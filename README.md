@@ -7,6 +7,7 @@ OPAMというOCamlのパッケージシステムがあるのですが、どん�
 1. [base64](base64) 64文字で表す
 1. [csv](csv) カンマ区切りのデータの読み書き
 1. [ppx_deriving](ppx_deriving) データの自動文字列化等
+1. [ppx_monad](ppx_monad) モナド構文の追加
 1. [xml-light](xml-light) XMLのパース、文字列化、DTDによる検証
 1. [camlimages](camlimages) 画像の読込、保存、文字列描画、表示
 
