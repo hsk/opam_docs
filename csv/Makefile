@@ -14,4 +14,4 @@ run: test
 run.opt: test.opt
 	./test.opt
 clean:
-	rm -f *.cm* *.o *.csv test test.opt
+	rm -f *.cm* *.o *.csv test test.opt .omakedb* *.omc *.run

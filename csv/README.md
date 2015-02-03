@@ -49,3 +49,17 @@ run.opt: test.opt
 clean:
 	rm -f *.cm* *.o *.csv test test.opt
 ```
+or
+
+OMakefile
+
+```
+.PHONY: all clean
+USE_OCAMLFIND = true
+FILES[]= test
+OCAMLPACKS[]=
+  csv
+.DEFAULT: $(OCamlProgram test, $(FILES))
+clean:
+  rm -f $(filter-proper-targets $(ls R, .))
+```
