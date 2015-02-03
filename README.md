@@ -8,6 +8,7 @@ OPAMというOCamlのパッケージシステムがあるのですが、どん�
 - [csv](csv) カンマ区切りのデータの読み書き
 - [ppx_deriving](ppx_deriving) データの自動文字列化等
 - [xml-light](xml-light) XMLのパース、文字列化、DTDによる検証
+- [camlimages](camlimages) 画像の読込、保存、文字列描画、表示
 
 # 標準ライブラリ
 
