@@ -1,0 +1,7 @@
+<!ELEMENT start (user)>
+<!ELEMENT user (name, sex, body)>
+<!ELEMENT name (#PCDATA)>
+<!ELEMENT sex (#PCDATA)>
+<!ELEMENT body (height, weight)>
+<!ELEMENT height (#PCDATA)>
+<!ELEMENT weight (#PCDATA)>

@@ -1,0 +1,10 @@
+<start>
+    <user>
+        <name>Bob</name>
+        <sex>male</sex>
+        <body>
+            <height>150</height>
+            <weight>48</weight>
+        </body>
+    </user>
+</start>
