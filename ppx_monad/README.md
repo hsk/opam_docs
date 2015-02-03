@@ -1,10 +1,10 @@
-# PPX_deriving
+# PPX_monad
 
-型に自動的に文字列化等の機能を追加します。
+モナド用の構文を追加します。
 
 ## インストール
 
-	$ opam install ppx_deriving
+	$ opam install ppx_monad
 
 ## 使い方
 
