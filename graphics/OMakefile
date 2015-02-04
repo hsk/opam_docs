@@ -1,10 +1,9 @@
 .PHONY: all clean
 USE_OCAMLFIND = true
 FILES[]= test
-FILES2[]= test_font
 OCAMLPACKS[]=
-  cairo
-.DEFAULT: $(OCamlProgram test, $(FILES)) $(OCamlProgram test_font, $(FILES2))
+  graphics
+.DEFAULT: $(OCamlProgram test, $(FILES))
 clean:
   rm -f $(filter-proper-targets $(ls R, .))
 
