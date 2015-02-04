@@ -3,12 +3,7 @@
 これは何？
 
 OCamlには沢山のライブラリが存在しています。
-しかし、ぱっと使ってみたいと思ってもすぐに使えないと不便です。
-
-そこで、OCamlのOPAMパッケージを使った簡単な例を揃えてみました。
-Makefileを用意して、インストール、アンインストールと、ocamlcとocamloptでのリンクをする例を乗せました。
-makeをするだけで、テストプログラムが動作します。make installでパッケージのインストールをmake uninstallでパッケージの削除が書いてあります。make cleanをすれば不要なファイルを消す事が出来ます。
-OMakefileはomakeでのビルドとcleanのみ対応していますが、全てを消すことはできないのでmake cleanで消すようにしました。
+ぱっと使ってみたいと思ってもすぐに使えるように、OCamlのOPAMパッケージを使った簡単な例を揃えたものです。
 
 ## 標準ライブラリ
 
@@ -50,3 +45,10 @@ OMakefileはomakeでのビルドとcleanのみ対応していますが、全て�
 1. [cairo2](cairo2) Cairo最新版アンチエイリアス付き画像生成、文字列描画、保存
 1. [imagemagick](imagemagick) 様々な画像の読み込み、保存、描画
 [](1. [lablgl](lablgl) OpenGL)
+
+
+## より詳しい説明
+
+Makefileを用意して、インストール、アンインストールと、ocamlcとocamloptでのリンクをする例を乗せました。
+makeをするだけで、テストプログラムが動作します。make installでパッケージのインストールをmake uninstallでパッケージの削除が書いてあります。make cleanをすれば不要なファイルを消す事が出来ます。
+OMakefileはomakeでのビルドとcleanのみ対応していますが、全てを消すことはできないのでmake cleanで消すようにしました。
