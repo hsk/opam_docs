@@ -6,8 +6,6 @@ OPAMというOCamlのパッケージシステムがあるのですが、どん�
 
 1. [base64](base64) 64文字で表す
 1. [csv](csv) カンマ区切りのデータの読み書き
-1. [ppx_deriving](ppx_deriving) データの自動文字列化等
-1. [ppx_monad](ppx_monad) モナド構文の追加
 1. [xml-light](xml-light) XMLのパース、文字列化、DTDによる検証
 
 ## 画像処理
@@ -18,6 +16,12 @@ OPAMというOCamlのパッケージシステムがあるのですが、どん�
 1. [cairo2](cairo2) Cairo最新版アンチエイリアス付き画像生成、文字列描画、保存
 1. [imagemagick](imagemagick) 様々な画像の読み込み、保存、描画
 [](1. [lablgl](lablgl) OpenGL)
+
+## ppx
+
+1. [ppx_deriving](ppx_deriving) データの自動文字列化等
+1. [ppx_monad](ppx_monad) モナド構文の追加
+1. [ppx_monadic](ppx_monadic) モナド構文の追加
 
 ## 標準ライブラリ
 
