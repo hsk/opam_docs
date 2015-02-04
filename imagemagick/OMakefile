@@ -1,0 +1,9 @@
+.PHONY: all clean
+USE_OCAMLFIND = true
+FILES[]= test
+OCAMLPACKS[]=
+  magick
+.DEFAULT: $(OCamlProgram test, $(FILES))
+clean:
+  rm -f $(filter-proper-targets $(ls R, .))
+
