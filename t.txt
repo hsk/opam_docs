@@ -1,835 +1,836 @@
-# Existing packages for system:
-0install                             --  The antidote to app-stores
-aacplus                              --  Bindings for the aacplus library which 
-abella                               --  Interactive theorem prover based on lam
-acgtk                                --  Abstract Categorial Grammar development
-ackdo-reloaded                       --  ackdo - companion to sed and grep/ack/a
-acme                                 --  A library to interact with the acme tex
-acpc                                 --  Chemoinformatics tool for ligand-based 
-aez                                  --  Alt-Ergo Zero is an OCaml library for a
-ago                                  --  ago(1) - compute the number of days bet
-agrep                                --  String searching with errors
-aifad                                --  Machine learning library and applicatio
-aio                                  --  Linux kernel AIO access library for oca
-alberto                              --  OCaml interface to Erlang ports
-alcotest                             --  Alcotest is a lightweight and colourful
-aliases                              --  In memory indexes
-alpaca                               --  An asynchronous SOCKS5 proxy library
-alphaCaml                            --  Turns a so-called "binding specificatio
-alsa                                 --  Bindings for the ALSA library which pro
-alt-ergo                             --  Automatic theorem prover based on SMT t
-altgr-ergo                           --  Automatic theorem prover based on SMT t
-ancient                              --  Allows to use in-memory data structures
-annexlib                             --  An extension to the standard library
-annot                                --  annotation parser for external editors 
-ansicolor                            --  Simple ANSI terminal color library (dep
-ANSITerminal                         --  Basic control of ANSI compliant termina
-ao                                   --  Bindings for the AO library which provi
-apalogretrieve                       --  Retrieve data from an Apache logfile wi
-apron                                --  APRON numerical abstract domain library
-arakoon                              --  A distributed key-value store that guar
-archimedes                           --  Extensible 2D plotting library.
-argot                                --  An enhanced HTML generator for the ocam
-asn1-combinators                     --  Combinators for expressing ASN.1 gramma
-async                                --  Monadic concurrency library
-async-zmq                            --  Async wrapper for OCaml's zeromq bindin
-async_core                           --  Monadic concurrency library
-async_extended                       --  Additional utilities for async
-async_extra                          --  Monadic concurrency library
-async_find                           --  Directory traversal with Async
-async_graphics                       --  Async wrapper for the OCaml Graphics li
-async_inotify                        --  Async wrapper for inotify
-async_kernel                         --  Monadic concurrency library
-async_parallel                       --  Distributed computing library
-async_shell                          --  Shell helpers for Async
-async_smtp                           --  SMTP client and server
-async_ssl                            --  An Async-pipe-based interface with Open
-async_unix                           --  Monadic concurrency library
-atd                                  --  Parser for the ATD data format descript
-atd2cconv                            --  Convert ATD definitions to OCaml code t
-atdgen                               --  Generates efficient JSON serializers, d
-aws                                  --  AWS client for Amazon Web Services
-baardskeerder                        --  Baardskeerder is an append-only B-ish t
-bap                                  --  Binary Analysis Platform
-base-bigarray                      base  Bigarray library distributed with the O
-base-bytes                           --  Bytes compatibility library distributed
-base-metaocaml-ocamlfind             --  Findlib toolchain configuration for Met
-base-no-ppx                          --  A pseudo-library to indicate lack of ex
-base-threads                       base  Threads library distributed with the OC
-base-unix                          base  Unix library distributed with the OCaml
-base64                               --  Base64 encoding and decoding library
-batsh                                --  A (C-like syntax) programming language 
-batteries                            --  Community-maintained foundation library
-bdd                                  --  Quick implementation of a Binary Decisi
-beluga                               --  A Language for programming and reasonin
-bench                                --  A benchmarking tool for statistically v
-benchmark                            --  Benchmark running times of code.
-bencode                              --  Read/Write bencode (.torrent) files in 
-bencode_rpc                          --  Remote Procedure Call in OCaml, with B-
-bes                                  --  boolean expression simplifier
-bibtex2html                          --  BibTeX to HTML translator
-bigbro                               --  Management tool for hypertext (HTML) do
-bignum                               --  Core-flavoured wrapper around zarith's 
-bin_prot                             --  A binary protocol generator
-biniou                            1.0.9  Binary data format designed for speed, 
-biocaml                              --  The OCaml Bioinformatics Library
-bisect                               --  Code coverage tool for the OCaml langua
-bitcoin                              --  Library offering an OCaml interface to 
-bitmasks                             --  BitMasks over int and int64 exposed as 
-bitstring                            --  bitstrings and bitstring matching for O
-bitv                                 --  A bit vector library
-bjack                                --  Bindings for the Jack library which pro
-blahcaml                             --  Blahcaml provides basic OCaml bindings 
-bolt                                 --  Bolt is an OCaml Logging Tool
-bookaml                              --  Library for retrieving information abou
-bsdowl                               --  Highly portable build system targetting
-bson                                 --  A bson data structure, including encodi
-bt                                   --  BitTorrent library and client using Lwt
-cache                                --  Implements a caching service for storin
-cairo                                --  Binding to Cairo, a 2D Vector Graphics 
-cairo2                               --  Binding to Cairo, a 2D Vector Graphics 
-calendar                             --  Library for handling dates and times in
-caml2html                            --  Produce ready-to-go HTML files
-camlbz2                              --  Bindings for bzip2
-camldm                               --  Bindings for Linux libdevicemapper
-CamlGI                               --  FastCGI and CGI library
-camlgpc                              --  Interface to Alan Murta's General Polyg
-camlhighlight                        --  Camlhighlight provides syntax highlight
-camlidl                              --  Stub code generator for OCaml
-camlimages                           --  Image processing library
-camlmix                              --  Camlmix is a generic preprocessor which
-camlp4                               --  Camlp4 is a system for writing extensib
-camlp5                               --  Preprocessor-pretty-printer of OCaml
-camlpdf                              --  Read, write and modify PDF files
-camlprime                            --  Primality testing with lazy lists of pr
-camltc                               --  OCaml bindings for tokyo cabinet
-camltemplate                         --  Library for generating text from templa
-camlzip                              --  Provides easy access to compressed file
-camomile                             --  A comprehensive Unicode library
-capnp                                --  OCaml code generation plugin for the Ca
-caravan                              --  A framework for testing arbitrary syste
-cbor                                 --  CBOR encoder/decoder (RFC 7049)
-cconv                                --  Combinators for Type Conversion in OCam
-ccss                                 --  CCSS is a preprocessor for CSS, extendi
-cdrom                                --  Query the state and contents of CDROM d
-cduce                                --  Modern XML-oriented functional language
-cduce_ws                             --  Library fo Web Services creation
-cfg                                  --  Manipulate context-free grammars
-cfstream                             --  Stream operations in the style of Core'
-cgi                                  --  Library for writing CGIs
-chamo                                --  A source code editor, even if it can be
-choice                               --  Monadic combinators for enumerating alt
-cil                                  --  A front-end for the C programming langu
-cmdliner                             --  Declarative definition of command line 
-cmitomli                             --  Converts compiled interface files (.cmi
-coccinelle                           --  Coccinelle is a C source code matching 
-cohttp                               --  HTTP library for Lwt, Async and Mirage
-coinst                               --  Coinst tool suite to perform analysis o
-combine                              --  Combine is a library for combinatorics 
-comparelib                           --  Part of Jane Street’s Core library
-conduit                              --  Network connection library for TCP and 
-conf-cairo                           --  Virtual package relying on a Cairo syst
-conf-expat                           --  Virtual package relying on an expat sys
-conf-ftgl                            --  Virtual package relying on an ftgl syst
-conf-glade                           --  Virtual package relying on a libglade s
-conf-glew                            --  Virtual package relying on a GLEW syste
-conf-gmp                             --  Virtual package relying on a GMP lib sy
-conf-gnomecanvas                     --  Virtual package relying on a Gnomecanva
-conf-gsl                             --  Virtual package relying on a GSL lib sy
-conf-gtksourceview                   --  Virtual package relying on a GtkSourceV
-conf-leveldb                         --  Virtual package relying on a LevelDB li
-conf-libcurl                         --  Virtual package relying on a libcurl sy
-conf-libev                           --  High-performance event loop/event model
-conf-libffi                          --  Virtual package relying on a libffi sys
-conf-libgsasl                        --  Virtual package relying on a GSASL lib 
-conf-libMagickCore                   --  Virtual package relying on an ImageMagi
-conf-libpcre                         --  Virtual package relying on a libpcre sy
-conf-libpng                          --  Virtual package relying on a libpng sys
-conf-llvm-debug                      --  Debug mode for LLVM and clang package.
-conf-lua                             --  Virtual package relying on a Lua system
-conf-mpfr                            --  Virtual package relying on library MPFR
-conf-nanomsg                         --  Virtual package relying on a nanomsg sy
-conf-ode                             --  Virtual package relying on a ODE system
-conf-pkg-config                      --  Virtual package relying on pkg-config i
-conf-python-2-7                      --  Virtual package relying on Python-2.7 i
-conf-python-2-7-dev                  --  Virtual package relying on Python-2.7 d
-conf-qt                              --  Installation of Qt5 using APT packages 
-conf-sdl-gfx                         --  Virtual package relying on a sdl-gfx sy
-conf-sdl-image                       --  Virtual package relying on a sdl-image 
-conf-sdl-mixer                       --  Virtual package relying on a sdl-mixer 
-conf-sdl-net                         --  Virtual package relying on a sdl-net sy
-conf-sdl-ttf                         --  Virtual package relying on a sdl-ttf sy
-conf-sdl2                            --  Virtual package relying on a SDL2 syste
-conf-sdl2-image                      --  Virtual package relying on a sdl2-image
-conf-sdl2-mixer                      --  Virtual package relying on a sdl2-mixer
-conf-sdl2-net                        --  Virtual package relying on a sdl2-net s
-conf-sdl2-ttf                        --  Virtual package relying on a sdl2-ttf s
-conf-sfml2                           --  Virtual package relying on a SFML2 syst
-conf-zmq                             --  Virtual package relying on zmq library 
-config-file                          --  Small library to define, load and save 
-containers                           --  A modular standard library focused on d
-cookie-js                            --  Simple library for setting/getting cook
-coq                                  --  Formal proof management system
-coqide                               --  IDE of the coq formal proof management 
-core                                 --  Industrial strength alternative to OCam
-core_bench                           --  Benchmarking library
-core_extended                        --  Extra components that are not as closel
-core_kernel                          --  Industrial strength alternative to OCam
-cow                                  --  XML, JSON, HTML, CSS, and Markdown synt
-cowabloga                            --  Simple static blogging support.
-cpdf                                 --  High-level pdf tools based on CamlPDF
-cppo                              1.1.2  Equivalent of the C preprocessor for OC
-crc                                  --  CRC implementation supporting strings a
-crunch                               --  Convert a filesystem into a static OCam
-cry                                  --  The cry library is an implementation of
-crypt                                --  Tiny binding for the unix crypt functio
-cryptgps                             --  Cryptographic functions
-cryptodbm                            --  Encrypted layer over the dbm library: a
-cryptokit                            --  Cryptographic primitives library. 
-cstruct                              --  access C structures via a camlp4 extens
-csv                                  --  A pure OCaml library to read and write 
-ctypes                               --  Combinators for binding to C libraries 
-cubicle                              --  SMT based model checker for parameteriz
-cudf                                 --  CUDF library (part of the Mancoosi tool
-curses                               --  Bindings to curses/ncurses
-custom_printf                        --  Extension for printf format strings
-datalog                              --  An in-memory datalog implementation for
-dbforge                              --  A tool to describe database schemas and
-dbm                                  --  Binding to the NDBM/GDBM Unix "database
-delimcc                              --  Oleg's delimited continuations library 
-depext                               --  Query and install external dependencies
-deriving                             --  Extension to OCaml for deriving functio
-deriving-ocsigen                     --  Extension to OCaml for deriving functio
-deriving-yojson                      --  Parse/convert ocaml value from/to yojso
-dht                                  --  DHT library and test client for Lwt
-diy                                  --  Tool suite for testing shared memory mo
-dlist                                --  A purely functional list-like data stru
-dns                                  --  DNS client and server implementation
-dnscurve                             --  DNSCurve protocol for DNS queries over 
-dockerfile                           --  Typed interface for constructing Docker
-docout                               --  Functor to create (text) output functio
-dolog                                --  the dumb OCaml logger (lazy and optiona
-dose                                 --  Dose library (part of Mancoosi tools)
-dssi                                 --  Bindings for the DSSI API which provide
-dtools                               --  Library providing various helper functi
-dum                                  --  Inspect the runtime representation of a
-dumpast                              --  OCaml AST dumper
-duppy                                --  Library providing monadic threads
-dyntype                              --  syntax extension which makes OCaml type
-dypgen                               --  Self-extensible parsers and lexers for 
-easy-format                       1.0.2  High-level and functional interface to 
-efl                                  --  An OCaml interface to the Enlightenment
-eliom                                --  Framework for programming Web sites and
-email_message                        --  E-mail message parser
-enumerate                            --  Quotation expanders for enumerating fin
-erm_xml                              --  XML stream parser
-erm_xmpp                             --  XMPP protocol implementation
-erssical                             --  Erssical is a tool to fetch, merge and 
-estring                              --  Extension for string literals
-exenum                               --  Build efficient enumerations for dataty
-exn-source                           --  Exception backtrace for OCaml with sour
-expect                               --  Simple implementation of "expect" to he
-extlib                               --  A complete yet small extension for OCam
-extlib-compat                        --  A complete yet small extension for OCam
-extprot                              --  Extensible binary protocols for cross-l
-extunix                              --  Collection of thin bindings to various 
-ezjsonm                              --  An easy interface on top of the Jsonm l
-ezxmlm                               --  Combinators to use with XMLM for parsin
-faad                                 --  Bindings for the faad library which pro
-facebook-sdk                         --  Facebook Graph API SDK for OCaml
-facile                               --  Constraint programming library over int
-faillib                              --  Part of Jane Street’s Core library
-fat-filesystem                       --  FAT filesystem implementation
-fd-send-recv                         --  Bindings for sendmsg/recvmsg that allow
-ffmpeg                               --  Bindings for the ffmpeg library which p
-fftw3                                --  Binding to the famous Fast Fourier Tran
-fieldslib                            --  Syntax extension to define first class 
-fileutils                            --  Library to provide pure OCaml functions
-fix                                  --  a least fixed point computation library
-flac                                 --  Interface for the Free Lossless Audio C
-flow                                 --  Deprecated exceptionless “systems” 
-flowcaml                             --  Flow Caml is an extension of OCaml with
-flowtype                             --  Flow is a static typechecker for JavaSc
-fluent-logger                        --  A structured logger for Fluentd
-forkwork                             --  Fork child processes to perform work on
-format                               --  Format is a syntax extension which defi
-frag                                 --  File fragment extraction
-frama-c                              --  Platform dedicated to the static analys
-freetds                              --  Binding to the ct-lib component of the 
-freetennis                           --  Free Tennis, a free tennis simulation.
-frei0r                               --  Bindings for the frei0r API which provi
-frenetic                             --  The Frenetic SDN Controller Platform
-froc                                 --  Jake Donham's Froc library for function
-FrontC                               --  Library providing a C parser and lexer
-ftp                                  --  Functions for accessing files via FTP
-functory                             --  Distributed computing library.
-fury-puyo                            --  Fury Puyo is a free clone of the Puyo P
-gadelac                              --  Preprocessor for the Game Description L
-gammu                                --  Cell phone and SIM card access.
-gapi-ocaml                           --  A simple OCaml client for Google Servic
-gasoline                             --  Unix-ish application development framew
-gavl                                 --  Bindings for the gavl library which pro
-gdal                                 --  Bindings to the GDAL and OGR libraries
-gedcom                               --  GEDCOM parsing.
-gen                                  --  Simple and efficient iterators (modules
-gen_server                           --  An Erlang-like gen_server framework wri
-genet                                --  Genet is tool to build a continuous int
-genspir                              --  functions to generate almost uniformly 
-geoip                                --  Bindings to GeoIP database library.
-getopt                               --  Parsing of command line arguments (simi
-gettext                              --  Provides enough service to build a basi
-gg                                   --  Basic types for computer graphics in OC
-git                                  --  Low-level Git bindings in pure OCaml
-github                               --  GitHub APIv3 client bindings
-glical                               --  Glical: glancing at iCalendar data.
-glMLite                              --  OpenGL bindings for OCaml
-google-drive-ocamlfuse               --  A FUSE filesystem over Google Drive
-gperftools                           --  Bindings to gperftools
-gpr                                  --  GPR - Library and Application for Gauss
-gpx                                  --  Conversions between XML and GPX (1.1) t
-graphicspdf                          --  Version of OCaml's Graphics library whi
-grib                                 --  Bindings for the ECMWF GRIB API
-gsasl                                --  Bindings ot the GNU SASL library using 
-gsl                                  --  GSL - Bindings to the GNU Scientific Li
-gstreamer                            --  Bindings for the GStreamer library whic
-gtk-light                            --  Light wrapper around lablgtk2
-gtktop                               --  A small library to ease the creation of
-gxl-light                            --  Gxl parser and in-place destructive upd
-hamt                                 --  Hash Array Mapped Tries
-hardcaml                             --  Register Transfer Level hardware design
-hdf                                  --  Bindings for the HDF4 library
-headache                             --  Automatic generation of files headers
-heptagon                             --  Compiler for the Heptagon/BZR synchrono
-herelib                              --  Part of Jane Street’s Core library
-hevea                                --  A quite complete and fast LATEX to HTML
-hex                                  --  Hexadecimal converter
-higher                               --  Library for higher-kinded programming.
-higlo                                --  Library for syntax highlighting.
-humane-re                            --  A human friendly interface to regular e
-hweak                                --  An hastable with weak pointer enabling 
-hydro                                --  An independent implementation of ICE, t
-ibx                                  --  OCaml implementation of the Interactive
-imagemagick                          --  Bindings for ImageMagick
-imap                                 --  Non-blocking client library for the IMA
-imaplet-lwt                          --  IMAP server prototype, supports IMAPv4r
-indexmap                             --  Generic indexed data for OCaml
-inotify                              --  Inotify bindings for ocaml.
-inspect                              --  Inspect the runtime representation of a
-integration1d                        --  Integration of functions of one variabl
-io-page                              --  Allocate memory pages suitable for alig
-io-page-unix                         --  Allocate OS memory pages suitable for a
-io-page-xen                          --  Allocate OS memory pages suitable for a
-iocaml                               --  A webserver for iocaml-kernel and iocam
-iocaml-kernel                        --  An OCaml kernel for the IPython noteboo
-iocamljs-kernel                      --  An OCaml javascript kernel for the IPyt
-ipaddr                               --  IP (and MAC) address representation lib
-irc-client                           --  IRC client library
-irmin                                --  Irmin, the database that never forgets
-irrlicht                             --  An OCaml binding for the Irrlicht Engin
-itv-tree                             --  float intervals tree library
-ivy                                  --  This OCaml-library interfaces the Ivy s
-javalib                              --  Javalib is a library written in OCaml w
-jenga                                --  Build system
-joolog                               --  Logger for js_of_ocaml
-js-lz4                               --  Barebones bindings for the LZ4 C api
-js_of_ocaml                          --  Compiler from OCaml bytecode to Javascr
-json-static                          --  JSON camlp4 syntax extension using json
-json-wheel                           --  JSON parser and writer, with optional C
-jsondiff                             --  JSON sensitive diffing
-jsonm                                --  Non-blocking streaming JSON codec for O
-kaputt                               --  Testing tool
-KaSim                                --  Command line stochastic simulator for k
-ketrew                               --  Ketrew: a workflow engine based on an O
-kinetic-client                       --  Client for Seagate's kinetic drives.
-krb5                                 --  Kerberos 5 bindings
-lablgl                               --  Interface to OpenGL
-lablgtk                              --  OCaml interface to GTK+
-lablgtk-extras                       --  A collection of additional tools and li
-lablgtkosx                           --  Lablgtkosx binds gOSX_application on to
-lablqt                               --  OCamlfind package and PPX extension to 
-labltk                               --  OCaml interface to Tcl/Tk, including OC
-lacaml                               --  OCaml-bindings to BLAS and LAPACK.
-lacc                                 --  fat-free list accumulators
-ladspa                               --  Bindings for the LADSPA API which provi
-lambda-term                          --  Terminal manipulation library for OCaml
-lambdoc                              --  Library providing support for semantica
-lame                                 --  Bindings for the lame library which pro
-lastfm                               --  The lastfm library is an implementation
-lazy-trie                            --  Implementation of lazy prefix trees
-lbfgs                                --  Minimization of multidimensional functi
-ledit                                --  Line editor, a la rlwrap
-leveldb                              --  OCaml bindings for Google's LevelDB lib
-levenshtein                          --  Levenshtein distance algorithm for gene
-libres3                              --  Amazon S3 compatible server
-libsvm                               --  LIBSVM Bindings for OCaml
-libvhd                               --  OCaml bindings for the C library 'libvh
-libvirt                              --  Libvirt is a portable toolkit to intera
-lilis                                --  Library to Interpret Lindenmayer System
-liquidsoap                           --  Swiss-army knife for multimedia streami
-litiom                               --  Extensions to Ocsigen's Eliom.
-llvm                                 --  The official LLVM binding
-llvmgraph                            --  Ocamlgraph overlay for llvm
-lo                                   --  Bindings for the lo library which provi
-lpd                                  --  A Line Printer Daemon (LPD) server libr
-lwt                                  --  A cooperative threads library for OCaml
-lwt-binio                            --  Asynchronous random access IO for numbe
-lwt-zmq                              --  Lwt-friendly interface to ZeroMQ
-lz4                                  --  Bindings for LZ4, a very fast lossless 
-lzo                                  --  Bindings to LZO - a portable lossless d
-macaque                              --  Macaque (Macros for Caml Queries) is a 
-macaque_lwt                          --  Utils for MaCaQue with Lwt
-mad                                  --  Bindings for the mad library which prov
-magic                                --  Bindings for libmagic (to determine the
-maildir                              --  This is a preliminary release of an OCa
-mascot                               --  A style-checker for OCaml sources (code
-mbr-format                           --  A simple library for manipulating Maste
-melt                                 --  Program LaTeX documents using OCaml
-menhir                               --  LR(1) parser generator
-merge-queues                         --  Mergeable queues
-merge-ropes                          --  Mergeable ropes
-merlin                               --  Editor helper, provides completion, typ
-merlin-acme                          --  Merlin interface for acme.
-mesh                                 --  Triangular mesh generation and manipula
-message-switch                       --  A simple store-and-forward message swit
-meta_conv                            --  Meta conv, type_conv for various tree d
-mezzo                                --  We present the design of Mezzo, a progr
-mikmatch                             --  OCaml syntax extension for regexps
-milter                               --  OCaml libmilter bindings
-mindstorm                            --  Drive Lego Mindstorms bricks from OCaml
-mirage                               --  The Mirage library operating system
-mirage-block-unix                    --  Mirage disk block driver for Unix
-mirage-block-xen                     --  Mirage block driver for Xen that implem
-mirage-clock-unix                    --  A Mirage-compatible Clock library for U
-mirage-clock-xen                     --  A Mirage-compatible Clock library for X
-mirage-conduit                       --  Virtual package for the Mirage Conduit 
-mirage-console                       --  A Mirage-compatible Console library for
-mirage-console-unix                  --  A Mirage-compatible Console library for
-mirage-console-xen                   --  A Mirage-compatible Console library for
-mirage-dns                           --  Virtual package for the Mirage DNS tran
-mirage-entropy-unix                  --  Mirage entropy device
-mirage-entropy-xen                   --  Mirage entropy device
-mirage-fs                            --  Mirage filesystem utilities
-mirage-fs-unix                       --  Mirage filesystem passthrough driver fo
-mirage-http                          --  Mirage HTTP client and server driver
-mirage-http-unix                     --  Mirage HTTP client and server driver fo
-mirage-http-xen                      --  Mirage HTTP client and server driver fo
-mirage-net                           --  Mirage TCP/IP networking stack
-mirage-net-direct                    --  TCP/IP networking stack in pure OCaml
-mirage-net-macosx                    --  MacOS X implementation of the Mirage NE
-mirage-net-socket                    --  Socket-based networking stack compatibl
-mirage-net-unix                      --  Ethernet network driver for Mirage, usi
-mirage-net-xen                       --  Ethernet network device driver for Mira
-mirage-profile                       --  Collect profiling information
-mirage-tc                            --  Mirage type-classes
-mirage-tcpip-unix                    --  Userlevel TCP/IP stack
-mirage-tcpip-xen                     --  Userlevel TCP/IP stack
-mirage-types                         --  Module type definitions for Mirage-comp
-mirage-types-lwt                     --  Lwt module type definitions for Mirage-
-mirage-unix                          --  Mirage OS library for Unix compilation
-mirage-www                           --  Mirage website (written in Mirage)
-mirage-xen                           --  Mirage OS library for Xen compilation
-mirage-xen-minios                    --  Xen MiniOS guest operating system libra
-mirari                               --  Mirage application builder
-missinglib                           --  Collection of OCaml-related utilities
-mldonkey                             --  Cross-platform multi-network peer-to-pe
-mlgmp                                --  Interface of GNU MP and MPFR
-mlorg                                --  mlorg is a parser and exporter for org-
-mlpost                               --  Interface to Metapost
-mm                                   --  The mm library contains high-level to c
-modelica_ml                          --  Modelica abstract syntax and parser
-monadlib                             --  A starter library for monads, with tran
-mongo                                --  OCaml driver for MongoDB
-monomorphic                          --  A small library used to shadow polymorp
-more-ocaml                           --  Support code for the book 'More OCaml'
-mparser                              --  A simple monadic parser combinator libr
-mpi                                  --  OCaml binding to the Message Passing In
-mpp                                  --  A preprocessor meant to blend languages
-mpris                                --  Client library for the MPRIS D-Bus medi
-mqtt                                 --  MQTT message parser in OCaml
-mqtt_client                          --  MQTT pub/sub transport protocol client 
-msgpack                              --  Msgpack library
-mstruct                              --  Mstruct is a thin mutable layer on top 
-mtl                                  --  A Monad Transformers Library for OCaml
-mustache                             --  Mustache logic-less templates in OCaml
-mysql                                --  Bindings to libmysqlclient for interact
-mysql_protocol                       --  Implementation of MySQL Protocol with t
-nanomsg                              --  Ctypes based bindings to nanomsg
-nbd                                  --  Network Block Device (NBD) protocol imp
-netamqp                              --  Implements an AMQP client for accessing
-netlink                              --  Bindings to the Netlink Protocol Librar
-nit                                  --  Nit, a static analyis tool, checks whet
-nlopt-ocaml                          --  OCaml bindings to the NLOpt optimizatio
-nocrypto                             --  Small functional-style crypto library.
-nonstd                               --  Non-standard mini-library
-numerix                              --  Big integer library, written by Michel 
-oasis                                --  Architecture for building OCaml librari
-oasis-mirage                         --  This is a fork of OASIS with support fo
-oasis2opam                           --  Tool to convert OASIS metadata to OPAM 
-obeanstalk                           --  Async based client for the beanstalk wo
-obigstore                            --  Client/server + embeddable semi-structu
-objsize                              --  Small library to compute sizes of OCaml
-obrowser                             --  OCaml virtual machine written in Javasc
-obuild                               --  simple package build system for OCaml
-obus                                 --  A pure OCaml implementation of DBus
-ocaml+twt                            --  The Whitespace Thing, a layout preproce
-ocaml-arg                            --  A simple library to handle subcommand a
-ocaml-buddy                          --  Bindings for the Buddy BDD library.
-ocaml-data-notation                  --  Store data using OCaml notation
-ocaml-expat                          --  Write XML-Parsers using the SAX method
-ocaml-glpk                           --  Bindings for glpk
-ocaml-http                           --  Library freely inspired from Perl's HTT
-ocaml-indent                         --  OCaml-indent: OCaml source code indente
-ocaml-inifiles                       --  An ini file parser
-ocaml-lua                            --  Lua bindings
-ocaml-makefile                       --  Easy to use Makefile for small to mediu
-ocaml-markdown                       --  Markdown processor for Ocsigen
-ocaml-posix-resource                 --  POSIX resource operations bindings
-ocaml-radixtree                      --  Radix tree for string
-ocaml-src                            --  Compiler sources
-ocaml-top                            --  The OCaml interactive editor for educat
-ocaml-xdg-basedir                    --  xdg-basedir specification implementatio
-ocaml-xml-rpc                        --  An XML-RPC client and server, using an 
-ocaml-zmq                            --  OCaml bindings for ZMQ 2.1
-ocaml9p                              --  ocaml9p is a library for the 9p protoco
-ocaml_plugin                         --  Automatically build and dynlink OCaml s
-ocamlcc                              --  Compiler from OCaml bytecode executable
-ocamlclean                           --  Reduce size of OCaml bytecode files by 
-ocamldap                             --  Implementation of the Light Weight Dire
-ocamldbi                             --  Database independent layer patterned up
-ocamldiff                            --  OCamldiff is a small OCaml library prov
-ocamldot                             --  OCamldot is a small library to parse, p
-ocamldsort                           --  Sorts a set of OCaml source files accor
-ocamleditor                          --  OCamlEditor is a GTK+ source code edito
-ocamlfind                         1.5.5  A library manager for OCaml
-ocamlfuse                            --  OCaml bindings for FUSE (Filesystem in 
-ocamlgraph                           --  A generic graph library for OCaml
-ocamlgsl                             --  Interface to GSL (GNU scientific librar
-ocamlify                             --  Include files in OCaml code
-ocamlmod                             --  Generate OCaml modules from source file
-ocamlnet                             --  Internet protocols (http, cgi, email et
-ocamlpp                              --  OCaml binary files (.byte and .cmo) pre
-ocamlrss                             --  Library providing functions to parse an
-ocamlscript                          --  Tool which compiles OCaml scripts into 
-ocamlsdl                             --  Interface between OCaml and SDL
-ocamlspot                            --  OCamlSpotter - OCaml source browsing
-ocamltop-gtk                         --  A Gtk2 graphical interface for the OCam
-ocamltter                            --  The OCAMLTTER twitter client
-ocamlviz                             --  real-time profiling tool
-ocamlwc                              --  Count lines in OCaml source code
-ocamlweb                             --  A literate programming tool for OCaml
-ocamlyices                           --  Yices SMT solver binding
-ocapic                               --  Development tools to run OCaml programs
-oclock                               --  Oclock: Precise POSIX clock for OCaml
-ocp-build                            --  Project manager for OCaml
-ocp-indent                           --  A simple tool to indent OCaml programs
-ocp-index                            --  Lightweight documentation extractor for
-ocp-manager                          --  Global Manager for OCaml versions and O
-ocp-ocamlres                         --  Manipulation, injection and extraction 
-ocplib-endian                        --  Optimised functions to read and write i
-ocsfml                               --  Binding to the C++ SFML gaming library.
-ocsigenserver                        --  A full-featured and extensible Web serv
-ocurl                                --  Bindings to libcurl
-odate                                --  Date & Duration Library
-odb-server                           --  Text editors/IDE helper module
-odbc                                 --  Interface to various ODBC drivers
-odepack                              --  Binding to ODEPACK.
-odiff-gtk                            --  OCaml library to display and merge diff
-odisco                               --  OCaml library for Disco workers.
-ogg                                  --  Interface for Ogg Bitstream Library, ot
-ojquery                              --  JQuery binding for OCaml
-ojs-base                             --  Components to create web applications u
-ojwidgets                            --  Browser widgets in OCaml with js_of_oca
-ollvm                                --  ollvm library offers an interface to ma
-omake                     0.9.8.6-0.rc1  Build system designed for scalability a
-omake-mode                           --  Omake Emacs integration
-omd                                  --  A Markdown frontend in pure OCaml.
-omonad                               --  Monad programming using ppx preprocesso
-oni                                  --  Oni - assorted components for low-level
-oolc                                 --  An Ocaml implementation of Open Locatio
-opa-base                             --  Extended standard library developped al
-opam-doc                             --  Produce documentation for OPAM packages
-opam-installext                      --  OPAM plugin to install external system 
-opam-lib                             --  The OCaml PAckage Manager (OPAM)
-opam-publish                         --  A tool to ease contributions to opam re
-opam-query                           --  A tool to query opam files from shell s
-opam-sync-github-prs                 --  Sync OCaml GitHub issues with OPAM
-opam2web                             --  A tool to generate a website from an OP
-opamfu                               --  Functions over OPAM Universes
-opass                                --  A simple command line tool for storing,
-opasswd                              --  This is an OCaml binding to the glibc p
-openflow                             --  Serialization and protocol implementati
-opium                                --  Sinatra like web toolkit based on Lwt +
-oplay                                --  Raw YUV video player
-optcomp                              --  Optional compilation with cpp-like dire
-optimization1d                       --  Find extrema of 1D functions.
-opus                                 --  Bindings for the opus library to decode
-oqamldebug                           --  Graphical front-end to ocamldebug
-orakuda                              --  ORakuda, Perlish string literals in OCa
-orm                                  --  The ORM library provides a storage back
-osm_xml                              --  Library for parsing OpenStreetMap XML d
-ospec                                --  Behavior-Driven Development tool for OC
-otags                                --  Tag file generation of OCaml sources (f
-otfm                                 --  OpenType font decoder for OCaml
-otr                                  --  Off-the-record in pure OCaml
-ott                                  --  Ott is a tool for writing definitions o
-ounit                                --  Unit testing framework loosely based on
-ox                                   --  A platform for writing OpenFlow control
-p3                                   --  P3 parser library
-pa_bench                             --  Syntax extension for inline benchmarks
-pa_comprehension                     --  Syntax extension for comprehension expr
-pa_do                                --  Syntax extension to write arithmetic ex
-pa_monad_custom                      --  Syntactic Sugar for Monads
-pa_ounit                             --  Syntax extension for oUnit
-pa_ovisitor                          --  CamlP4 type_conv module to auto-generat
-pa_test                              --  Quotation expander for assertions.
-pa_where                             --  Backward declaration syntax
-packet                               --  A serialization library for several com
-pareto                               --  GSL powered OCaml statistics library, w
-parmap                               --  Minimalistic library allowing to exploi
-patdiff                              --  File Diff using the Patience Diff algor
-patience_diff                        --  Diff library using Bram Cohen's patienc
-patoline                             --  A new typesetting system, programmable 
-pbs                                  --  Helper library around PBS/Torque
-pcap-format                          --  read and write pcap-formatted network p
-pcf-format                           --  parse PCF format X11 bitmap font files
-pci-db                               --  Library to parse and query the pci.ids 
-pcre                                 --  pcre-ocaml - bindings to the Perl Compa
-pfff                                 --  Tools and APIs for program analysis, co
-pgocaml                              --  Interface to PostgreSQL databases
-pipebang                             --  Part of Jane Street’s Core library
-piqi                                 --  Protocol Buffers, JSON and XML serializ
-piqilib                              --  The Piqi library -- runtime support for
-planck                               --  A small monadic parser combinator libra
-planets                              --  A simple interactive program for playin
-plasma                               --  Distributed filesystem for large files,
-pomap                                --  Library for partially ordered maps
-portaudio                            --  Bindings for the portaudio library whic
-portia                               --  Literate Programming Preprocessor.
-postgresql                           --  postgresql-ocaml - bindings to the Post
-pprint                               --  an OCaml adaptation of Wadler's and Lei
-ppx_blob                             --  Include a file as a string at compile t
-ppx_deriving                        2.0  Type-driven code generation for OCaml >
-ppx_deriving_protobuf                --  A Protocol Buffers codec generator for 
-ppx_deriving_yojson                 2.2  JSON codec generator for OCaml >=4.02
-ppx_import                           --  A syntax extension for importing declar
-ppx_include                          --  Include OCaml source files in each othe
-ppx_meta_conv                        --  ppx_meta_conv, ppx based type_conv for 
-ppx_monad                            --  A monad syntax extension
-ppx_monadic                          --  ppx_monadic: ppx extension for do notat
-ppx_overload                         --  ppx_overload: SML style simple but user
-ppx_pattern_guard                    --  ppx_pattern_guard: ppx extension for pa
-ppx_poly_record                      --  ppx for polymorphic records
-ppx_test                             --  A ppx replacement of pa_ounit.
-ppx_tools                        0.99.2  Tools for authors of ppx rewriters and 
-prob-cache                           --  Polymorphic probability cache API, incl
-procord                              --  Procord: a portable library to delegate
-profound                             --  Interactive proof exploration based on 
-proj4ml                              --  Bindings to the PROJ.4 projection libra
-promela                              --  Library to create, manipulate and reaso
-protobuf                             --  Protobuf implementation for Ocaml
-pulseaudio                           --  Bindings to Pulseaudio client library
-pvem                                 --  Polymorphic-Variants-based Error Monad
-pvem_lwt_unix                        --  Access to the Operating system with Pve
-pxp                                  --  Polymorphic XML Parser
-qcheck                               --  QuickCheck inspired property-based test
-qfs                                  --  Bindinga to libqfs - client library to 
-qmp                                  --  OCaml implementation of a Qemu Message 
-qocamlbrowser                        --  OCamlBrowser clone written with OCaml a
-qrencode                             --  Binding to libqrencode (QR-code encodin
-qtest                                --  Inline unit test extractor
-quickcheck                           --  Translation of QuickCheck from Haskell 
-ranger                               --  A consecutive range slice library for s
-rdf                                  --  Native OCaml implementation of RDF Grap
-re                                   --  RE is a regular expression library for 
-re2                                  --  OCaml bindings for RE2, Google's regula
-react                                --  Declarative events and signals for OCam
-reactiveData                         --  Functional reactive programming with in
-receive-mail                         --  A simple SMTP server for OCaml
-redis                                --  Bindings for the key-value cache and st
-regstab                              --  SAT-Solver able to deal with formulae p
-reins                                --  Persistent data structure library from 
-release                              --  Release is a multi-process Lwt-enabled 
-res                                  --  RES - Library for resizable, contiguous
-riak                                 --  A Riak OCaml client
-riak-pb                              --  Riak OCaml Protobuffs library
-riakc                                --  Protobuf based Riak client
-riakc_ppx                            --  An OCaml library that provides type saf
-rml                                  --  ReactiveML: a programming language for 
-root1d                               --  Find roots of 1D functions.
-rope                                 --  Ropes ("heavyweight strings")
-rpc                                  --  A library to deal with RPCs in OCaml
-rpc_parallel                         --  Type-safe parallel library built on top
-rtime                                --  Module implementing timelines for React
-safa                                 --  Symbolic Algorithms for Finite Automata
-safepass                             --  A library enabling the safe storage of 
-samplerate                           --  Bindings for the samplerate library whi
-sarek                                --  GPGPU kernels DSL for OCaml. 
-satML-plugin                         --  Automatic theorem prover based on SMT t
-sawja                                --  Provide a high level representation of 
-schoca                               --  Implementation of the Scheme language i
-schroedinger                         --  Bindings for the schroedinger library t
-scrypt                               --  C bindings and a high level interface t
-sedlex                               --  unicode-friendly lexer generator (succe
-sequence                             --  Simple and lightweight sequence abstrac
-sexplib                              --  Library for serializing OCaml values to
-sha                                  --  Binding to the SHA cryptographic functi
-shared-memory-ring                   --  Shared memory rings for RPC and bytestr
-shcaml                               --  Library for Unix shell programming
-should                               --  Literate assertions
-sill                                 --  Implementation of Linear Session Types
-simple-bmc                           --  A tool to translate Hybrid automata int
-simple_pam                           --  Tiny binding around PAM
-slacko                               --  Access the Slack API
-slap                                 --  A linear algebra library with static si
-smart-print                          --  The pretty-printing library which feels
-smtp                                 --  SMTP library with Unix and Lwt backends
-snappy                               --  Bindings to snappy - fast compression/d
-sociaml-facebook-api                 --  Facebook Graph API Client Library for O
-sociaml-oauth-client                 --  OAuth Client Library for Ocaml
-sociaml-tumblr-api                   --  Tumblr API Client Library for OCaml
-sociaml-vcard                        --  vCard library for OCaml
-sodium                               --  Binding to libsodium UNAUDITED
-sonet                                --  Collection of modules for asynchronous 
-sosa                                 --  Sane OCaml String API
-soundtouch                           --  Bindings for the soundtouch library whi
-spatial_index                        --  Implementation of several spatial index
-spdiff                               --  tool for automatic inference of semanti
-speex                                --  Bindings for the speex library to decod
-spelll                               --  Fuzzy string searching, using Levenshte
-spf                                  --  OCaml bindings for libspf2
-spoc                                 --  High-level GPGPU programming library fo
-spotinstall                          --  A tool to facilitate the installation o
-spotlib                              --  Useful functions for OCaml programming 
-spotlib_js                           --  Useful functions for OCaml programming 
-sqlexpr                              --  Type-safe, convenient SQLite database a
-sqlgg                                --  SQL Guided (code) Generator
-sqlite3                              --  sqlite3-ocaml - SQLite3 bindings
-sqlite3EZ                            --  Thin wrapper for sqlite3-ocaml with a s
-srs                                  --  OCaml bindings for libsrs2
-ssl                                  --  Bindings for OpenSSL
-statsd-client                        --  StatsD client library
-stemmer                              --  Porter stemming algorithm in pure OCaml
-stemming                             --  Collection of stemmers
-stog                                 --  A static web site generator, able to ha
-stog-rdf                             --  Plugin for Stog. Define and query RDF g
-stog-writing                         --  Plugin for Stog to use footnotes and bi
-stone                                --  Simple static website generator, useful
-stringext                            --  Extra string functions for OCaml
-sundialsml                           --  Sundials/ML is an interface to the Sund
-swdogen                              --  SWagger DOcumentation GENerator
-symkat                               --  Symbolic Algorithms for Kleene algebra 
-syndic                               --  RSS1, RSS2, Atom and OPML1 parsing
-syslog                               --  syslog(3) routines for ocaml
-taglib                               --  Bindings for the taglib library which p
-tar-format                           --  A pure OCaml library to read and write 
-tcpip                                --  Userlevel TCP/IP stack
-tdk                                  --  tdk - The Decision Kit
-termbox                              --  Bindings for the termbox library, minim
-TestSimple                           --  A simple unit testing framework
-text                                 --  Library for dealing with "text", i.e. s
-textutils                            --  Text output utilities
-textwrap                             --  Text wrapping and filling library
-tgls                                 --  Thin bindings to OpenGL {3,4} and OpenG
-themoviedb                           --  API for TheMovieDb.org website
-theora                               --  Bindings for the theora library to deco
-thrift                               --  OCaml bindings for the Apache Thrift RP
-tiny_json                            --  A small Json library from OCAMLTTER 
-tiny_json_conv                       --  Meta conv for Tiny Json
-tls                                  --  Transport Layer Security (TLS) in OCaml
-toml                                 --  TOML parser.
-tophide                              --  Hides toplevel values whose name starts
-topology                             --  A library for working with network topo
-tplib                                --  TPLib: Tropical Polyhedra Library
-tptp                                 --  Library for reading and writing FOF and
-travis-senv                          --  Utility to manipulate Travis CI secure 
-treeprint                            --  Small tree structure printer with opera
-tryocaml                             --  Easiest way to learn how to code in OCa
-tsdl                                 --  Thin bindings to SDL for OCaml
-tuareg                               --  OCaml mode for GNU Emacs and XEmacs.
-tuntap                               --  TUN/TAP bindings
-type_conv                            --  Library for building type-driven syntax
-typehashlib                          --  Part of Jane Street’s Core library
-typerep                              --  typerep is a library for runtime types.
-typerex                              --  Set of tools and libraries for OCaml, d
-tyxml                                --  A simple library for building valid HTM
-ucorelib                             --  A light weight Unicode library for OCam
-udunits                              --  Bindings to the UDUNITS-2 library
-uint                                 --  Unsigned ints for OCaml
-ulex                                 --  lexer generator for Unicode and OCaml
-unison                               --  File-synchronization tool for Unix and 
-uri                                  --  RFC3986 URI/URL parsing library
-usb                                  --  OCaml bindings for libusb-1.0
-user-setup                           --  OPAM User Setup helper to configure var
-utop                                 --  Universal toplevel for OCaml
-uucd                                 --  Unicode character database decoder for 
-uucp                                 --  Unicode character properties for OCaml
-uuidm                                --  Module for universally unique identifie
-uunf                                 --  Unicode text normalization for OCaml
-uuseg                                --  Unicode text segmentation for OCaml
-uutf                                 --  Non-blocking streaming Unicode codec fo
-variantslib                          --  Part of Jane Street’s Core library
-vchan                                --  Xen Vchan implementation
-vector3                              --  module for 3D vectors (implemented as r
-vg                                   --  Declarative 2D vector graphics for OCam
-vhd-format                           --  A pure OCaml library for reading and wr
-vhd-tool                             --  A command-line tool to manipulate, tran
-vhdlib                               --  Bindings to libvhd
-vmnet                                --  Userlevel network bridging on MacOS X
-voaacenc                             --  Bindings for the voaacenc library to en
-vorbis                               --  Bindings to libvorbis
-wdialog                              --  Dialog-oriented web applications
-webdav                               --  Implements the client side of the WebDA
-weberizer                            --  HTML templating system.
-websocket                            --  Websocket library
-wget                                 --  Basic wget-like client, based on the Ci
-why                                  --  Why is a software verification platform
-why3                                 --  Why3 is a platform for deductive progra
-wiringpi                             --  WiringPi for OCaml, low level Raspberry
-wyrd                                 --  Text-based front-end to Remind, a sophi
-x509                                 --  X.509 certificate (RFC5280) library
-xapi                                 --  The xapi toolstack daemon which impleme
-xapi-forkexecd                       --  Sub-process control service for xapi
-xapi-idl                             --  Interface descriptions and common boile
-xapi-inventory                       --  Library for accessing the xapi toolstac
-xapi-libs-transitional               --  Further transitional libraries required
-xapi-netdev                          --  Host network device configuration
-xapi-networkd                        --  Xapi toolstack host network configurato
-xapi-rrd                             --  RRD library for use with xapi
-xapi-rrd-transport                   --  Shared-memory protocols for exposing pe
-xapi-rrdd                            --  Performance monitoring daemon for xapi
-xapi-rrdd-plugin                     --  A plugin library for the xapi performan
-xapi-squeezed                        --  A memory ballooning daemon for the Xen 
-xapi-stdext                          --  A deprecated collection of utility func
-xapi-tapctl                          --  A library to control tapdisk on a Xen h
-xapi-xenops                          --  Create/destroy/manipulate Xen domains
-xapi-xenops-cli                      --  A CLI for the xapi Xen domain manager.
-xapi-xenopsd                         --  A single-host domain/VM manager for the
-xe                                   --  A command-line client for the 'xapi' se
-xe-unikernel-upload                  --  A simple tool to upload a Unikernel to 
-xen-api-client                       --  Xen-API client library for remotely-con
-xen-block-driver                     --  Xen disk device drivers: both client ("
-xen-disk                             --  A command-line tool for attaching disks
-xen-evtchn                           --  Xen event channel bindings.
-xen-gnt                              --  Xen grant table bindings
-xenbigarray                          --  Portable Bigarray intended for embedded
-xenctrl                              --  Low-level Xen hypercall bindings.
-xenstore                             --  Xenstore protocol clients and server
-xenstore_transport                   --  Low-level libraries for connecting to a
-xentropyd                            --  Xentropyd: provide entropy to Xen VMs
-xml-light                            --  Xml-Light is a minimal XML parser & pri
-xmldiff                              --  Diffs on XML trees.
-xmlm                                 --  Streaming XML codec for OCaml
-xmlplaylist                          --  Library to parse various file playlists
-xstr                                 --  Functions for string searching/matching
-xstrp4                               --  Brace expansion (alias 'interpolation')
-xtmpl                                --  Small XML templating library.
-yajl                                 --  bindings to the YAJL streaming JSON lib
-yajl-extra                           --  extended YAJL bindings with a convenien
-yojson                            1.2.0  Yojson is an optimized parsing and prin
-zarith                               --  Implements arithmetic and logical opera
-zbar                                 --  Binding to ZBar (QR-code scanning libra
-zed                                  --  Abstract engine for text edition in OCa
-zenon                                --  Automated theorem prover for first orde
-zephyrus                             --  Zephyrus automatic configuration genera
-zero                                 --  Deprecated, merged into core_kernel
-zmq                                  --  OCaml bindings for ZeroMQ 4.0
+# Existing packages for 4.02.1:
+0install                      --  The antidote to app-stores
+aacplus                       --  Bindings for the aacplus library which provides functions for decoding AAC audio files
+abella                        --  Interactive theorem prover based on lambda-tree syntax
+acgtk                         --  Abstract Categorial Grammar development toolkit.
+ackdo-reloaded                --  ackdo - companion to sed and grep/ack/ag
+acme                          --  A library to interact with the acme text editor.
+acpc                          --  Chemoinformatics tool for ligand-based virtual screening
+aez                           --  Alt-Ergo Zero is an OCaml library for an SMT solver.
+ago                           --  ago(1) - compute the number of days between two calendar dates
+agrep                         --  String searching with errors
+aifad                         --  Machine learning library and application written in OCaml which generalizes decision tree learning to algebraic data types
+aio                           --  Linux kernel AIO access library for ocaml
+alberto                       --  OCaml interface to Erlang ports
+alcotest                      --  Alcotest is a lightweight and colourful test framework
+aliases                       --  In memory indexes
+alpaca                        --  An asynchronous SOCKS5 proxy library
+alphaCaml                     --  Turns a so-called "binding specification" into an OCaml compilation unit
+alsa                          --  Bindings for the ALSA library which provides functions for using soundcards
+alt-ergo                      --  Automatic theorem prover based on SMT technology and dedicated to program verification
+altgr-ergo                    --  Automatic theorem prover based on SMT technology and dedicated to program verification: Graphical interface
+ancient                       --  Allows to use in-memory data structures which are larger than available memory and so are kept in swap
+annexlib                      --  An extension to the standard library
+annot                         --  annotation parser for external editors and IDEs
+ansicolor                     --  Simple ANSI terminal color library (deprecated in favor of ANSITerminal).
+ANSITerminal                  --  Basic control of ANSI compliant terminals and the windows shell.
+ao                            --  Bindings for the AO library which provides high-level functions for using soundcards
+apalogretrieve                --  Retrieve data from an Apache logfile with a syntax derived from the SQL language.
+apron                         --  APRON numerical abstract domain library
+arakoon                       --  A distributed key-value store that guarantees consistency above anything else.
+archimedes                    --  Extensible 2D plotting library.
+argot                         --  An enhanced HTML generator for the ocamldoc tool of the OCaml language.
+asn1-combinators              --  Combinators for expressing ASN.1 grammars in OCaml
+async                         --  Monadic concurrency library
+async-zmq                     --  Async wrapper for OCaml's zeromq bindings
+async_core                    --  Monadic concurrency library
+async_extended                --  Additional utilities for async
+async_extra                   --  Monadic concurrency library
+async_find                    --  Directory traversal with Async
+async_graphics                --  Async wrapper for the OCaml Graphics library
+async_inotify                 --  Async wrapper for inotify
+async_kernel                  --  Monadic concurrency library
+async_parallel                --  Distributed computing library
+async_shell                   --  Shell helpers for Async
+async_smtp                    --  SMTP client and server
+async_ssl                     --  An Async-pipe-based interface with OpenSSL.
+async_unix                    --  Monadic concurrency library
+atd                           --  Parser for the ATD data format description language
+atd2cconv                     --  Convert ATD definitions to OCaml code that uses the CConv 0.1 library
+atdgen                        --  Generates efficient JSON serializers, deserializers and validators
+aws                           --  AWS client for Amazon Web Services
+baardskeerder                 --  Baardskeerder is an append-only B-ish tree.
+bap                           --  Binary Analysis Platform
+base-bigarray               base  Bigarray library distributed with the OCaml compiler
+base-bytes                  base  Bytes library distributed with the OCaml compiler
+base-metaocaml-ocamlfind      --  Findlib toolchain configuration for MetaOCaml.
+base-no-ppx                   --  A pseudo-library to indicate lack of extension points support
+base-threads                base  Threads library distributed with the OCaml compiler
+base-unix                   base  Unix library distributed with the OCaml compiler
+base64                     2.0.0  Base64 encoding and decoding library
+batsh                         --  A (C-like syntax) programming language that compiles to Bash and Windows Batch.
+batteries                     --  Community-maintained foundation library
+bdd                           --  Quick implementation of a Binary Decision Diagrams (BDD) library for OCaml
+beluga                        --  A Language for programming and reasoning using Higher-Order Abstract Syntax
+bench                         --  A benchmarking tool for statistically valid benchmarks
+benchmark                     --  Benchmark running times of code.
+bencode                       --  Read/Write bencode (.torrent) files in OCaml
+bencode_rpc                   --  Remote Procedure Call in OCaml, with B-encode and Lwt.
+bes                           --  boolean expression simplifier
+bibtex2html                   --  BibTeX to HTML translator
+bigbro                        --  Management tool for hypertext (HTML) documents
+bignum                        --  Core-flavoured wrapper around zarith's arbitrary-precision rationals.
+bin_prot                      --  A binary protocol generator
+biniou                        --  Binary data format designed for speed, safety, ease of use and backward compatibility as protocols evolve
+biocaml                       --  The OCaml Bioinformatics Library
+bisect                        --  Code coverage tool for the OCaml language
+bitcoin                       --  Library offering an OCaml interface to the official Bitcoin client API
+bitmasks                      --  BitMasks over int and int64 exposed as sets
+bitstring                     --  bitstrings and bitstring matching for OCaml
+bitv                          --  A bit vector library
+bjack                         --  Bindings for the Jack library which provides functions for linking audio programs
+blahcaml                      --  Blahcaml provides basic OCaml bindings to the Blahtex library.
+bolt                          --  Bolt is an OCaml Logging Tool
+bookaml                       --  Library for retrieving information about published books
+bsdowl                        --  Highly portable build system targetting modern UNIX systems
+bson                          --  A bson data structure, including encoding/decoding
+bt                            --  BitTorrent library and client using Lwt
+cache                         --  Implements a caching service for storing arbitrary strings that can be located by string keys
+cairo                         --  Binding to Cairo, a 2D Vector Graphics Library
+cairo2                        --  Binding to Cairo, a 2D Vector Graphics Library.
+calendar                      --  Library for handling dates and times in your program
+caml2html                     --  Produce ready-to-go HTML files
+camlbz2                       --  Bindings for bzip2
+camldm                        --  Bindings for Linux libdevicemapper
+CamlGI                        --  FastCGI and CGI library
+camlgpc                       --  Interface to Alan Murta's General Polygon Clipper
+camlhighlight                 --  Camlhighlight provides syntax highlighting facilities for OCaml applications.
+camlidl                       --  Stub code generator for OCaml
+camlimages                    --  Image processing library
+camlmix                       --  Camlmix is a generic preprocessor which converts text with embedded
+camlp4                        --  Camlp4 is a system for writing extensible parsers for programming languages
+camlp5                        --  Preprocessor-pretty-printer of OCaml
+camlpdf                       --  Read, write and modify PDF files
+camlprime                     --  Primality testing with lazy lists of prime numbers
+camltc                        --  OCaml bindings for tokyo cabinet
+camltemplate                  --  Library for generating text from templates
+camlzip                       --  Provides easy access to compressed files in ZIP, GZIP and JAR format
+camomile                      --  A comprehensive Unicode library
+capnp                         --  OCaml code generation plugin for the Cap'n Proto serialization framework
+caravan                       --  A framework for testing arbitrary systems, in OCaml.
+cbor                          --  CBOR encoder/decoder (RFC 7049)
+cconv                         --  Combinators for Type Conversion in OCaml, and ppx_deriving plugin.
+ccss                          --  CCSS is a preprocessor for CSS, extending the language with arithmetic operations and variables.
+cdrom                         --  Query the state and contents of CDROM devices under Linux.
+cduce                         --  Modern XML-oriented functional language with innovative features
+cduce_ws                      --  Library fo Web Services creation
+cfg                           --  Manipulate context-free grammars
+cfstream                      --  Stream operations in the style of Core's API.
+cgi                           --  Library for writing CGIs
+chamo                         --  A source code editor, even if it can be used to edit any text file.
+choice                        --  Monadic combinators for enumerating alternatives.
+cil                           --  A front-end for the C programming language that facilitates program analysis and transformation
+cmdliner                      --  Declarative definition of command line interfaces for OCaml
+cmitomli                      --  Converts compiled interface files (.cmi) into source interface files (.mli)
+coccinelle                    --  Coccinelle is a C source code matching and transformation engine.
+cohttp                        --  HTTP library for Lwt, Async and Mirage
+coinst                        --  Coinst tool suite to perform analysis on package repositories.
+combine                       --  Combine is a library for combinatorics problem solving.
+comparelib                    --  Part of Jane Street’s Core library
+conduit                       --  Network connection library for TCP and SSL
+conf-cairo                    --  Virtual package relying on a Cairo system installation.
+conf-expat                    --  Virtual package relying on an expat system installation.
+conf-ftgl                     --  Virtual package relying on an ftgl system installation.
+conf-glade                    --  Virtual package relying on a libglade system installation.
+conf-glew                     --  Virtual package relying on a GLEW system installation.
+conf-gmp                      --  Virtual package relying on a GMP lib system installation.
+conf-gnomecanvas              --  Virtual package relying on a Gnomecanvas system installation.
+conf-gsl                      --  Virtual package relying on a GSL lib system installation.
+conf-gtksourceview            --  Virtual package relying on a GtkSourceView system installation.
+conf-leveldb                  --  Virtual package relying on a LevelDB lib system installation.
+conf-libcurl                  --  Virtual package relying on a libcurl system installation.
+conf-libev                    --  High-performance event loop/event model with lots of features
+conf-libffi                   --  Virtual package relying on a libffi system installation.
+conf-libgsasl                 --  Virtual package relying on a GSASL lib system installation.
+conf-libMagickCore            --  Virtual package relying on an ImageMagick system installation.
+conf-libpcre                  --  Virtual package relying on a libpcre system installation.
+conf-libpng                   --  Virtual package relying on a libpng system installation.
+conf-llvm-debug               --  Debug mode for LLVM and clang package.
+conf-lua                      --  Virtual package relying on a Lua system installation.
+conf-mpfr                     --  Virtual package relying on library MPFR installation.
+conf-nanomsg                  --  Virtual package relying on a nanomsg system installation.
+conf-ode                      --  Virtual package relying on a ODE system installation.
+conf-pkg-config               --  Virtual package relying on pkg-config installation.
+conf-python-2-7               --  Virtual package relying on Python-2.7 installation.
+conf-python-2-7-dev           --  Virtual package relying on Python-2.7 development package installation.
+conf-qt                       --  Installation of Qt5 using APT packages or from source.
+conf-sdl-gfx                  --  Virtual package relying on a sdl-gfx system installation.
+conf-sdl-image                --  Virtual package relying on a sdl-image system installation.
+conf-sdl-mixer                --  Virtual package relying on a sdl-mixer system installation.
+conf-sdl-net                  --  Virtual package relying on a sdl-net system installation.
+conf-sdl-ttf                  --  Virtual package relying on a sdl-ttf system installation.
+conf-sdl2                     --  Virtual package relying on a SDL2 system installation.
+conf-sdl2-image               --  Virtual package relying on a sdl2-image system installation.
+conf-sdl2-mixer               --  Virtual package relying on a sdl2-mixer system installation.
+conf-sdl2-net                 --  Virtual package relying on a sdl2-net system installation.
+conf-sdl2-ttf                 --  Virtual package relying on a sdl2-ttf system installation.
+conf-sfml2                    --  Virtual package relying on a SFML2 system installation.
+conf-zmq                      --  Virtual package relying on zmq library installation.
+config-file                   --  Small library to define, load and save options files.
+containers                    --  A modular standard library focused on data structures.
+cookie-js                     --  Simple library for setting/getting cookies in js_of_ocaml
+coq                           --  Formal proof management system
+coqide                        --  IDE of the coq formal proof management system
+core                          --  Industrial strength alternative to OCaml's standard library
+core_bench                    --  Benchmarking library
+core_extended                 --  Extra components that are not as closely vetted or as stable as Core
+core_kernel                   --  Industrial strength alternative to OCaml's standard library
+cow                           --  XML, JSON, HTML, CSS, and Markdown syntax and libraries
+cowabloga                     --  Simple static blogging support.
+cpdf                          --  High-level pdf tools based on CamlPDF
+cppo                          --  Equivalent of the C preprocessor for OCaml programs
+crc                           --  CRC implementation supporting strings and cstructs
+crunch                        --  Convert a filesystem into a static OCaml module
+cry                           --  The cry library is an implementation of the shout protocol to connect to audio diffusion servers such as icecast
+crypt                         --  Tiny binding for the unix crypt function
+cryptgps                      --  Cryptographic functions
+cryptodbm                     --  Encrypted layer over the dbm library: access to serverless, key-value databases with symmetric encryption.
+cryptokit                     --  Cryptographic primitives library. 
+cstruct                       --  access C structures via a camlp4 extension
+csv                        1.3.4  A pure OCaml library to read and write CSV files.
+ctypes                        --  Combinators for binding to C libraries without writing any C.
+cubicle                       --  SMT based model checker for parameterized systems
+cudf                          --  CUDF library (part of the Mancoosi tools)
+curses                        --  Bindings to curses/ncurses
+custom_printf                 --  Extension for printf format strings
+datalog                       --  An in-memory datalog implementation for OCaml.
+dbforge                       --  A tool to describe database schemas and generate OCaml code to access these databases. 
+dbm                           --  Binding to the NDBM/GDBM Unix "databases"
+delimcc                       --  Oleg's delimited continuations library for byte-code and native OCaml
+depext                        --  Query and install external dependencies of OPAM packages
+deriving                      --  Extension to OCaml for deriving functions from type declarations
+deriving-ocsigen              --  Extension to OCaml for deriving functions from type declarations
+deriving-yojson               --  Parse/convert ocaml value from/to yojson ast
+dht                           --  DHT library and test client for Lwt
+diy                           --  Tool suite for testing shared memory models
+dlist                         --  A purely functional list-like data structure supporting O(1) concatenation
+dns                           --  DNS client and server implementation
+dnscurve                      --  DNSCurve protocol for DNS queries over a secure channel
+dockerfile                    --  Typed interface for constructing Docker container descriptions
+docout                        --  Functor to create (text) output functions
+dolog                         --  the dumb OCaml logger (lazy and optionally colorful)
+dose                          --  Dose library (part of Mancoosi tools)
+dssi                          --  Bindings for the DSSI API which provides audio synthesizers
+dtools                        --  Library providing various helper functions to make daemons
+dum                           --  Inspect the runtime representation of arbitrary OCaml values
+dumpast                       --  OCaml AST dumper
+duppy                         --  Library providing monadic threads
+dyntype                       --  syntax extension which makes OCaml types and values easier to manipulate programmatically
+dypgen                        --  Self-extensible parsers and lexers for OCaml
+easy-format                   --  High-level and functional interface to the Format module of the OCaml standard library
+efl                           --  An OCaml interface to the Enlightenment Foundation Libraries (EFL) and Elementary.
+eliom                         --  Framework for programming Web sites and client/server Web applications.
+email_message                 --  E-mail message parser
+enumerate                     --  Quotation expanders for enumerating finite types.
+erm_xml                       --  XML stream parser
+erm_xmpp                      --  XMPP protocol implementation
+erssical                      --  Erssical is a tool to fetch, merge and filter Event RSS channels.
+estring                       --  Extension for string literals
+exenum                        --  Build efficient enumerations for datatypes. Inspired by Feat for Haskell.
+exn-source                    --  Exception backtrace for OCaml with source code printing
+expect                        --  Simple implementation of "expect" to help building unitary testing of interactive program
+extlib                        --  A complete yet small extension for OCaml standard library (reduced, recommended)
+extlib-compat                 --  A complete yet small extension for OCaml standard library (full, compatibility)
+extprot                       --  Extensible binary protocols for cross-language communication and long-term serialization
+extunix                       --  Collection of thin bindings to various low-level system API
+ezjsonm                       --  An easy interface on top of the Jsonm library
+ezxmlm                        --  Combinators to use with XMLM for parsing and selection
+faad                          --  Bindings for the faad library which provides functions for decoding AAC audio files
+facebook-sdk                  --  Facebook Graph API SDK for OCaml
+facile                        --  Constraint programming library over integer finite domains
+faillib                       --  Part of Jane Street’s Core library
+fat-filesystem                --  FAT filesystem implementation
+fd-send-recv                  --  Bindings for sendmsg/recvmsg that allow Unix.file_descrs to be sent and received over Unix domain sockets
+ffmpeg                        --  Bindings for the ffmpeg library which provides functions for decoding audio and video files
+fftw3                         --  Binding to the famous Fast Fourier Transform library FFTW
+fieldslib                     --  Syntax extension to define first class values representing record fields, to get and set record fields, iterate and fold over all fields of a re
+fileutils                     --  Library to provide pure OCaml functions to manipulate real file (POSIX like) and filename.
+fix                           --  a least fixed point computation library, using an efficient imperative algorithm
+flac                          --  Interface for the Free Lossless Audio Codec otherwise known as FLAC
+flow                          --  Deprecated exceptionless “systems” library on top of Core and Lwt.
+flowcaml                      --  Flow Caml is an extension of OCaml with a type system tracing information flow.
+flowtype                      --  Flow is a static typechecker for JavaScript.
+fluent-logger                 --  A structured logger for Fluentd
+forkwork                      --  Fork child processes to perform work on multiple cores
+format                        --  Format is a syntax extension which defines quotations for building
+frag                          --  File fragment extraction
+frama-c                       --  Platform dedicated to the static analysis of source code written in C
+freetds                       --  Binding to the ct-lib component of the FreeTDS library.
+freetennis                    --  Free Tennis, a free tennis simulation.
+frei0r                        --  Bindings for the frei0r API which provides video effects
+frenetic                      --  The Frenetic SDN Controller Platform
+froc                          --  Jake Donham's Froc library for functional reactive programming in OCaml.
+FrontC                        --  Library providing a C parser and lexer
+ftp                           --  Functions for accessing files via FTP
+functory                      --  Distributed computing library.
+fury-puyo                     --  Fury Puyo is a free clone of the Puyo Puyo game.
+gadelac                       --  Preprocessor for the Game Description Language.
+gammu                         --  Cell phone and SIM card access.
+gapi-ocaml                    --  A simple OCaml client for Google Services.
+gasoline                      --  Unix-ish application development framework
+gavl                          --  Bindings for the gavl library which provides functions for converting images formats, colorspaces, etc.
+gdal                          --  Bindings to the GDAL and OGR libraries
+gedcom                        --  GEDCOM parsing.
+gen                           --  Simple and efficient iterators (modules Gen and GenLabels).
+gen_server                    --  An Erlang-like gen_server framework written for Async.
+genet                         --  Genet is tool to build a continuous integration platform.
+genspir                       --  functions to generate almost uniformly points on the unit sphere
+geoip                         --  Bindings to GeoIP database library.
+getopt                        --  Parsing of command line arguments (similar to GNU GetOpt) for OCaml
+gettext                       --  Provides enough service to build a basic internationalized program
+gg                            --  Basic types for computer graphics in OCaml
+git                           --  Low-level Git bindings in pure OCaml
+github                        --  GitHub APIv3 client bindings
+glical                        --  Glical: glancing at iCalendar data.
+glMLite                       --  OpenGL bindings for OCaml
+google-drive-ocamlfuse        --  A FUSE filesystem over Google Drive
+gperftools                    --  Bindings to gperftools
+gpr                           --  GPR - Library and Application for Gaussian Process Regression
+gpx                           --  Conversions between XML and GPX (1.1) types.
+graphicspdf                   --  Version of OCaml's Graphics library which outputs PDFs.
+grib                          --  Bindings for the ECMWF GRIB API
+gsasl                         --  Bindings ot the GNU SASL library using Ctypes
+gsl                           --  GSL - Bindings to the GNU Scientific Library
+gstreamer                     --  Bindings for the GStreamer library which provides functions for playning and manipulating multimedia streams
+gtk-light                     --  Light wrapper around lablgtk2
+gtktop                        --  A small library to ease the creation of graphical toplevels. 
+gxl-light                     --  Gxl parser and in-place destructive update library
+hamt                          --  Hash Array Mapped Tries
+hardcaml                      --  Register Transfer Level hardware design in OCaml
+hdf                           --  Bindings for the HDF4 library
+headache                      --  Automatic generation of files headers
+heptagon                      --  Compiler for the Heptagon/BZR synchronous programming language
+herelib                       --  Part of Jane Street’s Core library
+hevea                         --  A quite complete and fast LATEX to HTML translator
+hex                           --  Hexadecimal converter
+higher                        --  Library for higher-kinded programming.
+higlo                         --  Library for syntax highlighting.
+humane-re                     --  A human friendly interface to regular expressions in OCaml
+hweak                         --  An hastable with weak pointer enabling the GC to collect things that are in the hashtable
+hydro                         --  An independent implementation of ICE, the object-oriented RPC protocol by ZeroC
+ibx                           --  OCaml implementation of the Interactive Brokers TWS API
+imagemagick                   --  Bindings for ImageMagick
+imap                          --  Non-blocking client library for the IMAP4rev1 protocol
+imaplet-lwt                   --  IMAP server prototype, supports IMAPv4rev1
+indexmap                      --  Generic indexed data for OCaml
+inotify                       --  Inotify bindings for ocaml.
+inspect                       --  Inspect the runtime representation of arbitrary OCaml values.  
+integration1d                 --  Integration of functions of one variable.
+io-page                       --  Allocate memory pages suitable for aligned I/O
+io-page-unix                  --  Allocate OS memory pages suitable for aligned I/O
+io-page-xen                   --  Allocate OS memory pages suitable for aligned I/O
+iocaml                        --  A webserver for iocaml-kernel and iocamljs-kernel.
+iocaml-kernel                 --  An OCaml kernel for the IPython notebook.
+iocamljs-kernel               --  An OCaml javascript kernel for the IPython notebook.
+ipaddr                        --  IP (and MAC) address representation library
+irc-client                    --  IRC client library
+irmin                         --  Irmin, the database that never forgets
+irrlicht                      --  An OCaml binding for the Irrlicht Engine.
+itv-tree                      --  float intervals tree library
+ivy                           --  This OCaml-library interfaces the Ivy software bus C-library.
+javalib                       --  Javalib is a library written in OCaml with the aim to provide a high level representation of Java .class files.
+jenga                         --  Build system
+joolog                        --  Logger for js_of_ocaml
+js-lz4                        --  Barebones bindings for the LZ4 C api
+js_of_ocaml                   --  Compiler from OCaml bytecode to Javascript
+json-static                   --  JSON camlp4 syntax extension using json-wheel
+json-wheel                    --  JSON parser and writer, with optional C-style comments
+jsondiff                      --  JSON sensitive diffing
+jsonm                         --  Non-blocking streaming JSON codec for OCaml
+kaputt                        --  Testing tool
+KaSim                         --  Command line stochastic simulator for kappa models.
+ketrew                        --  Ketrew: a workflow engine based on an OCaml EDSL
+kinetic-client                --  Client for Seagate's kinetic drives.
+krb5                          --  Kerberos 5 bindings
+lablgl                        --  Interface to OpenGL
+lablgtk                       --  OCaml interface to GTK+
+lablgtk-extras                --  A collection of additional tools and libraries to develop ocaml applications based on Lablgtk2.
+lablgtkosx                    --  Lablgtkosx binds gOSX_application on top of lablgtk
+lablqt                        --  OCamlfind package and PPX extension to interface OCaml and QtQuick.
+labltk                        --  OCaml interface to Tcl/Tk, including OCaml library explorer OCamlBrowser
+lacaml                        --  OCaml-bindings to BLAS and LAPACK.
+lacc                          --  fat-free list accumulators
+ladspa                        --  Bindings for the LADSPA API which provides audio effects
+lambda-term                   --  Terminal manipulation library for OCaml
+lambdoc                       --  Library providing support for semantically rich documents in web applications.
+lame                          --  Bindings for the lame library which provides functions for encoding mp3 files
+lastfm                        --  The lastfm library is an implementation of the API used by the last.fm to keep count of played songs
+lazy-trie                     --  Implementation of lazy prefix trees
+lbfgs                         --  Minimization of multidimensional functions on bounded or unbounded domains.
+ledit                         --  Line editor, a la rlwrap
+leveldb                       --  OCaml bindings for Google's LevelDB library.
+levenshtein                   --  Levenshtein distance algorithm for general array.
+libres3                       --  Amazon S3 compatible server
+libsvm                        --  LIBSVM Bindings for OCaml
+libvhd                        --  OCaml bindings for the C library 'libvhd' which allows the manipulation
+libvirt                       --  Libvirt is a portable toolkit to interact with the virtualisation capabilities of Linux, Solaris and other operating systems.
+lilis                         --  Library to Interpret Lindenmayer Systems
+liquidsoap                    --  Swiss-army knife for multimedia streaming
+litiom                        --  Extensions to Ocsigen's Eliom.
+llvm                          --  The official LLVM binding
+llvmgraph                     --  Ocamlgraph overlay for llvm
+lo                            --  Bindings for the lo library which provides functions for communicating with input controls using the OSC protocol
+lpd                           --  A Line Printer Daemon (LPD) server library written entirely in OCaml.
+lwt                           --  A cooperative threads library for OCaml
+lwt-binio                     --  Asynchronous random access IO for numbers
+lwt-zmq                       --  Lwt-friendly interface to ZeroMQ
+lz4                           --  Bindings for LZ4, a very fast lossless compression algorithm
+lzo                           --  Bindings to LZO - a portable lossless data compression library
+macaque                       --  Macaque (Macros for Caml Queries) is a DSL for OCaml, wich produce SQL requests from a comprehension syntax. Macaque can build queries by from s
+macaque_lwt                   --  Utils for MaCaQue with Lwt
+mad                           --  Bindings for the mad library which provides functions for encoding wave audio files into mp3
+magic                         --  Bindings for libmagic (to determine the type of files)
+maildir                       --  This is a preliminary release of an OCaml library to access directories in the Maildir format.
+mascot                        --  A style-checker for OCaml sources (code, documentation, interface, metrics, and typography).
+mbr-format                    --  A simple library for manipulating Master Boot Records.
+melt                          --  Program LaTeX documents using OCaml
+menhir                        --  LR(1) parser generator
+merge-queues                  --  Mergeable queues
+merge-ropes                   --  Mergeable ropes
+merlin                        --  Editor helper, provides completion, typing and sources browsing in Vim and Emacs
+merlin-acme                   --  Merlin interface for acme.
+mesh                          --  Triangular mesh generation and manipulation.
+message-switch                --  A simple store-and-forward message switch.
+meta_conv                     --  Meta conv, type_conv for various tree data formats.
+mezzo                         --  We present the design of Mezzo, a programming language in the ML tradition,
+mikmatch                      --  OCaml syntax extension for regexps
+milter                        --  OCaml libmilter bindings
+mindstorm                     --  Drive Lego Mindstorms bricks from OCaml
+mirage                        --  The Mirage library operating system
+mirage-block-unix             --  Mirage disk block driver for Unix
+mirage-block-xen              --  Mirage block driver for Xen that implements the blkfront/back protocol
+mirage-clock-unix             --  A Mirage-compatible Clock library for Unix
+mirage-clock-xen              --  A Mirage-compatible Clock library for Xen
+mirage-conduit                --  Virtual package for the Mirage Conduit transports
+mirage-console                --  A Mirage-compatible Console library for Xen and Unix
+mirage-console-unix           --  A Mirage-compatible Console library for Unix
+mirage-console-xen            --  A Mirage-compatible Console library for Xen
+mirage-dns                    --  Virtual package for the Mirage DNS transports
+mirage-entropy-unix           --  Mirage entropy device
+mirage-entropy-xen            --  Mirage entropy device
+mirage-fs                     --  Mirage filesystem utilities
+mirage-fs-unix                --  Mirage filesystem passthrough driver for Unix
+mirage-http                   --  Mirage HTTP client and server driver
+mirage-http-unix              --  Mirage HTTP client and server driver for Unix
+mirage-http-xen               --  Mirage HTTP client and server driver for Xen
+mirage-net                    --  Mirage TCP/IP networking stack
+mirage-net-direct             --  TCP/IP networking stack in pure OCaml
+mirage-net-macosx             --  MacOS X implementation of the Mirage NETWORK interface
+mirage-net-socket             --  Socket-based networking stack compatible with Mirage
+mirage-net-unix               --  Ethernet network driver for Mirage, using tuntap
+mirage-net-xen                --  Ethernet network device driver for Mirage/Xen
+mirage-profile                --  Collect profiling information
+mirage-tc                     --  Mirage type-classes
+mirage-tcpip-unix             --  Userlevel TCP/IP stack
+mirage-tcpip-xen              --  Userlevel TCP/IP stack
+mirage-types                  --  Module type definitions for Mirage-compatible applications
+mirage-types-lwt              --  Lwt module type definitions for Mirage-compatible applications
+mirage-unix                   --  Mirage OS library for Unix compilation
+mirage-www                    --  Mirage website (written in Mirage)
+mirage-xen                    --  Mirage OS library for Xen compilation
+mirage-xen-minios             --  Xen MiniOS guest operating system library
+mirari                        --  Mirage application builder
+missinglib                    --  Collection of OCaml-related utilities
+mldonkey                      --  Cross-platform multi-network peer-to-peer daemon
+mlgmp                         --  Interface of GNU MP and MPFR
+mlorg                         --  mlorg is a parser and exporter for org-mode files.
+mlpost                        --  Interface to Metapost
+mm                            --  The mm library contains high-level to create and manipulate multimedia streams (audio, video, MIDI)
+modelica_ml                   --  Modelica abstract syntax and parser
+monadlib                      --  A starter library for monads, with transformers and applicatives.
+mongo                         --  OCaml driver for MongoDB
+monomorphic                   --  A small library used to shadow polymorphic operators (and functions) contained in the stdlib.
+more-ocaml                    --  Support code for the book 'More OCaml'
+mparser                       --  A simple monadic parser combinator library
+mpi                           --  OCaml binding to the Message Passing Interface (MPI)
+mpp                           --  A preprocessor meant to blend languages.
+mpris                         --  Client library for the MPRIS D-Bus media player interface
+mqtt                          --  MQTT message parser in OCaml
+mqtt_client                   --  MQTT pub/sub transport protocol client written in OCaml
+msgpack                       --  Msgpack library
+mstruct                       --  Mstruct is a thin mutable layer on top of cstruct
+mtl                           --  A Monad Transformers Library for OCaml
+mustache                      --  Mustache logic-less templates in OCaml
+mysql                         --  Bindings to libmysqlclient for interacting with mysql databases
+mysql_protocol                --  Implementation of MySQL Protocol with the Bitstring library
+nanomsg                       --  Ctypes based bindings to nanomsg
+nbd                           --  Network Block Device (NBD) protocol implementation
+netamqp                       --  Implements an AMQP client for accessing a message broker
+netlink                       --  Bindings to the Netlink Protocol Library Suite (libnl)
+nit                           --  Nit, a static analyis tool, checks whether a java bytecode program is NullPointerException free.
+nlopt-ocaml                   --  OCaml bindings to the NLOpt optimization library
+nocrypto                      --  Small functional-style crypto library.
+nonstd                        --  Non-standard mini-library
+numerix                       --  Big integer library, written by Michel Quercia. Compares well to GMP.
+oasis                         --  Architecture for building OCaml libraries and applications
+oasis-mirage                  --  This is a fork of OASIS with support for native output-obj.
+oasis2opam                    --  Tool to convert OASIS metadata to OPAM package descriptions
+obeanstalk                    --  Async based client for the beanstalk work queue
+obigstore                     --  Client/server + embeddable semi-structured database.
+objsize                       --  Small library to compute sizes of OCaml heap values.
+obrowser                      --  OCaml virtual machine written in Javascript
+obuild                        --  simple package build system for OCaml
+obus                          --  A pure OCaml implementation of DBus
+ocaml+twt                     --  The Whitespace Thing, a layout preprocessor for OCaml code
+ocaml-arg                     --  A simple library to handle subcommand arguments
+ocaml-buddy                   --  Bindings for the Buddy BDD library.
+ocaml-data-notation           --  Store data using OCaml notation
+ocaml-expat                   --  Write XML-Parsers using the SAX method
+ocaml-glpk                    --  Bindings for glpk
+ocaml-http                    --  Library freely inspired from Perl's HTTP::Daemon module
+ocaml-indent                  --  OCaml-indent: OCaml source code indenter
+ocaml-inifiles                --  An ini file parser
+ocaml-lua                     --  Lua bindings
+ocaml-makefile                --  Easy to use Makefile for small to medium-sized OCaml-projects
+ocaml-markdown                --  Markdown processor for Ocsigen
+ocaml-posix-resource          --  POSIX resource operations bindings
+ocaml-radixtree               --  Radix tree for string
+ocaml-src                     --  Compiler sources
+ocaml-top                     --  The OCaml interactive editor for education
+ocaml-xdg-basedir             --  xdg-basedir specification implementation
+ocaml-xml-rpc                 --  An XML-RPC client and server, using an ad-hoc interface definition language and IDL compiler
+ocaml-zmq                     --  OCaml bindings for ZMQ 2.1
+ocaml9p                       --  ocaml9p is a library for the 9p protocol.
+ocaml_plugin                  --  Automatically build and dynlink OCaml source files
+ocamlcc                       --  Compiler from OCaml bytecode executable files to C source code
+ocamlclean                    --  Reduce size of OCaml bytecode files by dead-code removing
+ocamldap                      --  Implementation of the Light Weight Directory Access Protocol
+ocamldbi                      --  Database independent layer patterned upon Perl DBI
+ocamldiff                     --  OCamldiff is a small OCaml library providing functions to parse and display diff results.
+ocamldot                      --  OCamldot is a small library to parse, print and display graphviz dot files.
+ocamldsort                    --  Sorts a set of OCaml source files according to their dependencies
+ocamleditor                   --  OCamlEditor is a GTK+ source code editor and build tool for OCaml.
+ocamlfind                  1.5.5  A library manager for OCaml
+ocamlfuse                     --  OCaml bindings for FUSE (Filesystem in UserSpacE)
+ocamlgraph                    --  A generic graph library for OCaml
+ocamlgsl                      --  Interface to GSL (GNU scientific library)
+ocamlify                      --  Include files in OCaml code
+ocamlmod                      --  Generate OCaml modules from source files
+ocamlnet                      --  Internet protocols (http, cgi, email etc.) and helper data structures (mail messages, character sets, etc.)
+ocamlpp                       --  OCaml binary files (.byte and .cmo) pretty printers.
+ocamlrss                      --  Library providing functions to parse and print RSS 2.0 files
+ocamlscript                   --  Tool which compiles OCaml scripts into native code
+ocamlsdl                      --  Interface between OCaml and SDL
+ocamlspot                     --  OCamlSpotter - OCaml source browsing
+ocamltop-gtk                  --  A Gtk2 graphical interface for the OCaml toplevel.
+ocamltter                     --  The OCAMLTTER twitter client
+ocamlviz                      --  real-time profiling tool
+ocamlwc                       --  Count lines in OCaml source code
+ocamlweb                      --  A literate programming tool for OCaml
+ocamlyices                    --  Yices SMT solver binding
+ocapic                        --  Development tools to run OCaml programs on PIC microcontrollers
+oclock                        --  Oclock: Precise POSIX clock for OCaml
+ocp-build                     --  Project manager for OCaml
+ocp-indent                    --  A simple tool to indent OCaml programs
+ocp-index                     --  Lightweight documentation extractor for installed OCaml libraries
+ocp-manager                   --  Global Manager for OCaml versions and OPAM switches
+ocp-ocamlres                  --  Manipulation, injection and extraction of embedded resources
+ocplib-endian                 --  Optimised functions to read and write int16/32/64 from strings and bigarrays, based on new primitives added in version 4.01.
+ocsfml                        --  Binding to the C++ SFML gaming library.
+ocsigenserver                 --  A full-featured and extensible Web server
+ocurl                         --  Bindings to libcurl
+odate                         --  Date & Duration Library
+odb-server                    --  Text editors/IDE helper module
+odbc                          --  Interface to various ODBC drivers
+odepack                       --  Binding to ODEPACK.
+odiff-gtk                     --  OCaml library to display and merge diffs using Lablgtk.
+odisco                        --  OCaml library for Disco workers.
+ogg                           --  Interface for Ogg Bitstream Library, otherwise known as libogg
+ojquery                       --  JQuery binding for OCaml
+ojs-base                      --  Components to create web applications using js_of_ocaml and websockets.
+ojwidgets                     --  Browser widgets in OCaml with js_of_ocaml.
+ollvm                         --  ollvm library offers an interface to manipulate LLVM IR in pure OCaml.
+omake                         --  Build system designed for scalability and portability
+omake-mode                    --  Omake Emacs integration
+omd                           --  A Markdown frontend in pure OCaml.
+omonad                        --  Monad programming using ppx preprocessor
+oni                           --  Oni - assorted components for low-level networking.
+oolc                          --  An Ocaml implementation of Open Location Code.
+opa-base                      --  Extended standard library developped along the OPA language
+opam-doc                      --  Produce documentation for OPAM packages
+opam-installext               --  OPAM plugin to install external system dependencies
+opam-lib                      --  The OCaml PAckage Manager (OPAM)
+opam-publish                  --  A tool to ease contributions to opam repositories.
+opam-query                    --  A tool to query opam files from shell scripts
+opam-sync-github-prs          --  Sync OCaml GitHub issues with OPAM
+opam2web                      --  A tool to generate a website from an OPAM repository
+opamfu                        --  Functions over OPAM Universes
+opass                         --  A simple command line tool for storing, retreiving, and generating password and
+opasswd                       --  This is an OCaml binding to the glibc passwd file and shadow password
+openflow                      --  Serialization and protocol implementation for OpenFlow 1.{0,3}
+opium                         --  Sinatra like web toolkit based on Lwt + Cohttp
+oplay                         --  Raw YUV video player
+optcomp                       --  Optional compilation with cpp-like directives
+optimization1d                --  Find extrema of 1D functions.
+opus                          --  Bindings for the opus library to decode audio files in opus format
+oqamldebug                    --  Graphical front-end to ocamldebug
+orakuda                       --  ORakuda, Perlish string literals in OCaml
+orm                           --  The ORM library provides a storage backend to persist ML values.
+osm_xml                       --  Library for parsing OpenStreetMap XML dumps.
+ospec                         --  Behavior-Driven Development tool for OCaml, inspired by RSpec
+otags                         --  Tag file generation of OCaml sources (for vi and emacs)
+otfm                          --  OpenType font decoder for OCaml
+otr                           --  Off-the-record in pure OCaml
+ott                           --  Ott is a tool for writing definitions of programming languages and calculi
+ounit                         --  Unit testing framework loosely based on HUnit. It is similar to JUnit, and other XUnit testing frameworks
+ox                            --  A platform for writing OpenFlow controllers
+p3                            --  P3 parser library
+pa_bench                      --  Syntax extension for inline benchmarks
+pa_comprehension              --  Syntax extension for comprehension expressions
+pa_do                         --  Syntax extension to write arithmetic expressions
+pa_monad_custom               --  Syntactic Sugar for Monads
+pa_ounit                      --  Syntax extension for oUnit
+pa_ovisitor                   --  CamlP4 type_conv module to auto-generate visitor, folder, mapper from type definitions.
+pa_test                       --  Quotation expander for assertions.
+pa_where                      --  Backward declaration syntax
+packet                        --  A serialization library for several common packet formats
+pareto                        --  GSL powered OCaml statistics library, which provides:
+parmap                        --  Minimalistic library allowing to exploit multicore architecture
+patdiff                       --  File Diff using the Patience Diff algorithm
+patience_diff                 --  Diff library using Bram Cohen's patience diff algorithm.
+patoline                      --  A new typesetting system, programmable in ocaml.
+pbs                           --  Helper library around PBS/Torque
+pcap-format                   --  read and write pcap-formatted network packet traces
+pcf-format                    --  parse PCF format X11 bitmap font files
+pci-db                        --  Library to parse and query the pci.ids database of PCI devices
+pcre                          --  pcre-ocaml - bindings to the Perl Compatibility Regular Expressions library
+pfff                          --  Tools and APIs for program analysis, code visualization, refactoring
+pgocaml                       --  Interface to PostgreSQL databases
+pipebang                      --  Part of Jane Street’s Core library
+piqi                          --  Protocol Buffers, JSON and XML serialization system for OCaml
+piqilib                       --  The Piqi library -- runtime support for multi-format Protobuf/JSON/XML/Piq data serialization and conversion
+planck                        --  A small monadic parser combinator library
+planets                       --  A simple interactive program for playing with simulations of planetary systems
+plasma                        --  Distributed filesystem for large files, implemented in user space
+pomap                         --  Library for partially ordered maps
+portaudio                     --  Bindings for the portaudio library which provides high-level functions for using soundcards
+portia                        --  Literate Programming Preprocessor.
+postgresql                    --  postgresql-ocaml - bindings to the PostgreSQL library
+pprint                        --  an OCaml adaptation of Wadler's and Leijen's prettier printer
+ppx_blob                      --  Include a file as a string at compile time
+ppx_deriving                 2.0  Type-driven code generation for OCaml >=4.02
+ppx_deriving_protobuf         --  A Protocol Buffers codec generator for OCaml >=4.02
+ppx_deriving_yojson           --  JSON codec generator for OCaml >=4.02
+ppx_import                    --  A syntax extension for importing declarations from interfaces
+ppx_include                   --  Include OCaml source files in each other
+ppx_meta_conv                 --  ppx_meta_conv, ppx based type_conv for various tree data formats.
+ppx_monad                  0.0.1  A monad syntax extension
+ppx_monadic                   --  ppx_monadic: ppx extension for do notation, pattern guards, and monad comprehension 
+ppx_overload                  --  ppx_overload: SML style simple but user definable overloading
+ppx_pattern_guard             --  ppx_pattern_guard: ppx extension for pattern guard
+ppx_poly_record               --  ppx for polymorphic records
+ppx_test                      --  A ppx replacement of pa_ounit.
+ppx_tools                 0.99.2  Tools for authors of ppx rewriters and other syntactic tools
+prob-cache                    --  Polymorphic probability cache API, including a distributed riak backed cache.
+procord                       --  Procord: a portable library to delegate tasks to other processes.
+profound                      --  Interactive proof exploration based on formula linking
+proj4ml                       --  Bindings to the PROJ.4 projection library
+promela                       --  Library to create, manipulate and reason about PROMELA data structures.
+protobuf                      --  Protobuf implementation for Ocaml
+pulseaudio                    --  Bindings to Pulseaudio client library
+pvem                          --  Polymorphic-Variants-based Error Monad
+pvem_lwt_unix                 --  Access to the Operating system with Pvem and Lwt_unix
+pxp                           --  Polymorphic XML Parser
+qcheck                        --  QuickCheck inspired property-based testing for OCaml.
+qfs                           --  Bindinga to libqfs - client library to access QFS
+qmp                           --  OCaml implementation of a Qemu Message Protocol (QMP) client
+qocamlbrowser                 --  OCamlBrowser clone written with OCaml and QtQuick 2.
+qrencode                      --  Binding to libqrencode (QR-code encoding library)
+qtest                         --  Inline unit test extractor
+quickcheck                    --  Translation of QuickCheck from Haskell into OCaml
+ranger                        --  A consecutive range slice library for strings, arrays, etc.
+rdf                           --  Native OCaml implementation of RDF Graphs and Sparql 1.1 Query.
+re                            --  RE is a regular expression library for OCaml
+re2                           --  OCaml bindings for RE2, Google's regular expression library
+react                         --  Declarative events and signals for OCaml
+reactiveData                  --  Functional reactive programming with incremental changes in data structures
+receive-mail                  --  A simple SMTP server for OCaml
+redis                         --  Bindings for the key-value cache and store redis.
+regstab                       --  SAT-Solver able to deal with formulae patterns
+reins                         --  Persistent data structure library from OCaml Summer Project 2007 sponsored by Jane St. Capital.
+release                       --  Release is a multi-process Lwt-enabled daemon framework for OCaml.
+res                           --  RES - Library for resizable, contiguous datastructures.
+riak                          --  A Riak OCaml client
+riak-pb                       --  Riak OCaml Protobuffs library
+riakc                         --  Protobuf based Riak client
+riakc_ppx                     --  An OCaml library that provides type safe caching extensions to riakc using ppx deriving
+rml                           --  ReactiveML: a programming language for implementing interactive systems.
+root1d                        --  Find roots of 1D functions.
+rope                          --  Ropes ("heavyweight strings")
+rpc                           --  A library to deal with RPCs in OCaml
+rpc_parallel                  --  Type-safe parallel library built on top of Async_rpc
+rtime                         --  Module implementing timelines for React
+safa                          --  Symbolic Algorithms for Finite Automata
+safepass                      --  A library enabling the safe storage of user passwords
+samplerate                    --  Bindings for the samplerate library which provides functions for changing samplerate of audio data
+sarek                         --  GPGPU kernels DSL for OCaml. 
+satML-plugin                  --  Automatic theorem prover based on SMT technology and dedicated to program verification: satML plugin
+sawja                         --  Provide a high level representation of Java bytecode programs and static analysis tools.
+schoca                        --  Implementation of the Scheme language in OCaml 
+schroedinger                  --  Bindings for the schroedinger library to decode video files in Dirac format
+scrypt                        --  C bindings and a high level interface to the official scrypt distribution.
+sedlex                        --  unicode-friendly lexer generator (successor of ulex, now based on -ppx instead of camlp4)
+sequence                      --  Simple and lightweight sequence abstract data type.
+sexplib                       --  Library for serializing OCaml values to and from S-expressions
+sha                           --  Binding to the SHA cryptographic functions
+shared-memory-ring            --  Shared memory rings for RPC and bytestream communications.
+shcaml                        --  Library for Unix shell programming
+should                        --  Literate assertions
+sill                          --  Implementation of Linear Session Types
+simple-bmc                    --  A tool to translate Hybrid automata into SMT formula which is solvable by dReal(https://github.com/soonhokong/dReal).
+simple_pam                    --  Tiny binding around PAM
+slacko                        --  Access the Slack API
+slap                          --  A linear algebra library with static size checking for matrix operations
+smart-print                   --  The pretty-printing library which feels natural to use.
+smtp                          --  SMTP library with Unix and Lwt backends
+snappy                        --  Bindings to snappy - fast compression/decompression library
+sociaml-facebook-api          --  Facebook Graph API Client Library for OCaml
+sociaml-oauth-client          --  OAuth Client Library for Ocaml
+sociaml-tumblr-api            --  Tumblr API Client Library for OCaml
+sociaml-vcard                 --  vCard library for OCaml
+sodium                        --  Binding to libsodium UNAUDITED
+sonet                         --  Collection of modules for asynchronous network applications
+sosa                          --  Sane OCaml String API
+soundtouch                    --  Bindings for the soundtouch library which provides functions for changing pitch and timestretching audio data
+spatial_index                 --  Implementation of several spatial indexes (R-tree, etc.)
+spdiff                        --  tool for automatic inference of semantic patches
+speex                         --  Bindings for the speex library to decode audio files in speex format
+spelll                        --  Fuzzy string searching, using Levenshtein automaton. Can be used for spell-checking.
+spf                           --  OCaml bindings for libspf2
+spoc                          --  High-level GPGPU programming library for OCaml. 
+spotinstall                   --  A tool to facilitate the installation of OCaml annotation files (.cmt, .cmti, .spot, .spit). 
+spotlib                       --  Useful functions for OCaml programming used by @camlspotter
+spotlib_js                    --  Useful functions for OCaml programming used by @camlspotter
+sqlexpr                       --  Type-safe, convenient SQLite database access.
+sqlgg                         --  SQL Guided (code) Generator
+sqlite3                       --  sqlite3-ocaml - SQLite3 bindings
+sqlite3EZ                     --  Thin wrapper for sqlite3-ocaml with a simplified interface
+srs                           --  OCaml bindings for libsrs2
+ssl                           --  Bindings for OpenSSL
+statsd-client                 --  StatsD client library
+stemmer                       --  Porter stemming algorithm in pure OCaml
+stemming                      --  Collection of stemmers
+stog                          --  A static web site generator, able to handle blog posts as well as regular pages.
+stog-rdf                      --  Plugin for Stog. Define and query RDF graphs in rewrite rules.
+stog-writing                  --  Plugin for Stog to use footnotes and bibliographies in stog-generated web sites.
+stone                         --  Simple static website generator, useful for a portfolio or documentation pages
+stringext                     --  Extra string functions for OCaml
+sundialsml                    --  Sundials/ML is an interface to the Sundials suite of numerical solvers.
+swdogen                       --  SWagger DOcumentation GENerator
+symkat                        --  Symbolic Algorithms for Kleene algebra with Tests (KAT)
+syndic                        --  RSS1, RSS2, Atom and OPML1 parsing
+syslog                        --  syslog(3) routines for ocaml
+taglib                        --  Bindings for the taglib library which provides functions for reading tags in headers of audio files
+tar-format                    --  A pure OCaml library to read and write tar files
+tcpip                         --  Userlevel TCP/IP stack
+tdk                           --  tdk - The Decision Kit
+termbox                       --  Bindings for the termbox library, minimalistic API for creating text-based interfaces.
+TestSimple                    --  A simple unit testing framework
+text                          --  Library for dealing with "text", i.e. sequence of unicode characters, in a convenient way
+textutils                     --  Text output utilities
+textwrap                      --  Text wrapping and filling library
+tgls                          --  Thin bindings to OpenGL {3,4} and OpenGL ES {2,3} for OCaml
+themoviedb                    --  API for TheMovieDb.org website
+theora                        --  Bindings for the theora library to decode video files in theora format
+thrift                        --  OCaml bindings for the Apache Thrift RPC system
+tiny_json                     --  A small Json library from OCAMLTTER 
+tiny_json_conv                --  Meta conv for Tiny Json
+tls                           --  Transport Layer Security (TLS) in OCaml
+toml                          --  TOML parser.
+tophide                       --  Hides toplevel values whose name starts with an underscore
+topology                      --  A library for working with network topologies.
+tplib                         --  TPLib: Tropical Polyhedra Library
+tptp                          --  Library for reading and writing FOF and CNF formulas in TPTP format
+travis-senv                   --  Utility to manipulate Travis CI secure environment variables
+treeprint                     --  Small tree structure printer with operator associations and precedences.
+tryocaml                      --  Easiest way to learn how to code in OCaml language
+tsdl                          --  Thin bindings to SDL for OCaml
+tuareg                        --  OCaml mode for GNU Emacs and XEmacs.
+tuntap                        --  TUN/TAP bindings
+type_conv                     --  Library for building type-driven syntax extensions
+typehashlib                   --  Part of Jane Street’s Core library
+typerep                       --  typerep is a library for runtime types.
+typerex                       --  Set of tools and libraries for OCaml, developed by OCamlPro and INRIA
+tyxml                         --  A simple library for building valid HTML5 and SVG documents.
+ucorelib                      --  A light weight Unicode library for OCaml
+udunits                       --  Bindings to the UDUNITS-2 library
+uint                          --  Unsigned ints for OCaml
+ulex                          --  lexer generator for Unicode and OCaml
+unison                        --  File-synchronization tool for Unix and Windows
+uri                           --  RFC3986 URI/URL parsing library
+usb                           --  OCaml bindings for libusb-1.0
+user-setup                    --  OPAM User Setup helper to configure various editors and tools for OCaml
+utop                          --  Universal toplevel for OCaml
+uucd                          --  Unicode character database decoder for OCaml
+uucp                          --  Unicode character properties for OCaml
+uuidm                         --  Module for universally unique identifiers (UUIDs)
+uunf                          --  Unicode text normalization for OCaml
+uuseg                         --  Unicode text segmentation for OCaml
+uutf                          --  Non-blocking streaming Unicode codec for OCaml
+variantslib                   --  Part of Jane Street’s Core library
+vchan                         --  Xen Vchan implementation
+vector3                       --  module for 3D vectors (implemented as records of x, y and z floats)
+vg                            --  Declarative 2D vector graphics for OCaml
+vhd-format                    --  A pure OCaml library for reading and writing .vhd format data with a particular emphasis on efficient streaming and format conversion.
+vhd-tool                      --  A command-line tool to manipulate, transcode and stream .vhd format data.
+vhdlib                        --  Bindings to libvhd
+vmnet                         --  Userlevel network bridging on MacOS X
+voaacenc                      --  Bindings for the voaacenc library to encode audio files in AAC format
+vorbis                        --  Bindings to libvorbis
+wdialog                       --  Dialog-oriented web applications
+webdav                        --  Implements the client side of the WebDAV protocol (RFC 4918)
+weberizer                     --  HTML templating system.
+websocket                     --  Websocket library
+wget                          --  Basic wget-like client, based on the Citrix' HTTP library.
+why                           --  Why is a software verification platform.
+why3                          --  Why3 is a platform for deductive program verification.
+wiringpi                      --  WiringPi for OCaml, low level Raspberry Pi hardware access
+wyrd                          --  Text-based front-end to Remind, a sophisticated calendar and alarm program
+x509                          --  X.509 certificate (RFC5280) library
+xapi                          --  The xapi toolstack daemon which implements the XenAPI
+xapi-forkexecd                --  Sub-process control service for xapi
+xapi-idl                      --  Interface descriptions and common boilerplate for xapi services.
+xapi-inventory                --  Library for accessing the xapi toolstack inventory file
+xapi-libs-transitional        --  Further transitional libraries required by xapi
+xapi-netdev                   --  Host network device configuration
+xapi-networkd                 --  Xapi toolstack host network configurator
+xapi-rrd                      --  RRD library for use with xapi
+xapi-rrd-transport            --  Shared-memory protocols for exposing performance counters
+xapi-rrdd                     --  Performance monitoring daemon for xapi
+xapi-rrdd-plugin              --  A plugin library for the xapi performance monitoring daemon
+xapi-squeezed                 --  A memory ballooning daemon for the Xen hypervisor
+xapi-stdext                   --  A deprecated collection of utility functions
+xapi-tapctl                   --  A library to control tapdisk on a Xen host
+xapi-xenops                   --  Create/destroy/manipulate Xen domains
+xapi-xenops-cli               --  A CLI for the xapi Xen domain manager.
+xapi-xenopsd                  --  A single-host domain/VM manager for the Xen hypervisor
+xe                            --  A command-line client for the 'xapi' service (as used in XenServer)
+xe-unikernel-upload           --  A simple tool to upload a Unikernel to a XenServer pool.
+xen-api-client                --  Xen-API client library for remotely-controlling an XCP or XenServer host.
+xen-block-driver              --  Xen disk device drivers: both client ("frontend") and server ("backend")
+xen-disk                      --  A command-line tool for attaching disks to VMs running on a xen host.
+xen-evtchn                    --  Xen event channel bindings.
+xen-gnt                       --  Xen grant table bindings
+xenbigarray                   --  Portable Bigarray intended for embedded Xen use
+xenctrl                       --  Low-level Xen hypercall bindings.
+xenstore                      --  Xenstore protocol clients and server
+xenstore_transport            --  Low-level libraries for connecting to a xenstore service on a xen host.
+xentropyd                     --  Xentropyd: provide entropy to Xen VMs
+xml-light                    2.4  Xml-Light is a minimal XML parser & printer for OCaml 
+xmldiff                       --  Diffs on XML trees.
+xmlm                          --  Streaming XML codec for OCaml
+xmlplaylist                   --  Library to parse various file playlists in XML format
+xstr                          --  Functions for string searching/matching/splitting
+xstrp4                        --  Brace expansion (alias 'interpolation') performed by camlp4
+xtmpl                         --  Small XML templating library.
+yajl                          --  bindings to the YAJL streaming JSON library
+yajl-extra                    --  extended YAJL bindings with a convenient high-level JSON representation
+yojson                        --  Yojson is an optimized parsing and printing library for the JSON format 
+zarith                        --  Implements arithmetic and logical operations over arbitrary-precision integers
+zbar                          --  Binding to ZBar (QR-code scanning library)
+zed                           --  Abstract engine for text edition in OCaml
+zenon                         --  Automated theorem prover for first order classical logic (with equality), based on the tableau method
+zephyrus                      --  Zephyrus automatic configuration generation tool.
+zero                          --  Deprecated, merged into core_kernel
+zmq                           --  OCaml bindings for ZeroMQ 4.0
+
