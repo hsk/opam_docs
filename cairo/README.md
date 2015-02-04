@@ -7,6 +7,17 @@ Cairo2とCairoはインターフェイスが若干異なります。
 
 ## インストール
 
+libgtk2が必要なので、osxの場合は、homebrewだと
+```
+export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig:/usr/X11/lib/pkgconfig:$PKG_CONFIG_PATH
+```
+
+といった設定が必要です。また、以下のインストールが必要です。
+
+```
+brew install gtk+ cairo
+```
+
 	$ opam install cairo
 
 ## 使い方
