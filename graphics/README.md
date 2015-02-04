@@ -68,4 +68,5 @@ clean:
 
 ## 参考URL
 
-http://ocaml.jp/Graphics
+http://ocaml.jp/Chapter%2025%20The%20graphics%20library
+
