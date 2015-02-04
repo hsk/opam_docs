@@ -3,6 +3,10 @@
 アンチエイリアス付きの画像処理ライブラリ
 Cairoより新しいバージョン
 
+https://github.com/Chris00/ocaml-cairo のcairoもcairo2です。
+
+
+
 ## インストール
 
 libgtk2が必要なので、osxの場合は、homebrewだと
@@ -86,3 +90,9 @@ OCAMLPACKS[]=
 clean:
   rm -f $(filter-proper-targets $(ls R, .))
 ```
+
+## 参考URL
+
+https://github.com/Chris00/ocaml-cairo/tree/master/examples
+
+http://cairo.forge.ocamlcore.org/tutorial/
