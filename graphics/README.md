@@ -1,9 +1,12 @@
 # graphics
 
-標準のグラフィックスライブラリ。
-バックグラウンド処理や、アンチエイリアシングありの高度な処理は出来ない。
+標準のグラフィックスライブラリです。
+
+バックグラウンド処理や、アンチエイリアシングありの高度な処理を行いたい場合は、[../cairo2](Cairo2)や[../imagemagick](ImageMagick)を使うと良いでしょう。
 
 ## インストール
+
+OCamlをインストールすればついてきます。
 
 ## 使い方
 
@@ -62,3 +65,7 @@ OCAMLPACKS[]=
 clean:
   rm -f $(filter-proper-targets $(ls R, .))
 ```
+
+## 参考URL
+
+http://ocaml.jp/Graphics

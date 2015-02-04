@@ -7,7 +7,7 @@ OCamlには沢山のライブラリが存在しています。
 
 ## 標準ライブラリ
 
-1. [digest.md](digest) MD5文字列の生成、変換
+1. [digest](digest) MD5文字列の生成、変換
 1. [graphics](graphics) 標準の画像処理ライブラリ
 
 ## ppx
