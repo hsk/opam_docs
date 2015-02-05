@@ -42,6 +42,7 @@ OCamlには沢山のライブラリが存在しています。
 1. [xml-light](xml-light) XMLのパース、文字列化、DTDによる検証
 1. [ocamlgraph](ocamlgraph) グラフの計算、表示等
 1. [camlzip](camlzip) zipファイルの圧縮、解凍等
+1. [yojson](yojson) jsonの読み書き、ソート、文字列化等
 
 ## 画像処理
 
