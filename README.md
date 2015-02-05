@@ -58,6 +58,11 @@ $ make
 1. [imagemagick](imagemagick) 様々な画像の読み込み、保存、描画
 [](1. [lablgl](lablgl) OpenGL)
 
+
+## ネットワーク
+
+1. [ocurl](ocurl) libcurlのOCamlバインディング
+
 ## 数学
 
 1. zarith                        --  Implements arithmetic and logical operations over arbitrary-precision integers
