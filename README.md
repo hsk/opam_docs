@@ -12,19 +12,15 @@ OCamlには沢山のライブラリが存在しています。
 
 ## ppx
 
-1. [ppx_deriving](ppx_deriving) データの自動文字列化等
+1. [ppx_blob](ppx_blob)         Include a file as a string at compile time
+1. [ppx_deriving](ppx_deriving) データの自動文字列化等 for OCaml >=4.02
 1. [ppx_monad](ppx_monad) モナド構文の追加
 1. [ppx_monadic](ppx_monadic) モナド構文の追加
 1. [ppx_deriving_yojson](ppx_deriving_yojson) データのJSON化
-1. ppx_blob                      --  Include a file as a string at compile time
-1. ppx_deriving                 2.0  Type-driven code generation for OCaml >=4.02
 1. ppx_deriving_protobuf         --  A Protocol Buffers codec generator for OCaml >=4.02
-1. ppx_deriving_yojson           --  JSON codec generator for OCaml >=4.02
 1. ppx_import                    --  A syntax extension for importing declarations from interfaces
 1. ppx_include                   --  Include OCaml source files in each other
 1. ppx_meta_conv                 --  ppx_meta_conv, ppx based type_conv for various tree data formats.
-1. ppx_monad                  0.0.1  A monad syntax extension
-1. ppx_monadic                   --  ppx_monadic: ppx extension for do notation, pattern guards, and monad comprehension
 1. ppx_overload                  --  ppx_overload: SML style simple but user definable overloading
 1. ppx_pattern_guard             --  ppx_pattern_guard: ppx extension for pattern guard
 1. ppx_poly_record               --  ppx for polymorphic records
