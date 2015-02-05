@@ -1,0 +1,11 @@
+.PHONY: all clean
+USE_OCAMLFIND = true
+FILES[]= ex01
+OCAMLPACKS[]=
+  ppx_import
+  ppx_deriving
+.DEFAULT: $(OCamlProgram ex01, $(FILES))
+          $(OCamlProgram ex02, $(FILES))
+clean:
+  rm -f $(filter-proper-targets $(ls R, .))
+
