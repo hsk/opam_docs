@@ -76,3 +76,29 @@ OCAMLPACKS[]=
 clean:
   rm -f $(filter-proper-targets $(ls R, .))
 ```
+
+## 参考URL
+
+ocamlgraphについての大体の情報について
+
+http://no-maddojp.hatenablog.com/entry/2013/11/29/163610
+
+Functorの使い方の入り口を把握
+
+http://d.hatena.ne.jp/soutaro/20070103/1167827921
+
+ocamlgraphの github
+
+https://github.com/backtracking/ocamlgraph
+
+Graphの使い方の例をテストから見る
+
+https://github.com/backtracking/ocamlgraph/blob/master/tests/check.ml
+
+componentsの仕様
+
+https://github.com/backtracking/ocamlgraph/blob/master/src/components.mli
+
+vetex labelの仕様
+
+https://github.com/backtracking/ocamlgraph/blob/master/src/sig.mli
