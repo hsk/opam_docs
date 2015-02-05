@@ -47,6 +47,24 @@ OCamlには沢山のライブラリが存在しています。
 [](1. [lablgl](lablgl) OpenGL)
 
 
+## データベース
+
+1. mysql                         --  Bindings to libmysqlclient for interacting with mysql databases
+1. mysql_protocol                --  Implementation of MySQL Protocol with the Bitstring library
+1. odbc                          --  Interface to various ODBC drivers
+1. pgocaml                       --  Interface to PostgreSQL databases
+1. postgresql                    --  postgresql-ocaml - bindings to the PostgreSQL library
+1. mongo                         --  OCaml driver for MongoDB
+
+## コマンドラインツール
+
+1. ocamlc ocamlopt 標準のコンパイラ
+1. ocamllex ocamlyacc 標準のコンパイラコンパイラ サードパーティ製ではmenhir ulexがある。
+1. camlp4 プリプロセッサ
+1. omake OCaml製で、OCamlやC言語等のmakeに変わる便利なビルドツール
+1. ocamlfind パッケージ自動検索
+1. ocamlspot ソースコードの情報取得
+
 ## より詳しい説明
 
 Makefileを用意して、インストール、アンインストールと、ocamlcとocamloptでのリンクをする例を乗せました。
