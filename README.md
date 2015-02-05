@@ -18,7 +18,7 @@ OCamlには沢山のライブラリが存在しています。
 1. [ppx_monadic](ppx_monadic) モナド構文の追加
 1. [ppx_deriving_yojson](ppx_deriving_yojson) データのJSON化
 1. ppx_deriving_protobuf         --  A Protocol Buffers codec generator for OCaml >=4.02
-1. ppx_import                    --  A syntax extension for importing declarations from interfaces
+1. [ppx_import](ppx_import)                    --  A syntax extension for importing declarations from interfaces
 1. ppx_include                   --  Include OCaml source files in each other
 1. ppx_meta_conv                 --  ppx_meta_conv, ppx based type_conv for various tree data formats.
 1. ppx_overload                  --  ppx_overload: SML style simple but user definable overloading
