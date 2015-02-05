@@ -30,6 +30,10 @@ OCamlには沢山のライブラリが存在しています。
 1. ppx_test                      --  A ppx replacement of pa_ounit.
 1. ppx_tools                 0.99.2  Tools for authors of ppx rewriters and other syntactic tools
 
+## Comminucate
+
+1. biniou                        --  Binary data format designed for speed, safety, ease of use and backward compatibility as protocols evolve
+
 
 ## データ処理
 
@@ -37,6 +41,7 @@ OCamlには沢山のライブラリが存在しています。
 1. [csv](csv) カンマ区切りのデータの読み書き
 1. [xml-light](xml-light) XMLのパース、文字列化、DTDによる検証
 1. [ocamlgraph](ocamlgraph) グラフの計算、表示等
+1. [camlzip](camlzip) zipファイルの圧縮、解凍等
 
 ## 画像処理
 
@@ -47,6 +52,18 @@ OCamlには沢山のライブラリが存在しています。
 1. [imagemagick](imagemagick) 様々な画像の読み込み、保存、描画
 [](1. [lablgl](lablgl) OpenGL)
 
+## 数学
+
+1. zarith                        --  Implements arithmetic and logical operations over arbitrary-precision integers
+1. [mesh](mesh)                  --  Triangular mesh generation and manipulation.
+1. odepack
+1. l-bfgs
+1. 1d root finding
+1. boolean expression simplifier
+1. tptp                          --  Library for reading and writing FOF and CNF formulas in TPTP format
+1. 1d optimazation
+19. pareto                        --  GSL powered OCaml statistics library, which provides
+
 
 ## データベース
 
@@ -56,6 +73,8 @@ OCamlには沢山のライブラリが存在しています。
 1. pgocaml                       --  Interface to PostgreSQL databases
 1. postgresql                    --  postgresql-ocaml - bindings to the PostgreSQL library
 1. mongo                         --  OCaml driver for MongoDB
+1. obigstore                     --  Client/server + embeddable semi-structured database.
+1. ocamldbi                      --  Database independent layer patterned upon Perl DBI
 
 ## コマンドラインツール
 

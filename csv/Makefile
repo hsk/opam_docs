@@ -1,17 +1,17 @@
-default: test test.opt run run.opt
+default: ex01 ex01.opt run run.opt
 
 install:
 	opam install csv
 uninstall: clean
 	opam uninstall csv
 
-test.opt: install test.ml
-	ocamlfind ocamlopt -package csv csv.cmxa test.ml -o test.opt
-test: install test.ml
-	ocamlfind ocamlc -package csv csv.cma test.ml -o test
-run: test
-	./test
-run.opt: test.opt
-	./test.opt
+ex01.opt: install ex01.ml
+	ocamlfind ocamlopt -package csv csv.cmxa ex01.ml -o ex01.opt
+ex01: install ex01.ml
+	ocamlfind ocamlc -package csv csv.cma ex01.ml -o ex01
+run: ex01
+	./ex01
+run.opt: ex01.opt
+	./ex01.opt
 clean:
-	rm -f *.cm* *.o *.csv test test.opt .omakedb* *.omc *.run
+	rm -f *.cm* *.o *.csv ex01 ex01.opt .omakedb* *.omc *.run
