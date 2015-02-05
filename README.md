@@ -36,6 +36,7 @@ OCamlには沢山のライブラリが存在しています。
 1. [base64](base64) 64文字で表す
 1. [csv](csv) カンマ区切りのデータの読み書き
 1. [xml-light](xml-light) XMLのパース、文字列化、DTDによる検証
+1. [ocamlgraph](ocamlgraph) グラフの計算、表示等
 
 ## 画像処理
 
