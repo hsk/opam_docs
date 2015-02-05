@@ -15,6 +15,7 @@ OCamlには沢山のライブラリが存在しています。
 1. [ppx_deriving](ppx_deriving) データの自動文字列化等
 1. [ppx_monad](ppx_monad) モナド構文の追加
 1. [ppx_monadic](ppx_monadic) モナド構文の追加
+1. [ppx_deriving_yojson](ppx_deriving_yojson) データのJSON化
 1. ppx_blob                      --  Include a file as a string at compile time
 1. ppx_deriving                 2.0  Type-driven code generation for OCaml >=4.02
 1. ppx_deriving_protobuf         --  A Protocol Buffers codec generator for OCaml >=4.02
