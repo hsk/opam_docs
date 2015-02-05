@@ -4,6 +4,7 @@
 
 Cairo2が最新なので、[Cairo2](../cairo)を使うと良いでしょう。
 Cairo2とCairoはインターフェイスが若干異なります。
+インストールが面倒なら[../imagemagick](imagemagick)を使うとよいかもしれません。
 
 ## インストール
 
