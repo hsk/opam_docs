@@ -108,23 +108,36 @@ let f xs ys =
 Makefile
 
 ```
-default: test test.opt run run.opt
+default: ex01 ex01.opt run run.opt
 
 install:
   opam install ppx_monad
 uninstall: clean
   opam uninstall ppx_monad
 
-test.opt: install test.ml
-  ocamlfind ocamlopt -package ppx_monad test.ml -o test.opt
-test: install test.ml
-  ocamlfind ocamlc -package ppx_monad test.ml -o test
-run: test
-  ./test
-run.opt: test.opt
-  ./test.opt
+ex01.opt: install ex01.ml
+  ocamlfind ocamlopt -package ppx_monad ex01.ml -o ex01.opt
+ex01: install ex01.ml
+  ocamlfind ocamlc -package ppx_monad ex01.ml -o ex01
+run: ex01
+  ./ex01
+run.opt: ex01.opt
+  ./ex01.opt
 clean:
-  rm -f *.cm* *.o test test.opt
+  rm -f *.cm* *.o ex01 ex01.opt .omakedb* *.omc
+```
+
+OMakefile
+
+```
+.PHONY: all clean
+USE_OCAMLFIND = true
+FILES[]= ex01
+OCAMLPACKS[]=
+  ppx_monad
+.DEFAULT: $(OCamlProgram ex01, $(FILES))
+clean:
+  rm -f $(filter-proper-targets $(ls R, .))
 ```
 
 ## 参考URL
