@@ -5,6 +5,14 @@
 OCamlには沢山のライブラリが存在しています。
 ぱっと使ってみたいと思ってもすぐに使えるように、OCamlのOPAMパッケージを使った簡単な例を揃えたものです。
 
+```
+$ git clone https://github.com/hsk/opam_docs.git
+$ cd digest
+$ make
+```
+
+等とする事で実行してみる事が出来ます。opamのインストールも自動で行います。make uninstallで削除できます。
+
 ## 標準ライブラリ
 
 1. [digest](digest) MD5文字列の生成、変換
