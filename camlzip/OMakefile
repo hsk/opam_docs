@@ -1,0 +1,12 @@
+.PHONY: all clean
+USE_OCAMLFIND = true
+FILES[]= ex01
+OCAMLPACKS[]=
+  camlzip
+  unix
+FILES2[] = minizip
+.DEFAULT: $(OCamlProgram ex01, $(FILES))
+  $(OCamlProgram minizip, $(FILES2))
+clean:
+  rm -f $(filter-proper-targets $(ls R, .))
+
