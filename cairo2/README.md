@@ -5,7 +5,7 @@ Cairoより新しいバージョン
 
 https://github.com/Chris00/ocaml-cairo のcairoもcairo2です。
 
-インストールが面倒なら[../imagemagick](imagemagick)を使うとよいかもしれません。
+インストールが面倒なら[imagemagick](../imagemagick)を使うとよいかもしれません。
 
 
 ## インストール
