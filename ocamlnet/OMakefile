@@ -1,0 +1,9 @@
+.PHONY: all clean
+USE_OCAMLFIND = true
+FILES[]= ex01
+OCAMLPACKS[]=
+  netclient
+.DEFAULT: $(OCamlProgram ex01, $(FILES))
+clean:
+  rm -f $(filter-proper-targets $(ls R, .))
+
