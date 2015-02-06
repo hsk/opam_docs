@@ -48,6 +48,7 @@ $ make
 1. [ocamlgraph](ocamlgraph) グラフの計算、表示等
 1. [camlzip](camlzip) zipファイルの圧縮、解凍等
 1. [yojson](yojson) jsonの読み書き、ソート、文字列化等
+1. [ocaml-syck](ocaml-syck) yamlの読み書き
 
 ## 画像処理
 
@@ -86,6 +87,10 @@ $ make
 1. mongo                         --  OCaml driver for MongoDB
 1. obigstore                     --  Client/server + embeddable semi-structured database.
 1. ocamldbi                      --  Database independent layer patterned upon Perl DBI
+
+## リアクティブプログラミング
+
+1. [react](react)
 
 ## コマンドラインツール
 
