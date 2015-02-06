@@ -105,3 +105,16 @@ OCAMLPACKS[]=
 clean:
   rm -f $(filter-proper-targets $(ls R, .))
 ```
+
+## 参考URL
+
+https://github.com/mjambon/yojson
+
+-[common.mli](https://github.com/mjambon/yojson/blob/master/common.mli)
+-[pretty.mli](https://github.com/mjambon/yojson/blob/master/pretty.mli)
+-[read.mli](https://github.com/mjambon/yojson/blob/master/read.mli)
+-[safe.mli](https://github.com/mjambon/yojson/blob/master/safe.mli)
+-[util.mli](https://github.com/mjambon/yojson/blob/master/util.mli)
+-[write.mli](https://github.com/mjambon/yojson/blob/master/write.mli)
+-[write2.mli](https://github.com/mjambon/yojson/blob/master/write2.mli)
+-[yojson_biniou.mli](https://github.com/mjambon/yojson/blob/master/yojson_biniou.mli)

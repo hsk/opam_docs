@@ -95,3 +95,13 @@ run.opt: test.opt
 clean:
   rm -f *.cm* *.o *.csv test test.opt
 ```
+
+## 参考URL
+
+https://github.com/ncannasse/xml-light
+
+- [dtd.mli](https://github.com/ncannasse/xml-light/blob/master/dtd.mli)
+- [xml.mli](https://github.com/ncannasse/xml-light/blob/master/xml.mli)
+- [xmlParser.mli](https://github.com/ncannasse/xml-light/blob/master/xmlParser.mli)
+- [xml_lexer.mli](https://github.com/ncannasse/xml-light/blob/master/xml_lexer.mli)
+
