@@ -1,9 +1,9 @@
 .PHONY: all clean
 USE_OCAMLFIND = true
-FILES[]= test
+FILES[]= ex01
 OCAMLPACKS[]=
   magick
-.DEFAULT: $(OCamlProgram test, $(FILES))
+.DEFAULT: $(OCamlProgram ex01, $(FILES))
 clean:
   rm -f $(filter-proper-targets $(ls R, .))
 

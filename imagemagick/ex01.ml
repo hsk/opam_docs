@@ -9,7 +9,7 @@ let () =
     draw_ellipse img ~cx ~cy
         ~rx:50 ~ry:20 ~fill_color:(color_of_string "#FFFB") ()
   ) [ (20, 40); (60, 55); (90, 30); (120, 65); (175, 35); ];
-  write_image img "test.jpg"
+  write_image img "ex01.jpg"
 
 
 
