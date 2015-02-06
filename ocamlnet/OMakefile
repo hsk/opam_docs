@@ -1,9 +1,11 @@
 .PHONY: all clean
 USE_OCAMLFIND = true
 FILES[]= ex01
+FILES2[]= ex02
 OCAMLPACKS[]=
   netclient
 .DEFAULT: $(OCamlProgram ex01, $(FILES))
+          $(OCamlProgram ex02, $(FILES2))
 clean:
   rm -f $(filter-proper-targets $(ls R, .))
 
