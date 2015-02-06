@@ -32,3 +32,4 @@ B64.decodeでデコードします。
 
 ## 参考URL
 
+- [b64.mli](https://github.com/mirage/ocaml-base64/blob/master/lib/b64.mli)

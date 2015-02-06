@@ -89,8 +89,6 @@ clean:
 
 ## 参考URL
 
-[gzip.mli](https://github.com/Leonidas-from-XIV/camlzip/blob/master/src/gzip.mli)
-
-[zip.mli](https://github.com/Leonidas-from-XIV/camlzip/blob/master/src/zip.mli)
-
-[zlib.mli](https://github.com/Leonidas-from-XIV/camlzip/blob/master/src/zlib.mli)
+- [gzip.mli](https://github.com/Leonidas-from-XIV/camlzip/blob/master/src/gzip.mli)
+- [zip.mli](https://github.com/Leonidas-from-XIV/camlzip/blob/master/src/zip.mli)
+- [zlib.mli](https://github.com/Leonidas-from-XIV/camlzip/blob/master/src/zlib.mli)
