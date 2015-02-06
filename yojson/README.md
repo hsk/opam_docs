@@ -108,8 +108,12 @@ clean:
 
 ## 参考URL
 
-https://github.com/mjambon/yojson
-
+- https://github.com/mjambon/yojson
+- http://mjambon.com/yojson-doc/Yojson.html
+- http://mjambon.com/yojson-doc/Yojson.Basic.html
+- http://mjambon.com/yojson-doc/Yojson.Safe.html
+- http://mjambon.com/yojson-doc/Yojson.Raw.html
+- http://mjambon.com/yojson-doc/Yojson_biniou.html
 - [common.mli](https://github.com/mjambon/yojson/blob/master/common.mli)
 - [pretty.mli](https://github.com/mjambon/yojson/blob/master/pretty.mli)
 - [read.mli](https://github.com/mjambon/yojson/blob/master/read.mli)
@@ -118,3 +122,4 @@ https://github.com/mjambon/yojson
 - [write.mli](https://github.com/mjambon/yojson/blob/master/write.mli)
 - [write2.mli](https://github.com/mjambon/yojson/blob/master/write2.mli)
 - [yojson_biniou.mli](https://github.com/mjambon/yojson/blob/master/yojson_biniou.mli)
+- [yojson.mli.cppo](https://github.com/mjambon/yojson/blob/master/yojson.mli.cppo)
