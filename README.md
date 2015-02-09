@@ -17,6 +17,7 @@ $ make
 
 1. [digest](digest) MD5文字列の生成、変換
 1. [graphics](graphics) 標準の画像処理ライブラリ
+1. [str](str) 標準の正規表現ライブラリ
 
 ## ppx
 
