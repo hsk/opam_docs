@@ -7,11 +7,10 @@ module ExpParser = struct
 
   open Planck
 
-  (* Stream of chars with buffering and memoization *)
   module Stream = Schar
-  module Base = Pbase.Make(Stream) (* Base parser *)
+  module Base = Pbase.Make(Stream)
   include Base
-  include Pbuffer.Extend(Stream)(Base) (* Extend Base with parser operators for buffered streams *)
+  include Pbuffer.Extend(Stream)(Base)
 
   module Op = Op_prec.Make(struct
     type t = e
@@ -29,18 +28,17 @@ module ExpParser = struct
       '-',  { prec = 2.0; kind = `Infix `Left };
       '*',  { prec = 3.0; kind = `Infix `Left };
       '/',  { prec = 3.0; kind = `Infix `Left };
-      '~',  { prec = 5.0; kind = `Prefix }; (* unary minus *)
+      '~',  { prec = 5.0; kind = `Prefix };
     ]
 
-  (* parsing rules *)
   let blank = void (one_of [' '; '\t'; '\n'; '\r'])
 
   let rec parse s =
     let stream = Stream.from_string ~filename:"stdin" s in
     expr stream
+
   and simple_expr st = st |> (
     
-    (* Skip spaces *)
     ?* blank >>= fun () -> (
 
     constant
@@ -56,7 +54,7 @@ module ExpParser = struct
     )
   )
   and constant st = st |> (
-    (* [0-9]+ *)
+
     matched (?+ (tokenp (function '0'..'9' -> true | _ -> false) <?> "decimal")) 
     >>= fun s -> return (`Term (Const (int_of_string s)))
   )

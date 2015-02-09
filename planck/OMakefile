@@ -6,4 +6,3 @@ OCAMLPACKS[]=
 .DEFAULT: $(OCamlProgram ex01, $(FILES))
 clean:
   rm -f $(filter-proper-targets $(ls R, .))
-
