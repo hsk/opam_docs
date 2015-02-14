@@ -1,6 +1,6 @@
 # Core
 
-ジェットな、つおいライブラリです。
+Jane Street で開発されている基本ライブラリで、Realworld OCamlでも基本的なライブラリとして使われています。
 
 ## インストール
 
@@ -22,7 +22,6 @@ let _ =
   ) in
   Printf.printf "%d\n" rc
 ```
-
 
 Makefile
 
