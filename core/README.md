@@ -1,6 +1,6 @@
 # Core
 
-Jane Street で開発されている基本ライブラリで、Realworld OCamlでも基本的なライブラリとして使われています。
+Jane Street で開発されている基本ライブラリで、Real World OCamlでも基本的なライブラリとして使われています。
 
 ## インストール
 
