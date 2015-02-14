@@ -5,6 +5,10 @@
 OCamlには沢山のライブラリが存在しています。
 ぱっと使ってみたいと思ってもすぐに使えるように、OCamlのOPAMパッケージを使った簡単な例を揃えたものです。
 
+http://ocaml.org/docs/
+
+こちらと名前がかぶってよくない事が分かったので、リポジトリ名を変更しようかと検討中です。
+
 ```
 $ git clone https://github.com/hsk/opam_docs.git
 $ cd digest
