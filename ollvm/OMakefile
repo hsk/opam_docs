@@ -1,9 +1,12 @@
-.PHONY: all clean
+.PHONY: all clean ex02
 USE_OCAMLFIND = true
 FILES[]= ex01
+FILES2[]= ex02
 OCAMLPACKS[]=
   ollvm
-.DEFAULT: $(OCamlProgram ex01, $(FILES))
+OCAMLFLAGS[] += -w Aer-8-40-42$(if $(OCAML_ACCEPTS_Z_WARNING), z)
+.DEFAULT: $(OCamlProgram ex01, $(FILES)) ex02
+ex02: $(OCamlProgram ex02, $(FILES2))
 clean:
   rm -f $(filter-proper-targets $(ls R, .))
 
