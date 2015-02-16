@@ -37,13 +37,13 @@ $ make
 1. [ppx_deriving_yojson](ppx_deriving_yojson) データのJSON化
 1. ppx_deriving_protobuf         --  A Protocol Buffers codec generator for OCaml >=4.02
 1. [ppx_import](ppx_import)                    --  A syntax extension for importing declarations from interfaces
-1. ppx_include                   --  Include OCaml source files in each other
-1. ppx_meta_conv                 --  ppx_meta_conv, ppx based type_conv for various tree data formats.
-1. ppx_overload                  --  ppx_overload: SML style simple but user definable overloading
-1. ppx_pattern_guard             --  ppx_pattern_guard: ppx extension for pattern guard
-1. ppx_poly_record               --  ppx for polymorphic records
-1. ppx_test                      --  A ppx replacement of pa_ounit.
-1. ppx_tools                 0.99.2  Tools for authors of ppx rewriters and other syntactic tools
+1. ppx\_include                   --  Include OCaml source files in each other
+1. ppx\_meta\_conv                 --  ppx\_meta\_conv, ppx based type\_conv for various tree data formats.
+1. ppx\_overload                  --  ppx\_overload: SML style simple but user definable overloading
+1. ppx\_pattern\_guard             --  ppx\_pattern\_guard: ppx extension for pattern guard
+1. ppx\_poly\_record               --  ppx for polymorphic records
+1. ppx\_test                      --  A ppx replacement of pa\_ounit.
+1. ppx\_tools                 0.99.2  Tools for authors of ppx rewriters and other syntactic tools
 
 ## Comminucate
 
@@ -77,6 +77,8 @@ $ make
 ## ネットワーク
 
 1. [ocurl](ocurl) libcurlのOCamlバインディング
+1. [ocamlnet](ocamlnet) http等
+1. [cow](cow) HTMLのDSL
 
 ## 数学
 
