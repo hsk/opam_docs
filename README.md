@@ -23,6 +23,11 @@ $ make
 1. [graphics](graphics) 標準の画像処理ライブラリ
 1. [str](str) 標準の正規表現ライブラリ
 
+## 補強ライブラリ
+
+1. [core](core)
+2. [extlib](extlib)
+
 ## ppx
 
 1. [ppx_blob](ppx_blob)         Include a file as a string at compile time
@@ -54,6 +59,10 @@ $ make
 1. [camlzip](camlzip) zipファイルの圧縮、解凍等
 1. [yojson](yojson) jsonの読み書き、ソート、文字列化等
 1. [ocaml-syck](ocaml-syck) yamlの読み書き
+
+## テキスト処理
+
+1. [pcre](pcre) Perl互換正規表現ライブラリ
 
 ## 画像処理
 
@@ -106,6 +115,7 @@ $ make
 1. omake OCaml製で、OCamlやC言語等のmakeに変わる便利なビルドツール
 1. ocamlfind パッケージ自動検索
 1. ocamlspot ソースコードの情報取得
+1. [utop](utop) トップレベルコマンド
 
 ## より詳しい説明
 
