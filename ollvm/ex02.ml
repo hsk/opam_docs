@@ -1,4 +1,3 @@
-
 let parse input =
   let inp = open_in input in
   let lexbuf = Lexing.from_channel inp in
@@ -9,6 +8,3 @@ let parse input =
 let _ =
   let ast = parse "test.ll" in
   Ollvm_printer.toplevelentries (Ollvm_printer.empty_env ()) Format.std_formatter ast
-
-
-
