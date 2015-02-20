@@ -118,6 +118,7 @@ $ make
 1. ocamlfind パッケージ自動検索
 1. ocamlspot ソースコードの情報取得
 1. [utop](utop) トップレベルコマンド
+1. [depext](depext) opam-depext opamのライブラリが依存する外部ライブラリをインストール
 
 ## より詳しい説明
 
