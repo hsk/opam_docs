@@ -1521,14 +1521,26 @@ end
 open Javalib_pack
 
 let _ =
-  let name = Sys.argv.(1) in
-  let aname = JBasics.make_cn name in
-  let class_path = Javalib.class_path "./" in
-  let a = Javalib.get_class class_path aname in
-  (*Format.set_margin 200;*)
-  Format.printf "open Javalib_pack\n";
-  Format.printf "open Javalib\n";
-  Format.printf "let _ =\nlet k =@.";
-  Format.printf "%a@." (PJClass.pp PJCode.pp_jcode) a;
-  Format.printf "  in Javalib.unparse_class k (open_out %S);\n" (name ^ ".class");
-  Format.printf "  JPrint.print_jasmin k stdout;\n\n";
+  let jasmin = ref false in
+  let files = ref [] in
+  Arg.parse
+    [("-jasmin", Arg.Unit(fun () -> jasmin := true), "output jasmin")]
+    (fun s -> files := !files @ [s])
+    ("javalib decompiler\n" ^
+     Printf.sprintf "usage: %s [-jasmin] classfilename" Sys.argv.(0));
+  List.iter begin fun name ->
+    let aname = JBasics.make_cn name in
+    let class_path = Javalib.class_path "./" in
+    let a = Javalib.get_class class_path aname in
+    if !jasmin then
+      Javalib.JPrint.print_jasmin a stdout
+    else begin
+      Format.printf "open Javalib_pack\n";
+      Format.printf "open Javalib\n";
+      Format.printf "let _ =\nlet k =@.";
+      Format.printf "%a@." (PJClass.pp PJCode.pp_jcode) a;
+      Format.printf "  in Javalib.unparse_class k (open_out %S);\n" (name ^ ".class");
+      Format.printf "  JPrint.print_jasmin k stdout;\n\n"
+    end
+  end !files
+
