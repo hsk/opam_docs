@@ -1,0 +1,19 @@
+Func. Func ::= "fun" Ident "(" Pat ")" "=" Exp ;
+
+Add. Exp ::= Exp "+" Exp1 ;
+Sub. Exp ::= Exp "-" Exp1 ;
+Mul. Exp1 ::= Exp1 "*" Exp2 ;
+Div. Exp1 ::= Exp1 "/" Exp2 ;
+Atm. Exp2 ::= Atom ;
+
+coercions Exp 2 ;
+
+Let. Atom ::= "let" Pat "=" Exp "in" Exp ;
+Cnd. Atom ::= "if" Exp "then" Exp "else" Exp ;
+Int. Atom ::= Integer ;
+Var. Atom ::= Ident ;
+Exp. Atom ::= "(" Exp ")" ;
+App. Atom ::= Ident Exp ;
+
+VarPat. Pat ::= Ident ;
+
