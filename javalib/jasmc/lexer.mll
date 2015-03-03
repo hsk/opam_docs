@@ -144,6 +144,7 @@ rule token = parse
   | "dload_2" { Insn("dload_2", "") }
   | "dload_3" { Insn("dload_3", "") }
   | "dmul" { Insn("dmul", "") }
+  | "dmult" { Insn("dmult", "") }
   | "dneg" { Insn("dneg", "") }
   | "drem" { Insn("drem", "") }
   | "dreturn" { Insn("dreturn", "") }
@@ -179,6 +180,7 @@ rule token = parse
   | "fload_2" { Insn("fload_2", "") }
   | "fload_3" { Insn("fload_3", "") }
   | "fmul" { Insn("fmul", "") }
+  | "fmult" { Insn("fmult", "") }
   | "fneg" { Insn("fneg", "") }
   | "frem" { Insn("frem", "") }
   | "freturn" { Insn("freturn", "") }
