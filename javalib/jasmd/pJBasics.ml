@@ -1,3 +1,6 @@
+open Javalib_pack
+open Javalib
+open JClass
 open JBasics
 
 let rec pp_class_name fmt nam =

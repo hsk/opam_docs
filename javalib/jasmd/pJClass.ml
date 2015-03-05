@@ -1,6 +1,7 @@
+open Javalib_pack
+open JClass
 open PJBasics
 open PJCode
-open JClass
 
 let jclass = ""
 

@@ -52,6 +52,7 @@
         "fpstrict", STRICT;
         "synthetic", SYNTHETIC;
  ]
+  let dbg a = (print_endline a)
   let dbg a = ()
 }
 (*******************************************************************
@@ -144,7 +145,9 @@ rule token = parse
   | "dload_2" { Insn("dload_2", "") }
   | "dload_3" { Insn("dload_3", "") }
   | "dmul" { Insn("dmul", "") }
-  | "dmult" { Insn("dmult", "") }
+
+  (* added this synonym javalib *)
+  | "dmult" { Insn("dmul", "") }
   | "dneg" { Insn("dneg", "") }
   | "drem" { Insn("drem", "") }
   | "dreturn" { Insn("dreturn", "") }
@@ -180,7 +183,9 @@ rule token = parse
   | "fload_2" { Insn("fload_2", "") }
   | "fload_3" { Insn("fload_3", "") }
   | "fmul" { Insn("fmul", "") }
-  | "fmult" { Insn("fmult", "") }
+
+  (* added this synonym javalib *)
+  | "fmult" { Insn("fmul", "") }
   | "fneg" { Insn("fneg", "") }
   | "frem" { Insn("frem", "") }
   | "freturn" { Insn("freturn", "") }
@@ -234,7 +239,13 @@ rule token = parse
   | "iload_1" { Insn("iload_1", "") }
   | "iload_2" { Insn("iload_2", "") }
   | "iload_3" { Insn("iload_3", "") }
+
+  (* added this synonym javalib *)
+  | "ilor" { Insn("lor", "") }
   | "imul" { Insn("imul", "") }
+
+  (* added this synonym javalib *)
+  | "imult" { Insn("imul", "") }
   | "ineg" { Insn("ineg", "") }
   | "instanceof" { Insn("instanceof", "class") }
   | "int2byte" { Insn("int2byte", "") }
@@ -294,8 +305,12 @@ rule token = parse
   | "lload_2" { Insn("lload_2", "") }
   | "lload_3" { Insn("lload_3", "") }
   | "lmul" { Insn("lmul", "") }
+
+  (* added this synonym javalib *)
+  | "lmult" { Insn("lmul", "") }
   | "lneg" { Insn("lneg", "") }
-  | "lookupswitch" { Insn("lookupswitch", "switch") }
+
+  (*| "lookupswitch" { Insn("lookupswitch", "switch") }*)
   | "lor" { Insn("lor", "") }
   | "lrem" { Insn("lrem", "") }
   | "lreturn" { Insn("lreturn", "") }
@@ -327,7 +342,8 @@ rule token = parse
   | "sastore" { Insn("sastore", "") }
   | "sipush" { Insn("sipush", "i") }
   | "swap" { Insn("swap", "") }
-  | "tableswitch" { Insn("tableswitch", "switch") }
+
+  (*| "tableswitch" { Insn("tableswitch", "switch") }*)
 
   (* Jasmin directives *)
   | ".annotation" { dbg(Lexing.lexeme lexbuf); DANNOTATION }

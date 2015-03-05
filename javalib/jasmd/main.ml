@@ -1,3 +1,5 @@
+open Javalib_pack
+
 let _ =
   let mode = ref `Jasmin in
   let endflg = ref false in
@@ -11,7 +13,7 @@ let _ =
       "-sig", Arg.String(fun s ->
 
         let f name =
-          Format.printf "------ test %s@." name;
+          Format.printf "------ test JParseSignature.parse_%s@." name;
           name
         in
 
@@ -47,7 +49,7 @@ let _ =
           | _ -> Format.printf "error\n"
         end;
 
-        let name = f "classSignature" in
+        let name = f "ClassSignature" in
         begin try
           let classSignature = JParseSignature.parse_ClassSignature s in
           Format.printf "%a\n" PJSignature.pp_classSignature classSignature;
@@ -55,7 +57,7 @@ let _ =
           | _ -> Format.printf "error\n"
         end;
 
-        let name = f "methodTypeSignature" in
+        let name = f "MethodTypeSignature" in
         begin try
           let methodTypeSignature = JParseSignature.parse_MethodTypeSignature s in
           Format.printf "%a\n" PJSignature.pp_methodTypeSignature methodTypeSignature;
@@ -63,7 +65,7 @@ let _ =
           | _ -> Format.printf "error\n"
         end;
 
-        let name = f "fieldTypeSignature" in
+        let name = f "FieldTypeSignature" in
         begin try
           let fieldTypeSignature = JParseSignature.parse_FieldTypeSignature s in
           Format.printf "%a\n" PJSignature.pp_fieldTypeSignature fieldTypeSignature;

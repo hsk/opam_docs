@@ -1,6 +1,14 @@
 open Javalib_pack
 open Javalib
 
+let j2class src =
+  let len = String.length src in
+  if String.sub src (len - 2) 2 = ".j"
+  then
+    String.sub src 0 (len - 2) ^ ".class"
+  else
+    failwith ("filename is bad. " ^ src)
+
 let lexbuf l = Parser.jas_file Lexer.token l
 
 let file f =
@@ -8,7 +16,8 @@ let file f =
   begin try
     Parser.sourcefile := Some f;
     let k = lexbuf (Lexing.from_channel inchan) in
-    Javalib.unparse_class k (open_out (f ^ ".class"));
+
+    Javalib.unparse_class k (open_out (j2class f));
     JPrint.print_jasmin k stdout;
     close_in inchan
   with e ->
