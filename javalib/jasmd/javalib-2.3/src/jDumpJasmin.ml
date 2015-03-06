@@ -328,6 +328,11 @@ let rec find_lines x = match x with
   | _::l -> find_lines l
   | [] -> []
 
+let rec find_throws x = match x with
+  | AttributeExceptions throws::_ -> throws
+  | _::l -> find_throws l
+  | [] -> []
+
 let rec find_vars x = match x with
   | AttributeLocalVariableTable vars::_ -> vars
   | _::l -> find_vars l
@@ -427,9 +432,9 @@ let dump ch cl =
       IO.printf ch ".bytecode %s\n" version;
       IO.printf ch ".source %s\n\n" source;
       if accis = [] then
-        IO.printf ch ".class%s %s\n" class_flags class_name
+	IO.printf ch ".class%s %s\n" class_flags class_name
       else
-        IO.printf ch ".interface%s %s\n" class_flags class_name;
+	IO.printf ch ".interface%s %s\n" class_flags class_name;
       IO.printf ch ".super %s\n" super;
       List.iter (fun str -> IO.printf ch ".implements %s\n" str) interfaces;
       IO.printf ch "%s" "\n";
@@ -447,6 +452,11 @@ let dump ch cl =
 	   in let meth_desc = string_of_method_descriptor meth.m_descriptor in
 	     begin
 	       IO.printf ch ".method %s %s%s\n" meth_flags meth.m_name meth_desc;
+	       List.iter (fun (name) ->
+			    IO.printf ch "\t.throws %s\n"
+			    (string_of_classname name)
+			 )
+		 (find_throws meth.m_attributes);
 	       begin
 		 match find_Code meth with
 		   | Some code ->
@@ -463,6 +473,7 @@ let dump ch cl =
 					(string_of_int start) (string_of_int (start+length))
 				   )
 			   (find_vars code.c_attributes);
+
 			 for i = 0 to Array.length code.c_code-1 do
 			   let _ =
 			     match get_line code.c_attributes i with

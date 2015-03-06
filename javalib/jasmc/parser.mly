@@ -456,9 +456,7 @@ let mkcode ss =
     | Inst("aload_1", "") -> add 1 (JCode.OpLoad (`Object, 1))
     | Inst("aload_2", "") -> add 1 (JCode.OpLoad (`Object, 2))
     | Inst("aload_3", "") -> add 1 (JCode.OpLoad (`Object, 3))
-    | InstWord("anewarray", "class", o) ->
-      let a = JParseSignature.parse_objectType o in
-      add 3 (JCode.OpNewArray (JBasics.TObject a))
+    | InstWord("anewarray", "class", o) -> add 3 (JCode.OpNewArray (JBasics.TObject (JParseSignature.parse_objectType o)))
     | Inst("areturn", "") -> add 1 (JCode.OpReturn `Object)
     | Inst("arraylength", "") -> add 1 (JCode.OpArrayLength)
     | InstInt("astore", "i", n) -> add 2 (JCode.OpStore(`Object, n))
@@ -650,8 +648,7 @@ let mkcode ss =
     | Inst("iload_3", "") -> add 1 (JCode.OpLoad (`Int2Bool, 3))
     | Inst("imul", "") -> add 1 (JCode.OpMult `Int2Bool)
     | Inst("ineg", "") -> add 1 (JCode.OpNeg `Int2Bool)
-    | InstWord("instanceof", "class", o) ->
-      add 3 (JCode.OpInstanceOf (JParseSignature.parse_objectType o))
+    | InstWord("instanceof", "class", o) -> add 3 (JCode.OpInstanceOf (JParseSignature.parse_objectType o))
     | Inst("int2byte", "") -> add 1 (JCode.OpI2B)
     | Inst("int2char", "") -> add 1 (JCode.OpI2C)
     | Inst("int2short", "") -> add 1 (JCode.OpI2S)
@@ -664,7 +661,6 @@ let mkcode ss =
       let (name,o) = split_obj obj in
       let (args,r) = JParseSignature.parse_method_descriptor f in
       add 5(JCode.OpInvoke (`Interface (JBasics.make_cn name), (JBasics.make_ms o args r)))
-
 
     | InstWord("invokenonvirtual", "method", m) ->
       let (obj,f) = split_method m in
@@ -712,8 +708,7 @@ let mkcode ss =
     | Inst("lconst_0", "") -> add 1 (JCode.OpConst(`Long (Int64.of_int 0)))
     | Inst("lconst_1", "") -> add 1 (JCode.OpConst(`Long (Int64.of_int 1)))
     | InstInt("ldc", "constant", n) -> add 2 (JCode.OpConst(`Int (Int32.of_int n)))
-    | InstStr("ldc", "constant", str) ->
-      add 2 (JCode.OpConst(`String (JBasics.make_jstr str)))
+    | InstStr("ldc", "constant", s) -> add 2 (JCode.OpConst(`String (JBasics.make_jstr s)))
     | InstNum("ldc", "constant", s) -> add 2 (JCode.OpConst(`Float (float_of_string s)))
     | InstWord("ldc", "constant", d) -> add 2 (JCode.OpConst(`Float (float_of_string d)))
     | InstWord("ldc2_w", "bigconstant", d) -> add 3 (JCode.OpConst(`Double (float_of_string d)))
@@ -1588,7 +1583,7 @@ methods :
             directive :
               | DVAR var_expr
                 {
-                  Invalid (* TODO *)
+                  failwith "TODO: .var"
                 }
               | DLIMIT limit_expr { Invalid }
               | DLINE line_expr { $2 }
