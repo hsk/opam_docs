@@ -18,7 +18,7 @@ let file f =
     let k = lexbuf (Lexing.from_channel inchan) in
 
     Javalib.unparse_class k (open_out (j2class f));
-    JPrint.print_jasmin k stdout;
+    (*JPrint.print_jasmin k stdout;*)
     close_in inchan
   with e ->
     close_in inchan;

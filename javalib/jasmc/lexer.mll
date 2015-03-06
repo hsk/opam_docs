@@ -94,254 +94,253 @@ rule token = parse
   
   (* Whitespace *)
   | (sp | ht | ff)                  { token lexbuf }
-  | line_terminator+                 { dbg("SEP");SEP }
+  | (line_terminator+ (";" input_character*)?)+                { dbg("SEP"); SEP }
   | ";" input_character*
                                     { dbg(Lexing.lexeme lexbuf); token lexbuf } (* end_of_line_comment *)
-  | ";" input_character* line_terminator+
-                                    { dbg(Lexing.lexeme lexbuf); Lexing.new_line lexbuf; token lexbuf } (* end_of_line_comment *)
 
 
-  | "aaload" { Insn("aaload", "") }
-  | "aastore" { Insn("aastore", "") }
-  | "aconst_null" { Insn("aconst_null", "") }
-  | "aload" { Insn("aload", "i") }
-  | "aload_w" { Insn("aload", "I") }
-  | "aload_0" { Insn("aload_0", "") }
-  | "aload_1" { Insn("aload_1", "") }
-  | "aload_2" { Insn("aload_2", "") }
-  | "aload_3" { Insn("aload_3", "") }
-  | "anewarray" { Insn("anewarray", "class") }
-  | "areturn" { Insn("areturn", "") }
-  | "arraylength" { Insn("arraylength", "") }
-  | "astore" { Insn("astore", "i") }
-  | "astore_w" { Insn("astore", "I") }
-  | "astore_0" { Insn("astore_0", "") }
-  | "astore_1" { Insn("astore_1", "") }
-  | "astore_2" { Insn("astore_2", "") }
-  | "astore_3" { Insn("astore_3", "") }
-  | "athrow" { Insn("athrow", "") }
-  | "baload" { Insn("baload", "") }
-  | "bastore" { Insn("bastore", "") }
-  | "bipush" { Insn("bipush", "i") }
-  | "breakpoint" { Insn("breakpoint", "") }
-  | "caload" { Insn("caload", "") }
-  | "castore" { Insn("castore", "") }
-  | "checkcast" { Insn("checkcast", "class") }
-  | "d2f" { Insn("d2f", "") }
-  | "d2i" { Insn("d2i", "") }
-  | "d2l" { Insn("d2l", "") }
-  | "dadd" { Insn("dadd", "") }
-  | "daload" { Insn("daload", "") }
-  | "dastore" { Insn("dastore", "") }
-  | "dcmpg" { Insn("dcmpg", "") }
-  | "dcmpl" { Insn("dcmpl", "") }
-  | "dconst_0" { Insn("dconst_0", "") }
-  | "dconst_1" { Insn("dconst_1", "") }
-  | "ddiv" { Insn("ddiv", "") }
-  | "dload" { Insn("dload", "i") }
-  | "dload_w" { Insn("dload", "I") }
-  | "dload_0" { Insn("dload_0", "") }
-  | "dload_1" { Insn("dload_1", "") }
-  | "dload_2" { Insn("dload_2", "") }
-  | "dload_3" { Insn("dload_3", "") }
-  | "dmul" { Insn("dmul", "") }
 
-  (* added this synonym javalib *)
-  | "dmult" { Insn("dmul", "") }
-  | "dneg" { Insn("dneg", "") }
-  | "drem" { Insn("drem", "") }
-  | "dreturn" { Insn("dreturn", "") }
-  | "dstore" { Insn("dstore", "i") }
-  | "dstore_w" { Insn("dstore", "I") }
-  | "dstore_0" { Insn("dstore_0", "") }
-  | "dstore_1" { Insn("dstore_1", "") }
-  | "dstore_2" { Insn("dstore_2", "") }
-  | "dstore_3" { Insn("dstore_3", "") }
-  | "dsub" { Insn("dsub", "") }
-  | "dup" { Insn("dup", "") }
-  | "dup2" { Insn("dup2", "") }
-  | "dup2_x1" { Insn("dup2_x1", "") }
-  | "dup2_x2" { Insn("dup2_x2", "") }
-  | "dup_x1" { Insn("dup_x1", "") }
-  | "dup_x2" { Insn("dup_x2", "") }
-  | "f2d" { Insn("f2d", "") }
-  | "f2i" { Insn("f2i", "") }
-  | "f2l" { Insn("f2l", "") }
-  | "fadd" { Insn("fadd", "") }
-  | "faload" { Insn("faload", "") }
-  | "fastore" { Insn("fastore", "") }
-  | "fcmpg" { Insn("fcmpg", "") }
-  | "fcmpl" { Insn("fcmpl", "") }
-  | "fconst_0" { Insn("fconst_0", "") }
-  | "fconst_1" { Insn("fconst_1", "") }
-  | "fconst_2" { Insn("fconst_2", "") }
-  | "fdiv" { Insn("fdiv", "") }
-  | "fload" { Insn("fload", "i") }
-  | "fload_w" { Insn("fload", "I") }
-  | "fload_0" { Insn("fload_0", "") }
-  | "fload_1" { Insn("fload_1", "") }
-  | "fload_2" { Insn("fload_2", "") }
-  | "fload_3" { Insn("fload_3", "") }
-  | "fmul" { Insn("fmul", "") }
+  | "aaload" { dbg(Lexing.lexeme lexbuf); Insn("aaload", "") }
+  | "aastore" { dbg(Lexing.lexeme lexbuf); Insn("aastore", "") }
+  | "aconst_null" { dbg(Lexing.lexeme lexbuf); Insn("aconst_null", "") }
+  | "aload" { dbg(Lexing.lexeme lexbuf); Insn("aload", "i") }
+  | "aload_w" { dbg(Lexing.lexeme lexbuf); Insn("aload", "I") }
+  | "aload_0" { dbg(Lexing.lexeme lexbuf); Insn("aload_0", "") }
+  | "aload_1" { dbg(Lexing.lexeme lexbuf); Insn("aload_1", "") }
+  | "aload_2" { dbg(Lexing.lexeme lexbuf); Insn("aload_2", "") }
+  | "aload_3" { dbg(Lexing.lexeme lexbuf); Insn("aload_3", "") }
+  | "anewarray" { dbg(Lexing.lexeme lexbuf); Insn("anewarray", "class") }
+  | "areturn" { dbg(Lexing.lexeme lexbuf); Insn("areturn", "") }
+  | "arraylength" { dbg(Lexing.lexeme lexbuf); Insn("arraylength", "") }
+  | "astore" { dbg(Lexing.lexeme lexbuf); Insn("astore", "i") }
+  | "astore_w" { dbg(Lexing.lexeme lexbuf); Insn("astore", "I") }
+  | "astore_0" { dbg(Lexing.lexeme lexbuf); Insn("astore_0", "") }
+  | "astore_1" { dbg(Lexing.lexeme lexbuf); Insn("astore_1", "") }
+  | "astore_2" { dbg(Lexing.lexeme lexbuf); Insn("astore_2", "") }
+  | "astore_3" { dbg(Lexing.lexeme lexbuf); Insn("astore_3", "") }
+  | "athrow" { dbg(Lexing.lexeme lexbuf); Insn("athrow", "") }
+  | "baload" { dbg(Lexing.lexeme lexbuf); Insn("baload", "") }
+  | "bastore" { dbg(Lexing.lexeme lexbuf); Insn("bastore", "") }
+  | "bipush" { dbg(Lexing.lexeme lexbuf); Insn("bipush", "i") }
+  | "breakpoint" { dbg(Lexing.lexeme lexbuf); Insn("breakpoint", "") }
+  | "caload" { dbg(Lexing.lexeme lexbuf); Insn("caload", "") }
+  | "castore" { dbg(Lexing.lexeme lexbuf); Insn("castore", "") }
+  | "checkcast" { dbg(Lexing.lexeme lexbuf); Insn("checkcast", "class") }
+  | "d2f" { dbg(Lexing.lexeme lexbuf); Insn("d2f", "") }
+  | "d2i" { dbg(Lexing.lexeme lexbuf); Insn("d2i", "") }
+  | "d2l" { dbg(Lexing.lexeme lexbuf); Insn("d2l", "") }
+  | "dadd" { dbg(Lexing.lexeme lexbuf); Insn("dadd", "") }
+  | "daload" { dbg(Lexing.lexeme lexbuf); Insn("daload", "") }
+  | "dastore" { dbg(Lexing.lexeme lexbuf); Insn("dastore", "") }
+  | "dcmpg" { dbg(Lexing.lexeme lexbuf); Insn("dcmpg", "") }
+  | "dcmpl" { dbg(Lexing.lexeme lexbuf); Insn("dcmpl", "") }
+  | "dconst_0" { dbg(Lexing.lexeme lexbuf); Insn("dconst_0", "") }
+  | "dconst_1" { dbg(Lexing.lexeme lexbuf); Insn("dconst_1", "") }
+  | "ddiv" { dbg(Lexing.lexeme lexbuf); Insn("ddiv", "") }
+  | "dload" { dbg(Lexing.lexeme lexbuf); Insn("dload", "i") }
+  | "dload_w" { dbg(Lexing.lexeme lexbuf); Insn("dload", "I") }
+  | "dload_0" { dbg(Lexing.lexeme lexbuf); Insn("dload_0", "") }
+  | "dload_1" { dbg(Lexing.lexeme lexbuf); Insn("dload_1", "") }
+  | "dload_2" { dbg(Lexing.lexeme lexbuf); Insn("dload_2", "") }
+  | "dload_3" { dbg(Lexing.lexeme lexbuf); Insn("dload_3", "") }
+  | "dmul" { dbg(Lexing.lexeme lexbuf); Insn("dmul", "") }
 
   (* added this synonym javalib *)
-  | "fmult" { Insn("fmul", "") }
-  | "fneg" { Insn("fneg", "") }
-  | "frem" { Insn("frem", "") }
-  | "freturn" { Insn("freturn", "") }
-  | "fstore" { Insn("fstore", "i") }
-  | "fstore_w" { Insn("fstore", "I") }
-  | "fstore_0" { Insn("fstore_0", "") }
-  | "fstore_1" { Insn("fstore_1", "") }
-  | "fstore_2" { Insn("fstore_2", "") }
-  | "fstore_3" { Insn("fstore_3", "") }
-  | "fsub" { Insn("fsub", "") }
-  | "getfield" { Insn("getfield", "field") }
-  | "getstatic" { Insn("getstatic", "field") }
-  | "goto" { Insn("goto", "label") }
-  | "goto_w" { Insn("goto_w", "label") }
-  | "i2d" { Insn("i2d", "") }
-  | "i2f" { Insn("i2f", "") }
-  | "i2l" { Insn("i2l", "") }
-  | "iadd" { Insn("iadd", "") }
-  | "iaload" { Insn("iaload", "") }
-  | "iand" { Insn("iand", "") }
-  | "iastore" { Insn("iastore", "") }
-  | "iconst_0" { Insn("iconst_0", "") }
-  | "iconst_1" { Insn("iconst_1", "") }
-  | "iconst_2" { Insn("iconst_2", "") }
-  | "iconst_3" { Insn("iconst_3", "") }
-  | "iconst_4" { Insn("iconst_4", "") }
-  | "iconst_5" { Insn("iconst_5", "") }
-  | "iconst_m1" { Insn("iconst_m1", "") }
-  | "idiv" { Insn("idiv", "") }
-  | "if_acmpeq" { Insn("if_acmpeq", "label") }
-  | "if_acmpne" { Insn("if_acmpne", "label") }
-  | "if_icmpeq" { Insn("if_icmpeq", "label") }
-  | "if_icmpge" { Insn("if_icmpge", "label") }
-  | "if_icmpgt" { Insn("if_icmpgt", "label") }
-  | "if_icmple" { Insn("if_icmple", "label") }
-  | "if_icmplt" { Insn("if_icmplt", "label") }
-  | "if_icmpne" { Insn("if_icmpne", "label") }
-  | "ifeq" { Insn("ifeq", "label") }
-  | "ifge" { Insn("ifge", "label") }
-  | "ifgt" { Insn("ifgt", "label") }
-  | "ifle" { Insn("ifle", "label") }
-  | "iflt" { Insn("iflt", "label") }
-  | "ifne" { Insn("ifne", "label") }
-  | "ifnonnull" { Insn("ifnonnull", "label") }
-  | "ifnull" { Insn("ifnull", "label") }
-  | "iinc" { Insn("iinc", "ii") }
-  | "iinc_w" { Insn("iinc", "Ii") }
-  | "iload" { Insn("iload", "i") }
-  | "iload_w" { Insn("iload", "I") }
-  | "iload_0" { Insn("iload_0", "") }
-  | "iload_1" { Insn("iload_1", "") }
-  | "iload_2" { Insn("iload_2", "") }
-  | "iload_3" { Insn("iload_3", "") }
+  | "dmult" { dbg(Lexing.lexeme lexbuf); Insn("dmul", "") }
+  | "dneg" { dbg(Lexing.lexeme lexbuf); Insn("dneg", "") }
+  | "drem" { dbg(Lexing.lexeme lexbuf); Insn("drem", "") }
+  | "dreturn" { dbg(Lexing.lexeme lexbuf); Insn("dreturn", "") }
+  | "dstore" { dbg(Lexing.lexeme lexbuf); Insn("dstore", "i") }
+  | "dstore_w" { dbg(Lexing.lexeme lexbuf); Insn("dstore", "I") }
+  | "dstore_0" { dbg(Lexing.lexeme lexbuf); Insn("dstore_0", "") }
+  | "dstore_1" { dbg(Lexing.lexeme lexbuf); Insn("dstore_1", "") }
+  | "dstore_2" { dbg(Lexing.lexeme lexbuf); Insn("dstore_2", "") }
+  | "dstore_3" { dbg(Lexing.lexeme lexbuf); Insn("dstore_3", "") }
+  | "dsub" { dbg(Lexing.lexeme lexbuf); Insn("dsub", "") }
+  | "dup" { dbg(Lexing.lexeme lexbuf); Insn("dup", "") }
+  | "dup2" { dbg(Lexing.lexeme lexbuf); Insn("dup2", "") }
+  | "dup2_x1" { dbg(Lexing.lexeme lexbuf); Insn("dup2_x1", "") }
+  | "dup2_x2" { dbg(Lexing.lexeme lexbuf); Insn("dup2_x2", "") }
+  | "dup_x1" { dbg(Lexing.lexeme lexbuf); Insn("dup_x1", "") }
+  | "dup_x2" { dbg(Lexing.lexeme lexbuf); Insn("dup_x2", "") }
+  | "f2d" { dbg(Lexing.lexeme lexbuf); Insn("f2d", "") }
+  | "f2i" { dbg(Lexing.lexeme lexbuf); Insn("f2i", "") }
+  | "f2l" { dbg(Lexing.lexeme lexbuf); Insn("f2l", "") }
+  | "fadd" { dbg(Lexing.lexeme lexbuf); Insn("fadd", "") }
+  | "faload" { dbg(Lexing.lexeme lexbuf); Insn("faload", "") }
+  | "fastore" { dbg(Lexing.lexeme lexbuf); Insn("fastore", "") }
+  | "fcmpg" { dbg(Lexing.lexeme lexbuf); Insn("fcmpg", "") }
+  | "fcmpl" { dbg(Lexing.lexeme lexbuf); Insn("fcmpl", "") }
+  | "fconst_0" { dbg(Lexing.lexeme lexbuf); Insn("fconst_0", "") }
+  | "fconst_1" { dbg(Lexing.lexeme lexbuf); Insn("fconst_1", "") }
+  | "fconst_2" { dbg(Lexing.lexeme lexbuf); Insn("fconst_2", "") }
+  | "fdiv" { dbg(Lexing.lexeme lexbuf); Insn("fdiv", "") }
+  | "fload" { dbg(Lexing.lexeme lexbuf); Insn("fload", "i") }
+  | "fload_w" { dbg(Lexing.lexeme lexbuf); Insn("fload", "I") }
+  | "fload_0" { dbg(Lexing.lexeme lexbuf); Insn("fload_0", "") }
+  | "fload_1" { dbg(Lexing.lexeme lexbuf); Insn("fload_1", "") }
+  | "fload_2" { dbg(Lexing.lexeme lexbuf); Insn("fload_2", "") }
+  | "fload_3" { dbg(Lexing.lexeme lexbuf); Insn("fload_3", "") }
+  | "fmul" { dbg(Lexing.lexeme lexbuf); Insn("fmul", "") }
 
   (* added this synonym javalib *)
-  | "ilor" { Insn("lor", "") }
-  | "imul" { Insn("imul", "") }
+  | "fmult" { dbg(Lexing.lexeme lexbuf); Insn("fmul", "") }
+  | "fneg" { dbg(Lexing.lexeme lexbuf); Insn("fneg", "") }
+  | "frem" { dbg(Lexing.lexeme lexbuf); Insn("frem", "") }
+  | "freturn" { dbg(Lexing.lexeme lexbuf); Insn("freturn", "") }
+  | "fstore" { dbg(Lexing.lexeme lexbuf); Insn("fstore", "i") }
+  | "fstore_w" { dbg(Lexing.lexeme lexbuf); Insn("fstore", "I") }
+  | "fstore_0" { dbg(Lexing.lexeme lexbuf); Insn("fstore_0", "") }
+  | "fstore_1" { dbg(Lexing.lexeme lexbuf); Insn("fstore_1", "") }
+  | "fstore_2" { dbg(Lexing.lexeme lexbuf); Insn("fstore_2", "") }
+  | "fstore_3" { dbg(Lexing.lexeme lexbuf); Insn("fstore_3", "") }
+  | "fsub" { dbg(Lexing.lexeme lexbuf); Insn("fsub", "") }
+  | "getfield" { dbg(Lexing.lexeme lexbuf); Insn("getfield", "field") }
+  | "getstatic" { dbg(Lexing.lexeme lexbuf); Insn("getstatic", "field") }
+  | "goto" { dbg(Lexing.lexeme lexbuf); Insn("goto", "label") }
+  | "goto_w" { dbg(Lexing.lexeme lexbuf); Insn("goto_w", "label") }
+  | "i2d" { dbg(Lexing.lexeme lexbuf); Insn("i2d", "") }
+  | "i2f" { dbg(Lexing.lexeme lexbuf); Insn("i2f", "") }
+  | "i2l" { dbg(Lexing.lexeme lexbuf); Insn("i2l", "") }
+  | "iadd" { dbg(Lexing.lexeme lexbuf); Insn("iadd", "") }
+  | "iaload" { dbg(Lexing.lexeme lexbuf); Insn("iaload", "") }
+  | "iand" { dbg(Lexing.lexeme lexbuf); Insn("iand", "") }
+  | "iastore" { dbg(Lexing.lexeme lexbuf); Insn("iastore", "") }
+  | "iconst_0" { dbg(Lexing.lexeme lexbuf); Insn("iconst_0", "") }
+  | "iconst_1" { dbg(Lexing.lexeme lexbuf); Insn("iconst_1", "") }
+  | "iconst_2" { dbg(Lexing.lexeme lexbuf); Insn("iconst_2", "") }
+  | "iconst_3" { dbg(Lexing.lexeme lexbuf); Insn("iconst_3", "") }
+  | "iconst_4" { dbg(Lexing.lexeme lexbuf); Insn("iconst_4", "") }
+  | "iconst_5" { dbg(Lexing.lexeme lexbuf); Insn("iconst_5", "") }
+  | "iconst_m1" { dbg(Lexing.lexeme lexbuf); Insn("iconst_m1", "") }
+  | "idiv" { dbg(Lexing.lexeme lexbuf); Insn("idiv", "") }
+  | "if_acmpeq" { dbg(Lexing.lexeme lexbuf); Insn("if_acmpeq", "label") }
+  | "if_acmpne" { dbg(Lexing.lexeme lexbuf); Insn("if_acmpne", "label") }
+  | "if_icmpeq" { dbg(Lexing.lexeme lexbuf); Insn("if_icmpeq", "label") }
+  | "if_icmpge" { dbg(Lexing.lexeme lexbuf); Insn("if_icmpge", "label") }
+  | "if_icmpgt" { dbg(Lexing.lexeme lexbuf); Insn("if_icmpgt", "label") }
+  | "if_icmple" { dbg(Lexing.lexeme lexbuf); Insn("if_icmple", "label") }
+  | "if_icmplt" { dbg(Lexing.lexeme lexbuf); Insn("if_icmplt", "label") }
+  | "if_icmpne" { dbg(Lexing.lexeme lexbuf); Insn("if_icmpne", "label") }
+  | "ifeq" { dbg(Lexing.lexeme lexbuf); Insn("ifeq", "label") }
+  | "ifge" { dbg(Lexing.lexeme lexbuf); Insn("ifge", "label") }
+  | "ifgt" { dbg(Lexing.lexeme lexbuf); Insn("ifgt", "label") }
+  | "ifle" { dbg(Lexing.lexeme lexbuf); Insn("ifle", "label") }
+  | "iflt" { dbg(Lexing.lexeme lexbuf); Insn("iflt", "label") }
+  | "ifne" { dbg(Lexing.lexeme lexbuf); Insn("ifne", "label") }
+  | "ifnonnull" { dbg(Lexing.lexeme lexbuf); Insn("ifnonnull", "label") }
+  | "ifnull" { dbg(Lexing.lexeme lexbuf); Insn("ifnull", "label") }
+  | "iinc" { dbg(Lexing.lexeme lexbuf); Insn("iinc", "ii") }
+  | "iinc_w" { dbg(Lexing.lexeme lexbuf); Insn("iinc", "Ii") }
+  | "iload" { dbg(Lexing.lexeme lexbuf); Insn("iload", "i") }
+  | "iload_w" { dbg(Lexing.lexeme lexbuf); Insn("iload", "I") }
+  | "iload_0" { dbg(Lexing.lexeme lexbuf); Insn("iload_0", "") }
+  | "iload_1" { dbg(Lexing.lexeme lexbuf); Insn("iload_1", "") }
+  | "iload_2" { dbg(Lexing.lexeme lexbuf); Insn("iload_2", "") }
+  | "iload_3" { dbg(Lexing.lexeme lexbuf); Insn("iload_3", "") }
 
   (* added this synonym javalib *)
-  | "imult" { Insn("imul", "") }
-  | "ineg" { Insn("ineg", "") }
-  | "instanceof" { Insn("instanceof", "class") }
-  | "int2byte" { Insn("int2byte", "") }
-  | "int2char" { Insn("int2char", "") }
-  | "int2short" { Insn("int2short", "") }
+  | "ilor" { dbg(Lexing.lexeme lexbuf); Insn("lor", "") }
+  | "imul" { dbg(Lexing.lexeme lexbuf); Insn("imul", "") }
+
+  (* added this synonym javalib *)
+  | "imult" { dbg(Lexing.lexeme lexbuf); Insn("imul", "") }
+  | "ineg" { dbg(Lexing.lexeme lexbuf); Insn("ineg", "") }
+  | "instanceof" { dbg(Lexing.lexeme lexbuf); Insn("instanceof", "class") }
+  | "int2byte" { dbg(Lexing.lexeme lexbuf); Insn("int2byte", "") }
+  | "int2char" { dbg(Lexing.lexeme lexbuf); Insn("int2char", "") }
+  | "int2short" { dbg(Lexing.lexeme lexbuf); Insn("int2short", "") }
   
   (* added this synonym *)
-  | "i2b" { Insn("int2byte", "") }
+  | "i2b" { dbg(Lexing.lexeme lexbuf); Insn("int2byte", "") }
   
   (* added this synonym *)
-  | "i2c" { Insn("int2char", "") }
+  | "i2c" { dbg(Lexing.lexeme lexbuf); Insn("int2char", "") }
   
   (* added this synonym *)
-  | "i2s" { Insn("int2short", "") }
-  | "invokedynamic" { Insn("invokedynamic", "method") }
-  | "invokeinterface" { Insn("invokeinterface", "interface") }
-  | "invokenonvirtual" { Insn("invokenonvirtual", "method") }
+  | "i2s" { dbg(Lexing.lexeme lexbuf); Insn("int2short", "") }
+  | "invokedynamic" { dbg(Lexing.lexeme lexbuf); Insn("invokedynamic", "method") }
+  | "invokeinterface" { dbg(Lexing.lexeme lexbuf); Insn("invokeinterface", "interface") }
+  | "invokenonvirtual" { dbg(Lexing.lexeme lexbuf); Insn("invokenonvirtual", "method") }
   
   (* added this synonym *)
-  | "invokespecial" { Insn("invokenonvirtual", "method") }
-  | "invokestatic" { Insn("invokestatic", "method") }
-  | "invokevirtual" { Insn("invokevirtual", "method") }
-  | "ior" { Insn("ior", "") }
-  | "irem" { Insn("irem", "") }
-  | "ireturn" { Insn("ireturn", "") }
-  | "ishl" { Insn("ishl", "") }
-  | "ishr" { Insn("ishr", "") }
-  | "istore" { Insn("istore", "i") }
-  | "istore_w" { Insn("istore", "I") }
-  | "istore_0" { Insn("istore_0", "") }
-  | "istore_1" { Insn("istore_1", "") }
-  | "istore_2" { Insn("istore_2", "") }
-  | "istore_3" { Insn("istore_3", "") }
-  | "isub" { Insn("isub", "") }
-  | "iushr" { Insn("iushr", "") }
-  | "ixor" { Insn("ixor", "") }
-  | "jsr" { Insn("jsr", "label") }
-  | "jsr_w" { Insn("jsr_w", "label") }
-  | "l2d" { Insn("l2d", "") }
-  | "l2f" { Insn("l2f", "") }
-  | "l2i" { Insn("l2i", "") }
-  | "ladd" { Insn("ladd", "") }
-  | "laload" { Insn("laload", "") }
-  | "land" { Insn("land", "") }
-  | "lastore" { Insn("lastore", "") }
-  | "lcmp" { Insn("lcmp", "") }
-  | "lconst_0" { Insn("lconst_0", "") }
-  | "lconst_1" { Insn("lconst_1", "") }
-  | "ldc" { Insn("ldc", "constant") }
-  | "ldc_w" { Insn("ldc_w", "constant") }
-  | "ldc2_w" { Insn("ldc2_w", "bigconstant") }
-  | "ldiv" { Insn("ldiv", "") }
-  | "lload" { Insn("lload", "i") }
-  | "lload_w" { Insn("lload", "I") }
-  | "lload_0" { Insn("lload_0", "") }
-  | "lload_1" { Insn("lload_1", "") }
-  | "lload_2" { Insn("lload_2", "") }
-  | "lload_3" { Insn("lload_3", "") }
-  | "lmul" { Insn("lmul", "") }
+  | "invokespecial" { dbg(Lexing.lexeme lexbuf); Insn("invokenonvirtual", "method") }
+  | "invokestatic" { dbg(Lexing.lexeme lexbuf); Insn("invokestatic", "method") }
+  | "invokevirtual" { dbg(Lexing.lexeme lexbuf); Insn("invokevirtual", "method") }
+  | "ior" { dbg(Lexing.lexeme lexbuf); Insn("ior", "") }
+  | "irem" { dbg(Lexing.lexeme lexbuf); Insn("irem", "") }
+  | "ireturn" { dbg(Lexing.lexeme lexbuf); Insn("ireturn", "") }
+  | "ishl" { dbg(Lexing.lexeme lexbuf); Insn("ishl", "") }
+  | "ishr" { dbg(Lexing.lexeme lexbuf); Insn("ishr", "") }
+  | "istore" { dbg(Lexing.lexeme lexbuf); Insn("istore", "i") }
+  | "istore_w" { dbg(Lexing.lexeme lexbuf); Insn("istore", "I") }
+  | "istore_0" { dbg(Lexing.lexeme lexbuf); Insn("istore_0", "") }
+  | "istore_1" { dbg(Lexing.lexeme lexbuf); Insn("istore_1", "") }
+  | "istore_2" { dbg(Lexing.lexeme lexbuf); Insn("istore_2", "") }
+  | "istore_3" { dbg(Lexing.lexeme lexbuf); Insn("istore_3", "") }
+  | "isub" { dbg(Lexing.lexeme lexbuf); Insn("isub", "") }
+  | "iushr" { dbg(Lexing.lexeme lexbuf); Insn("iushr", "") }
+  | "ixor" { dbg(Lexing.lexeme lexbuf); Insn("ixor", "") }
+  | "jsr" { dbg(Lexing.lexeme lexbuf); Insn("jsr", "label") }
+  | "jsr_w" { dbg(Lexing.lexeme lexbuf); Insn("jsr_w", "label") }
+  | "l2d" { dbg(Lexing.lexeme lexbuf); Insn("l2d", "") }
+  | "l2f" { dbg(Lexing.lexeme lexbuf); Insn("l2f", "") }
+  | "l2i" { dbg(Lexing.lexeme lexbuf); Insn("l2i", "") }
+  | "ladd" { dbg(Lexing.lexeme lexbuf); Insn("ladd", "") }
+  | "laload" { dbg(Lexing.lexeme lexbuf); Insn("laload", "") }
+  | "land" { dbg(Lexing.lexeme lexbuf); Insn("land", "") }
+  | "lastore" { dbg(Lexing.lexeme lexbuf); Insn("lastore", "") }
+  | "lcmp" { dbg(Lexing.lexeme lexbuf); Insn("lcmp", "") }
+  | "lconst_0" { dbg(Lexing.lexeme lexbuf); Insn("lconst_0", "") }
+  | "lconst_1" { dbg(Lexing.lexeme lexbuf); Insn("lconst_1", "") }
+  | "ldc" { dbg(Lexing.lexeme lexbuf); Insn("ldc", "constant") }
+  | "ldc_w" { dbg(Lexing.lexeme lexbuf); Insn("ldc_w", "constant") }
+  | "ldc2_w" { dbg(Lexing.lexeme lexbuf); Insn("ldc2_w", "bigconstant") }
+  | "ldiv" { dbg(Lexing.lexeme lexbuf); Insn("ldiv", "") }
+  | "lload" { dbg(Lexing.lexeme lexbuf); Insn("lload", "i") }
+  | "lload_w" { dbg(Lexing.lexeme lexbuf); Insn("lload", "I") }
+  | "lload_0" { dbg(Lexing.lexeme lexbuf); Insn("lload_0", "") }
+  | "lload_1" { dbg(Lexing.lexeme lexbuf); Insn("lload_1", "") }
+  | "lload_2" { dbg(Lexing.lexeme lexbuf); Insn("lload_2", "") }
+  | "lload_3" { dbg(Lexing.lexeme lexbuf); Insn("lload_3", "") }
+  | "lmul" { dbg(Lexing.lexeme lexbuf); Insn("lmul", "") }
 
   (* added this synonym javalib *)
-  | "lmult" { Insn("lmul", "") }
-  | "lneg" { Insn("lneg", "") }
+  | "lmult" { dbg(Lexing.lexeme lexbuf); Insn("lmul", "") }
+  | "lneg" { dbg(Lexing.lexeme lexbuf); Insn("lneg", "") }
 
-  (*| "lookupswitch" { Insn("lookupswitch", "switch") }*)
-  | "lor" { Insn("lor", "") }
-  | "lrem" { Insn("lrem", "") }
-  | "lreturn" { Insn("lreturn", "") }
-  | "lshl" { Insn("lshl", "") }
-  | "lshr" { Insn("lshr", "") }
-  | "lstore" { Insn("lstore", "i") }
-  | "lstore_w" { Insn("lstore", "I") }
-  | "lstore_0" { Insn("lstore_0", "") }
-  | "lstore_1" { Insn("lstore_1", "") }
-  | "lstore_2" { Insn("lstore_2", "") }
-  | "lstore_3" { Insn("lstore_3", "") }
-  | "lsub" { Insn("lsub", "") }
-  | "lushr" { Insn("lushr", "") }
-  | "lxor" { Insn("lxor", "") }
-  | "monitorenter" { Insn("monitorenter", "") }
-  | "monitorexit" { Insn("monitorexit", "") }
-  | "multianewarray" { Insn("multianewarray", "marray") }
-  | "new" { Insn("new", "class") }
-  | "newarray" { Insn("newarray", "atype") }
-  | "nop" { Insn("nop", "") }
-  | "pop" { Insn("pop", "") }
-  | "pop2" { Insn("pop2", "") }
-  | "putfield" { Insn("putfield", "field") }
-  | "putstatic" { Insn("putstatic", "field") }
-  | "ret" { Insn("ret", "i") }
-  | "ret_w" { Insn("ret", "I") }
-  | "return" { Insn("return", "") }
-  | "saload" { Insn("saload", "") }
-  | "sastore" { Insn("sastore", "") }
-  | "sipush" { Insn("sipush", "i") }
-  | "swap" { Insn("swap", "") }
+  (*| "lookupswitch" { dbg(Lexing.lexeme lexbuf); Insn("lookupswitch", "switch") }*)
+  | "lor" { dbg(Lexing.lexeme lexbuf); Insn("lor", "") }
+  | "lrem" { dbg(Lexing.lexeme lexbuf); Insn("lrem", "") }
+  | "lreturn" { dbg(Lexing.lexeme lexbuf); Insn("lreturn", "") }
+  | "lshl" { dbg(Lexing.lexeme lexbuf); Insn("lshl", "") }
+  | "lshr" { dbg(Lexing.lexeme lexbuf); Insn("lshr", "") }
+  | "lstore" { dbg(Lexing.lexeme lexbuf); Insn("lstore", "i") }
+  | "lstore_w" { dbg(Lexing.lexeme lexbuf); Insn("lstore", "I") }
+  | "lstore_0" { dbg(Lexing.lexeme lexbuf); Insn("lstore_0", "") }
+  | "lstore_1" { dbg(Lexing.lexeme lexbuf); Insn("lstore_1", "") }
+  | "lstore_2" { dbg(Lexing.lexeme lexbuf); Insn("lstore_2", "") }
+  | "lstore_3" { dbg(Lexing.lexeme lexbuf); Insn("lstore_3", "") }
+  | "lsub" { dbg(Lexing.lexeme lexbuf); Insn("lsub", "") }
+  | "lushr" { dbg(Lexing.lexeme lexbuf); Insn("lushr", "") }
+  | "lxor" { dbg(Lexing.lexeme lexbuf); Insn("lxor", "") }
+  | "monitorenter" { dbg(Lexing.lexeme lexbuf); Insn("monitorenter", "") }
+  | "monitorexit" { dbg(Lexing.lexeme lexbuf); Insn("monitorexit", "") }
+  | "multianewarray" { dbg(Lexing.lexeme lexbuf); Insn("multianewarray", "marray") }
+  | "new" { dbg(Lexing.lexeme lexbuf); Insn("new", "class") }
+  | "newarray" { dbg(Lexing.lexeme lexbuf); Insn("newarray", "atype") }
+  | "nop" { dbg(Lexing.lexeme lexbuf); Insn("nop", "") }
+  | "pop" { dbg(Lexing.lexeme lexbuf); Insn("pop", "") }
+  | "pop2" { dbg(Lexing.lexeme lexbuf); Insn("pop2", "") }
+  | "putfield" { dbg(Lexing.lexeme lexbuf); Insn("putfield", "field") }
+  | "putstatic" { dbg(Lexing.lexeme lexbuf); Insn("putstatic", "field") }
+  | "ret" { dbg(Lexing.lexeme lexbuf); Insn("ret", "i") }
+  | "ret_w" { dbg(Lexing.lexeme lexbuf); Insn("ret", "I") }
+  | "return" { dbg(Lexing.lexeme lexbuf); Insn("return", "") }
+  | "saload" { dbg(Lexing.lexeme lexbuf); Insn("saload", "") }
+  | "sastore" { dbg(Lexing.lexeme lexbuf); Insn("sastore", "") }
+  | "sipush" { dbg(Lexing.lexeme lexbuf); Insn("sipush", "i") }
+  | "swap" { dbg(Lexing.lexeme lexbuf); Insn("swap", "") }
 
   (*| "tableswitch" { Insn("tableswitch", "switch") }*)
 
@@ -369,8 +368,8 @@ rule token = parse
   | ".enclosing" { dbg(Lexing.lexeme lexbuf); DENCLOSING }
   | ".signature" { dbg(Lexing.lexeme lexbuf); DSIGNATURE }
   | ".stack" { dbg(Lexing.lexeme lexbuf); DSTACK }
-  | decimal_numeral '.' decimal_numeral as i { dbg(Lexing.lexeme lexbuf); Num (i) }
-  | decimal_numeral as i                    { dbg(Lexing.lexeme lexbuf); Int (int_of_string i) }
+  | '-'? decimal_numeral '.' decimal_numeral as i { dbg(Lexing.lexeme lexbuf); Num (i) }
+  | '-'? decimal_numeral as i                    { dbg(Lexing.lexeme lexbuf); Int (int_of_string i) }
   | '"' string_character* '"' as s          { dbg(Lexing.lexeme lexbuf); Str s }
   | ':' { dbg(Lexing.lexeme lexbuf); COLON }
   | '=' { dbg(Lexing.lexeme lexbuf); EQ }

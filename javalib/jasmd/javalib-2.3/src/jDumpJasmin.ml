@@ -28,16 +28,16 @@ let string_of_classname cn =  JDumpBasics.class_name ~jvm:true cn
 
 let string_of_class_flags flags =
   let to_string flag = match flag with
-    | `AccPublic -> "public"
-    | `AccSynthetic -> "synthetic"
-    | `AccFinal  -> "final"
-    | `AccAbstract -> "abstract"
-    | `AccAnnotation -> "annotation"
-    | `AccEnum -> "enum"
-    | `AccInterface  -> "interface"
+    | `AccPublic -> " public"
+    | `AccSynthetic -> " synthetic"
+    | `AccFinal  -> " final"
+    | `AccAbstract -> " abstract"
+    | `AccAnnotation -> " annotation"
+    | `AccEnum -> " enum"
+    | `AccInterface  -> " interface"
     | `AccSuper -> ""
     | _ -> ""
-  in String.concat " " (List.map to_string flags)
+  in String.concat "" (List.map to_string flags)
 
 let string_of_field_flags flags =
   let to_string flag = match flag with
@@ -194,7 +194,7 @@ let string_of_opcode opcode constants pos =
 
       | OpAdd(jvmbt) -> Char.escaped (JDumpBasics.jvm_basic_type jvmbt)^"add"
       | OpSub(jvmbt) -> Char.escaped (JDumpBasics.jvm_basic_type jvmbt)^"sub"
-      | OpMult(jvmbt) -> Char.escaped (JDumpBasics.jvm_basic_type jvmbt)^"mult"
+      | OpMult(jvmbt) -> Char.escaped (JDumpBasics.jvm_basic_type jvmbt)^"mul"
       | OpDiv(jvmbt) -> Char.escaped (JDumpBasics.jvm_basic_type jvmbt)^"div"
       | OpRem(jvmbt) -> Char.escaped (JDumpBasics.jvm_basic_type jvmbt)^"rem"
       | OpNeg(jvmbt) -> Char.escaped (JDumpBasics.jvm_basic_type jvmbt)^"neg"
@@ -415,7 +415,8 @@ let string_of_stack_map_frame consts sm last = match sm with
 let dump ch cl =
   let version = string_of_version cl.j_version
   in let (source:string) = find_SourceFile cl.j_attributes
-  in let class_flags = string_of_class_flags cl.j_flags
+  in let (accis,flags) = List.partition (fun a -> a = `AccInterface) cl.j_flags
+  in let class_flags = string_of_class_flags flags
   in let class_name = string_of_classname cl.j_name
   in let super = match cl.j_super with
     | Some cn -> JDumpBasics.class_name cn
@@ -425,7 +426,10 @@ let dump ch cl =
     begin
       IO.printf ch ".bytecode %s\n" version;
       IO.printf ch ".source %s\n\n" source;
-      IO.printf ch ".class %s %s\n" class_flags class_name;
+      if accis = [] then
+        IO.printf ch ".class%s %s\n" class_flags class_name
+      else
+        IO.printf ch ".interface%s %s\n" class_flags class_name;
       IO.printf ch ".super %s\n" super;
       List.iter (fun str -> IO.printf ch ".implements %s\n" str) interfaces;
       IO.printf ch "%s" "\n";

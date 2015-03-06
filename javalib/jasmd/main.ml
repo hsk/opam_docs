@@ -17,7 +17,7 @@ let _ =
           name
         in
 
-        let name = f "objectType" in
+        let _ = f "objectType" in
         begin try
           let object_type = JParseSignature.parse_objectType s in
           Format.printf "%a\n" PJBasics.pp_object_type object_type;
@@ -25,7 +25,7 @@ let _ =
           | _ -> Format.printf "error\n"
         end;
         
-        let name = f "method_descriptor" in
+        let _ = f "method_descriptor" in
         begin try
           let method_descriptor = JParseSignature.parse_method_descriptor s in
           Format.printf "%a\n" PJBasics.pp_method_descriptor method_descriptor
@@ -33,7 +33,7 @@ let _ =
           | _ -> Format.printf "error\n"
         end;
 
-        let name = f "field_descriptor" in
+        let _ = f "field_descriptor" in
         begin try
           let value_type = JParseSignature.parse_field_descriptor s in
           Format.printf "%a\n" PJBasics.pp_value_type value_type;
@@ -41,7 +41,7 @@ let _ =
           | _ -> Format.printf "error\n"
         end;
 
-        let name = f "descriptor" in
+        let _ = f "descriptor" in
         begin try
           let descriptor = JParseSignature.parse_descriptor s in
           Format.printf "%a\n" PJBasics.pp_descriptor descriptor;
@@ -49,7 +49,7 @@ let _ =
           | _ -> Format.printf "error\n"
         end;
 
-        let name = f "ClassSignature" in
+        let _ = f "ClassSignature" in
         begin try
           let classSignature = JParseSignature.parse_ClassSignature s in
           Format.printf "%a\n" PJSignature.pp_classSignature classSignature;
@@ -57,7 +57,7 @@ let _ =
           | _ -> Format.printf "error\n"
         end;
 
-        let name = f "MethodTypeSignature" in
+        let _ = f "MethodTypeSignature" in
         begin try
           let methodTypeSignature = JParseSignature.parse_MethodTypeSignature s in
           Format.printf "%a\n" PJSignature.pp_methodTypeSignature methodTypeSignature;
@@ -65,7 +65,7 @@ let _ =
           | _ -> Format.printf "error\n"
         end;
 
-        let name = f "FieldTypeSignature" in
+        let _ = f "FieldTypeSignature" in
         begin try
           let fieldTypeSignature = JParseSignature.parse_FieldTypeSignature s in
           Format.printf "%a\n" PJSignature.pp_fieldTypeSignature fieldTypeSignature;

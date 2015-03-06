@@ -1,4 +1,4 @@
-all: examples/HelloWeb.j jasmc test install
+all: examples/HelloWeb.j jasmc install test
 
 jasmc: main.ml parser.mly lexer.mll
 	ocamlyacc parser.mly
@@ -8,25 +8,23 @@ jasmc: main.ml parser.mly lexer.mll
 test: example
 	@echo "--------"
 	./jasmc tests/jsr.j
-	javac -source 1.5 -target 1.5 tests/Test_switch.java
-	jasmd -high tests.Test_switch
-	jasmd tests.Test_switch > tests/Test_switch.j
+	javac -source 1.5 -target 1.5 tests/Test_interface2.java
+	jasmd -high tests.Test_interface
+	jasmd tests.Test_interface > tests/Test_interface.j
+	jasmd tests.Test_interface2 > tests/Test_interface2.j
 	@echo "--------"
-	cat tests/Test_switch.j
+	cat tests/Test_interface.j
 	@echo "--------"
-	cp tests/Test_switch.class tests/Test_switch.txt
-	javap -v tests/Test_switch.class
-	java tests.Test_switch
-	./jasmc tests/Test_switch.j
-	cp tests/Test_switch.class tests/Test_switch2.txt
-	java tests.Test_switch
-	./jasmc tests/Test_switch2.j
+	javap -v tests/Test_interface.class
+	./jasmc tests/Test_interface.j
+	./jasmc tests/Test_interface2.j
+	java tests.Test_interface2
 
 example:
 	./jasmc examples/*.j
 	java examples.ANewArray
 #	java examples.AnInterface
-#	java examples.Arrays
+	java examples.Arrays a
 #	java examples.Catch
 	java examples.Checkcast
 	java examples.Count
