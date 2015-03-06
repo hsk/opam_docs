@@ -158,7 +158,7 @@ let rec pp_descriptor fmt = function
 
 and show_descriptor x = Format.asprintf "%a" pp_descriptor x
 
-let rec pp_jstr fmt str = Format.fprintf fmt "%S" (jstr_raw str)
+let rec pp_jstr fmt str = Format.fprintf fmt "(JBasics.make_jstr %S)" (jstr_raw str)
 
 and show_jstr x = Format.asprintf "%a" pp_jstr x
 

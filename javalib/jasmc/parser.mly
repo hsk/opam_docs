@@ -368,6 +368,8 @@ type switchdefault =
 
 type pcode =
 | DLine of int
+| DCatchWWW of JBasics.class_name * string * string * string
+| DCatchIII of JBasics.class_name * int * int * int
 | Label of string
 | LabelInst of string * pcode
 | Invalid
@@ -394,6 +396,10 @@ let mkcode ss =
   let lines = ref [] in
   let addline line =
     lines := (!pos, line) :: !lines
+  in
+  let excs = ref [] in
+  let addexc exc =
+    excs := exc :: !excs
   in
   let labels = ref [] in
   let label2int l =
@@ -427,6 +433,8 @@ let mkcode ss =
   in
   let rec f c = 
     match c with
+    | DCatchIII _ -> addexc c; add 0 JCode.OpInvalid
+    | DCatchWWW _ -> addexc c; add 0 JCode.OpInvalid
     | DLine line -> addline line; add 0 JCode.OpInvalid
     | Label l -> addlabel l !pos; add 0 JCode.OpInvalid
     | LabelInst(l,i)-> addlabel l !pos; f i
@@ -817,8 +825,24 @@ let mkcode ss =
       code.(p) <- JCode.OpTableSwitch(realloc p def,low, high, defs)
     | (p, c) -> code.(p) <- c
   ) codes;
-  
-  (code,if !lines = [] then None else Some (List.rev !lines))
+  let lines = if !lines = [] then None else Some (List.rev !lines) in
+  let excs = List.map (function
+    | DCatchWWW(name,a,b,c) ->
+      {
+        JCode.e_start = label2int a;
+        e_end = label2int b;
+        e_handler = label2int c;
+        e_catch_type = (Some name)
+      }
+    | DCatchIII(name,a,b,c) -> 
+      {
+        JCode.e_start = a;
+        e_end = b;
+        e_handler = c;
+        e_catch_type = (Some name)
+      }
+  ) !excs in
+  (code,lines, excs)
 
 %}
 
@@ -1444,13 +1468,13 @@ methods :
       | defmethod statements endmethod
         {
           let(access,ms) = $1 in
-          let code,lines = mkcode (List.rev $2) in
+          let code,lines,excs = mkcode (List.rev $2) in
           let jmethod = {
             JCode.c_max_stack = !limit_stack;
             c_max_locals = !limit_locals;
             c_code = code;
-            c_exc_tbl = []; (* TODO *)
-            c_line_number_table = lines; (* TODO *)
+            c_exc_tbl = excs;
+            c_line_number_table = lines;
             c_local_variable_table = None; (* TODO *)
             c_local_variable_type_table = None; (* TODO *)
             c_stack_map_midp = None; (* TODO *)
@@ -1560,39 +1584,39 @@ methods :
               | DLINE line_expr { DLine($2) }
               | DTHROWS throws_expr
                 {
-                  Invalid (* TODO *)
+                  failwith "TODO: .throws"
                 }
               | DCATCH catch_expr
                 {
-                  Invalid (* TODO *)
+                  $2
                 }
               | DSET set_expr
                 {
-                  Invalid (* TODO *)
+                  failwith "TODO: .set"
                 }
               | DSIGNATURE signature_expr
                 {
-                  Invalid (* TODO *)
+                  failwith "TODO: .signature"
                 }
               | DATTRIBUTE generic_expr
                 {
-                  Invalid (* TODO *)
+                  failwith "TODO: .attribute"
                 }
               | DDEPRECATED deprecated_expr
                 {
-                  Invalid (* TODO *)
+                  failwith "TODO: .deprected"
                 }
               | DANNOTATION ann_met_expr ann_arglist endannotation
                 {
-                  Invalid (* TODO *)
+                  failwith "TODO: .annotation"
                 }
               | DANNOTATION ann_def_spec ann_def_val endannotation
                 {
-                  Invalid (* TODO *)
+                  failwith "TODO: .annotation"
                 }
               | DSTACK stackmap
                 {
-                  Invalid (* TODO *)
+                  failwith "TODO: .stack"
                 }
 
               /* */
@@ -1634,9 +1658,13 @@ methods :
               /* .catch <class> from <label1> to <label2> using <branchlab> */
               catch_expr :
                 | classname FROM Word TO Word USING Word
-                  { () }
+                  {
+                    DCatchWWW($1, $3, $5, $7)
+                  }
                 | classname FROM Int TO Int USING Int
-                  { () }
+                  {
+                    DCatchIII($1, $3, $5, $7)
+                  }
 
               /* .set <var> = <val> */
               set_expr :

@@ -1,6 +1,10 @@
 open Javalib_pack
 open JBasics
 open JCode
+let pp_i fmt i =
+  if i < 0
+  then Format.fprintf fmt "(%d)" i
+  else Format.fprintf fmt "%d" i
 
 let rec pp_jconst fmt = function
   | `ANull -> Format.pp_print_string fmt "`ANull"
@@ -98,9 +102,9 @@ let rec pp_jopcode fmt = function
       | `ANe -> Format.pp_print_string fmt "`ANe"
       end;
       Format.fprintf fmt ",@ %d@])" a1
-  | OpGoto a0 -> Format.fprintf fmt "(@[<hov2>JCode.OpGoto@ %d@])" a0
-  | OpJsr a0 -> Format.fprintf fmt "(@[<hov2>JCode.OpJsr@ %d@])" a0
-  | OpRet a0 -> Format.fprintf fmt "(@[<hov2>JCode.OpRet@ %d@])" a0
+  | OpGoto a0 -> Format.fprintf fmt "(@[<hov2>JCode.OpGoto@ %a@])" pp_i a0
+  | OpJsr a0 -> Format.fprintf fmt "(@[<hov2>JCode.OpJsr@ %a@])" pp_i a0
+  | OpRet a0 -> Format.fprintf fmt "(@[<hov2>JCode.OpRet@ %a@])" pp_i a0
   | OpTableSwitch (a0,a1,a2,a3) ->
       Format.fprintf fmt "@[<hov2>JCode.OpTableSwitch (@,";
       begin
