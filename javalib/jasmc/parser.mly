@@ -64,7 +64,6 @@
   let init_method () =
     limit_stack := 255;
     limit_locals := 255;
-    Printf.printf "init \n";
     pos := 0;
     lines := [];
     excs := [];
@@ -82,7 +81,6 @@
     Hashtbl.add label2pos l i
 
   let add n c =
-    Printf.printf "pos=%d add %d\n" !pos n;
     let p = !pos in
     pos := !pos + n;
     (p, c)
@@ -1458,9 +1456,7 @@ methods :
                       let defs = Array.of_list defs in
                       let padding_size = (4 - ((!pos + 1) mod 4)) mod 4 in
                       let n = 13 + padding_size + 4 * (Array.length defs) in
-                      Printf.printf "pos = %d high = %d low = %d\n" !pos high low;
-                      let high = if high = -1 then Array.length defs - 1 - low else high in
-                      Printf.printf "high = %d low = %d\n" high low;
+                      let high = if high = -1 then Array.length defs - 1 + low else high in
                       add n (JCode.OpTableSwitch ((default2int def), Int32.of_int low, Int32.of_int high, defs))
                     }
 
