@@ -1,546 +1,124 @@
 %{
-open Javalib_pack
-open Javalib
-type sis = (string * int) list
-[@@deriving show]
+  open Javalib_pack
+  open Javalib
 
-let replace_dot s =
-  let s = String.copy s in
+  type switchcase = 
+    | CaseIntWord of int * string
+    | CaseIntInt of int * int
+
+  type switchdefault =
+    | DefaultWord of string
+    | DefaultInt of int
+
+  type pcode =
+    | DCatchIII of JBasics.class_name * int * int * int
+
+  let unescape s =
+    Scanf.unescaped (String.sub s 1 ((String.length s)- 2))
+
+  let cbasic = function 
+      | "boolean" -> "Z"
+      | "byte"    -> "B"
+      | "char"    -> "C"
+      | "short"   -> "S"
+      | "int"     -> "I"
+      | "long"    -> "J"
+      | "float"   -> "F"
+      | "double"  -> "D"
+      | "void"    -> "V"
+      | _ -> assert false
+
+  let cf_access a =
+    if List.mem `Public a then `Public else
+    if List.mem `Protected a then `Protected else
+    if List.mem `Private a then `Private else
+    `Default
+
+  let replace_dot s =
+    let s = String.copy s in
     for i = 0 to String.length s - 1 do
       if s.[i] = '/' then s.[i] <- '.'
     done;
     s
 
-let split_method name =
-  let pos = String.index name '(' in
-  (String.sub name 0 pos, String.sub name pos ((String.length name) - pos))
+  let split_method name =
+    let pos = String.index name '(' in
+    (String.sub name 0 pos, String.sub name pos ((String.length name) - pos))
 
-let split_obj name =
-  let name = replace_dot name in
-  let pos = String.rindex name '.' in
-  (String.sub name 0 pos, String.sub name (pos+1) ((String.length name) - (pos+1)))
+  let split_obj name =
+    let name = replace_dot name in
+    let pos = String.rindex name '.' in
+    (String.sub name 0 pos, String.sub name (pos+1) ((String.length name) - (pos+1)))
 
-let cbasic = function 
-    | "boolean" -> "Z"
-    | "byte"    -> "B"
-    | "char"    -> "C"
-    | "short"   -> "S"
-    | "int"     -> "I"
-    | "long"    -> "J"
-    | "float"   -> "F"
-    | "double"  -> "D"
-    | "void"    -> "V"
-    | _ -> assert false
+  let sourcefile = ref None
+  let cn = ref (JBasics.make_cn "_")
+  let limit_stack = ref 0
+  let limit_locals = ref 0
+  let pos = ref 0
+  let lines = ref []
+  let excs = ref []
+  let throws = ref []
+  let label2pos = Hashtbl.create 16
+  let pos2label = Hashtbl.create 16
 
-let cf_access a =
-  if List.mem `Public a then `Public else
-  if List.mem `Protected a then `Protected else
-  if List.mem `Private a then `Private else
-  `Default
+  let init_method () =
+    limit_stack := 255;
+    limit_locals := 255;
+    pos := 0;
+    lines := [];
+    excs := [];
+    throws := [];
+    Hashtbl.clear label2pos;
+    Hashtbl.clear pos2label
 
-type switchcase = 
-| CaseIntWord of int * string
-| CaseIntInt of int * int
+  let label2int l =
+    if (Hashtbl.mem label2pos l) then Hashtbl.find label2pos l else
+    let pos = -(1 + (Hashtbl.length pos2label)) in
+    Hashtbl.add pos2label pos l;
+    pos
 
-type switchdefault =
-| DefaultWord of string
-| DefaultInt of int
+  let addlabel l i =
+    Hashtbl.add label2pos l i
 
-type pcode =
-| DLine of int
-| DThrow of JBasics.class_name
-| DCatchWWW of JBasics.class_name * string * string * string
-| DCatchIII of JBasics.class_name * int * int * int
-| Label of string
-| LabelInst of string * pcode
-| Invalid
-| Inst of string * string
-| InstIntInt of string * string * int * int
-| InstInt of string * string * int
-| InstNum of string * string * string
-| InstWord of string * string * string
-| InstWordInt of string * string * string * int
-| InstWordWord of string * string * string * string
-| InstStr of string * string * string
-| InstRelative of string * string * string
-| LookupSwitch of switchcase list * switchdefault
-| TableSwitch of int * int * switchdefault list * switchdefault
+  let add n c =
+    let p = !pos in
+    pos := !pos + n;
+    (p, c)
 
-let unescape s =
-  Scanf.unescaped (String.sub s 1 ((String.length s)- 2))
+  let mkcode codes =
 
-let sourcefile = ref None
-let cn = ref (JBasics.make_cn "_")
-let limit_stack = ref 0
-let limit_locals = ref 0
+    let realloc p l =
+      if l >= 0 then l - p else
+      let label = Hashtbl.find pos2label l in
+      (Hashtbl.find label2pos label) - p
 
-let pos = ref 0
-let lines = ref []
-let addline line =
-  lines := (!pos, line) :: !lines
-
-let excs = ref []
-let addexc exc =
-  excs := exc :: !excs
-
-let throws = ref []
-
-let addthrow throw =
-  throws := throw :: !throws
-
-let labels = ref []
-
-let label2int l =
-  (*Format.printf "label2int %s %d\n" l (List.length !labels);*)
-  let v = if (List.mem_assoc l !labels) then List.assoc l !labels else 0 in
-  (*Format.printf "v=%d\n" v;*)
-  if v <> 0 then v else
-  let pos = -(List.length !labels) - 1 in
-  labels := !labels @ [l, pos];
-  (*Format.printf "pos=%d\n" pos;*)
-  pos
-
-let addlabel l i =
-  let rec f = function
-  | [] -> [l,i]
-  | (x,v)::xs when x = l -> (l,i)::xs
-  | x::xs -> x:: f xs
-  in labels := f !labels
-
-let realloc p l =
-  if l >= 0 then l - p else
-  match List.nth !labels (-l-1)  with
-  | (l,v) -> v - p
-
-let add n c =
-  let p = !pos in
-  pos := !pos + n;
-  (p, c)
-
-let init_method () =
-  limit_stack := 255;
-  limit_locals := 255;
-  pos := 0;
-  lines := [];
-  excs := [];
-  throws := [];
-  labels := []
-
-let mkcode ss =
-
-  let rec f c = 
-    match c with
-    | DCatchIII _ -> addexc c; add 0 JCode.OpInvalid
-    | DCatchWWW _ -> addexc c; add 0 JCode.OpInvalid
-    | DThrow cn -> addthrow cn; add 0 JCode.OpInvalid
-    | DLine line -> addline line; add 0 JCode.OpInvalid
-    | Label l -> addlabel l !pos; add 0 JCode.OpInvalid
-    | LabelInst(l,i)-> addlabel l !pos; f i
-    | Invalid -> add 0 JCode.OpInvalid
-
-    (* A *)
-    | Inst("aaload", "") -> add 1 (JCode.OpArrayLoad `Object)
-    | Inst("aastore", "") -> add 1 (JCode.OpArrayStore `Object)
-    | Inst("aconst_null", "") -> add 1 (JCode.OpConst(`ANull))
-    | InstInt("aload", "i", n) -> add 2 (JCode.OpConst(`Int (Int32.of_int n)))
-    | InstInt("aload", "I", n) -> add 3 (JCode.OpConst(`Int (Int32.of_int n)))
-    | Inst("aload_0", "") -> add 1 (JCode.OpLoad (`Object, 0))
-    | Inst("aload_1", "") -> add 1 (JCode.OpLoad (`Object, 1))
-    | Inst("aload_2", "") -> add 1 (JCode.OpLoad (`Object, 2))
-    | Inst("aload_3", "") -> add 1 (JCode.OpLoad (`Object, 3))
-    | InstWord("anewarray", "class", o) -> add 3 (JCode.OpNewArray (JBasics.TObject (JParseSignature.parse_objectType o)))
-    | Inst("areturn", "") -> add 1 (JCode.OpReturn `Object)
-    | Inst("arraylength", "") -> add 1 (JCode.OpArrayLength)
-    | InstInt("astore", "i", n) -> add 2 (JCode.OpStore(`Object, n))
-    | InstInt("astore", "I", n) -> add 3 (JCode.OpStore(`Object, n))
-    | Inst("astore_0","") -> add 1 (JCode.OpStore (`Object, 0))
-    | Inst("astore_1","") -> add 1 (JCode.OpStore (`Object, 1))
-    | Inst("astore_2","") -> add 1 (JCode.OpStore (`Object, 2))
-    | Inst("astore_3","") -> add 1 (JCode.OpStore (`Object, 3))
-    | Inst("athrow", "") -> add 1 (JCode.OpThrow)
-
-    (* B *)
-    | Inst("baload", "") ->add 1 (JCode.OpArrayLoad `ByteBool)
-    | Inst("bastore", "") -> add 1 (JCode.OpArrayStore `ByteBool)
-    | InstInt("bipush", "i", n) -> add 2 (JCode.OpConst(`Byte n))
-    | Inst("breakpoint", "") -> add 1 (JCode.OpBreakpoint)
-
-    (* C *)
-    | Inst("caload", "") ->add 1 (JCode.OpArrayLoad `Char)
-    | Inst("castore", "") -> add 1 (JCode.OpArrayStore `Char)
-    | InstWord("checkcast", "class", w) ->
-      add 3 (JCode.OpCheckCast (JParseSignature.parse_objectType w))
-
-    (* D *)
-    | Inst("d2f", "") -> add 1 (JCode.OpD2F)
-    | Inst("d2i", "") -> add 1 (JCode.OpD2I)
-    | Inst("d2l", "") -> add 1 (JCode.OpD2L)
-    | Inst("dadd", "") -> add 1 (JCode.OpAdd `Double)
-    | Inst("daload", "") ->add 1 (JCode.OpArrayLoad `Double)
-    | Inst("dastore", "") -> add 1 (JCode.OpArrayStore `Double)
-    | Inst("dcmpg", "") -> add 1 (JCode.OpCmp `DG)
-    | Inst("dcmpl", "") -> add 1 (JCode.OpCmp `DL)
-    | Inst("dconst_0", "") -> add 1(JCode.OpConst(`Double (0.)))
-    | Inst("dconst_1", "") -> add 1(JCode.OpConst(`Double (1.)))
-    | Inst("ddiv", "") -> add 1 (JCode.OpDiv `Double)
-    | InstInt("dload", "i", 0) -> add 1 (JCode.OpLoad (`Double, 0))
-    | InstInt("dload", "i", 1) -> add 1 (JCode.OpLoad (`Double, 1))
-    | InstInt("dload", "i", 2) -> add 1 (JCode.OpLoad (`Double, 2))
-    | InstInt("dload", "i", 3) -> add 1 (JCode.OpLoad (`Double, 3))
-    | InstInt("dload", "i", i) -> add 2 (JCode.OpLoad (`Double, i))
-    | InstInt("dload", "I", 0) -> add 1 (JCode.OpLoad (`Double, 0))
-    | InstInt("dload", "I", 1) -> add 1 (JCode.OpLoad (`Double, 1))
-    | InstInt("dload", "I", 2) -> add 1 (JCode.OpLoad (`Double, 2))
-    | InstInt("dload", "I", 3) -> add 1 (JCode.OpLoad (`Double, 3))
-    | InstInt("dload", "I", n) -> add 3 (JCode.OpLoad (`Double, n))
-    | Inst("dload_0", "") -> add 1 (JCode.OpLoad (`Double, 0))
-    | Inst("dload_1", "") -> add 1 (JCode.OpLoad (`Double, 1))
-    | Inst("dload_2", "") -> add 1 (JCode.OpLoad (`Double, 2))
-    | Inst("dload_3", "") -> add 1 (JCode.OpLoad (`Double, 3))
-    | Inst("dmul", "") -> add 1 (JCode.OpMult `Double)
-    | Inst("dneg", "") -> add 1 (JCode.OpNeg `Double)
-    | Inst("drem", "") -> add 1 (JCode.OpRem `Double)
-    | Inst("dreturn", "") -> add 1 (JCode.OpReturn `Double)
-    | InstInt("dstore", "i", 0) -> add 1 (JCode.OpStore (`Double, 0))
-    | InstInt("dstore", "i", 1) -> add 1 (JCode.OpStore (`Double, 1))
-    | InstInt("dstore", "i", 2) -> add 1 (JCode.OpStore (`Double, 2))
-    | InstInt("dstore", "i", 3) -> add 1 (JCode.OpStore (`Double, 3))
-    | InstInt("dstore", "i", i) -> add 2 (JCode.OpStore (`Double, i))
-    | InstInt("dstore", "I", 0) -> add 1 (JCode.OpStore (`Double, 0))
-    | InstInt("dstore", "I", 1) -> add 1 (JCode.OpStore (`Double, 1))
-    | InstInt("dstore", "I", 2) -> add 1 (JCode.OpStore (`Double, 2))
-    | InstInt("dstore", "I", 3) -> add 1 (JCode.OpStore (`Double, 3))
-    | InstInt("dstore", "I", n) -> add 3 (JCode.OpStore (`Double, n))
-    | Inst("dstore_0", "") -> add 1 (JCode.OpStore (`Double, 0))
-    | Inst("dstore_1", "") -> add 1 (JCode.OpStore (`Double, 1))
-    | Inst("dstore_2", "") -> add 1 (JCode.OpStore (`Double, 2))
-    | Inst("dstore_3", "") -> add 1 (JCode.OpStore (`Double, 3))
-    | Inst("dsub", "") -> add 1 (JCode.OpSub `Double)
-    | Inst("dup", "") -> add 1 (JCode.OpDup)
-    | Inst("dup2", "") -> add 1 (JCode.OpDup2)
-    | Inst("dup2_x1", "") -> add 1 (JCode.OpDup2X1)
-    | Inst("dup2_x2", "") -> add 1 (JCode.OpDup2X2)
-    | Inst("dup_x1", "") -> add 1 (JCode.OpDupX1)
-    | Inst("dup_x2", "") -> add 1 (JCode.OpDupX2)
-
-    (* F *)
-    | Inst("f2i", "") -> add 1 (JCode.OpF2I)
-    | Inst("f2l", "") -> add 1 (JCode.OpF2L)
-    | Inst("f2d", "") -> add 1 (JCode.OpF2D)
-    | Inst("fadd", "") -> add 1 (JCode.OpAdd `Float)
-    | Inst("faload", "") ->add 1 (JCode.OpArrayLoad `Float)
-    | Inst("fastore", "") -> add 1 (JCode.OpArrayStore `Float)
-    | Inst("fcmpg", "") -> add 1 (JCode.OpCmp `FG)
-    | Inst("fcmpl", "") -> add 1 (JCode.OpCmp `FL)
-    | Inst("fconst_0", "") -> add 1(JCode.OpConst(`Float (0.)))
-    | Inst("fconst_1", "") -> add 1(JCode.OpConst(`Float (1.)))
-    | Inst("fconst_2", "") -> add 1(JCode.OpConst(`Float (2.)))
-    | Inst("fdiv", "") -> add 1 (JCode.OpDiv `Float)
-    | InstInt("fload", "i", 0) -> add 1 (JCode.OpLoad (`Float, 0))
-    | InstInt("fload", "i", 1) -> add 1 (JCode.OpLoad (`Float, 1))
-    | InstInt("fload", "i", 2) -> add 1 (JCode.OpLoad (`Float, 2))
-    | InstInt("fload", "i", 3) -> add 1 (JCode.OpLoad (`Float, 3))
-    | InstInt("fload", "i", i) -> add 2 (JCode.OpLoad (`Float, i))
-    | InstInt("fload", "I", 0) -> add 1 (JCode.OpLoad (`Float, 0))
-    | InstInt("fload", "I", 1) -> add 1 (JCode.OpLoad (`Float, 1))
-    | InstInt("fload", "I", 2) -> add 1 (JCode.OpLoad (`Float, 2))
-    | InstInt("fload", "I", 3) -> add 1 (JCode.OpLoad (`Float, 3))
-    | InstInt("fload", "I", n) -> add 3 (JCode.OpLoad (`Float, n))
-    | Inst("fload_0", "") -> add 1 (JCode.OpLoad (`Float, 0))
-    | Inst("fload_1", "") -> add 1 (JCode.OpLoad (`Float, 1))
-    | Inst("fload_2", "") -> add 1 (JCode.OpLoad (`Float, 2))
-    | Inst("fload_3", "") -> add 1 (JCode.OpLoad (`Float, 3))
-    | Inst("fmul", "") -> add 1 (JCode.OpMult `Float)
-    | Inst("fneg", "") -> add 1 (JCode.OpNeg `Float)
-    | Inst("frem", "") -> add 1 (JCode.OpRem `Float)
-    | Inst("freturn", "") -> add 1 (JCode.OpReturn `Float)
-    | InstInt("fstore", "i", 0) -> add 1 (JCode.OpStore (`Float, 0))
-    | InstInt("fstore", "i", 1) -> add 1 (JCode.OpStore (`Float, 1))
-    | InstInt("fstore", "i", 2) -> add 1 (JCode.OpStore (`Float, 2))
-    | InstInt("fstore", "i", 3) -> add 1 (JCode.OpStore (`Float, 3))
-    | InstInt("fstore", "i", i) -> add 2 (JCode.OpStore (`Float, i))
-    | InstInt("fstore", "I", 0) -> add 1 (JCode.OpStore (`Float, 0))
-    | InstInt("fstore", "I", 1) -> add 1 (JCode.OpStore (`Float, 1))
-    | InstInt("fstore", "I", 2) -> add 1 (JCode.OpStore (`Float, 2))
-    | InstInt("fstore", "I", 3) -> add 1 (JCode.OpStore (`Float, 3))
-    | InstInt("fstore", "I", n) -> add 3 (JCode.OpStore (`Float, n))
-    | Inst("fstore_0", "") -> add 1 (JCode.OpStore (`Float, 0))
-    | Inst("fstore_1", "") -> add 1 (JCode.OpStore (`Float, 1))
-    | Inst("fstore_2", "") -> add 1 (JCode.OpStore (`Float, 2))
-    | Inst("fstore_3", "") -> add 1 (JCode.OpStore (`Float, 3))
-    | Inst("fsub", "") -> add 1 (JCode.OpSub `Float)
-
-    (* G *)
-    | InstWordWord("getfield", "field", cf, fd) ->
-      let (c,f) = split_obj(cf) in
-      let fd = JParseSignature.parse_field_descriptor(fd) in
-      add 3 (JCode.OpGetField ((JBasics.make_cn c), (JBasics.make_fs f fd)))
-    | InstWordWord("getstatic", "field", cf, fd) ->
-      let (c,f) = split_obj(cf) in
-      let fd = JParseSignature.parse_field_descriptor(fd) in
-      add 3 (JCode.OpGetStatic ((JBasics.make_cn c), (JBasics.make_fs f fd)))
-    | InstWord("goto", "label", l) -> add 3 (JCode.OpGoto(label2int l))
-    | InstInt("goto", "label", n) -> add 3 (JCode.OpGoto n)
-    | InstWord("goto_w", "label", l) -> add 3 (JCode.OpGoto(label2int l))
-    | InstInt("goto_w", "label", n) -> add 3 (JCode.OpGoto n)
-
-    (* I *)
-    | Inst("i2f", "") -> add 1 (JCode.OpI2F)
-    | Inst("i2d", "") -> add 1 (JCode.OpI2D)
-    | Inst("i2l", "") -> add 1 (JCode.OpI2L)
-    | Inst("iadd", "") -> add 1 (JCode.OpAdd `Int2Bool)
-    | Inst("iaload", "") -> add 1 (JCode.OpArrayLoad `Int)
-    | Inst("iand", "") -> add 1 (JCode.OpIAnd)
-    | Inst("iastore", "") -> add 1 (JCode.OpArrayStore `Int)
-    | Inst("iconst_0", "") -> add 1 (JCode.OpConst(`Int (0l)))
-    | Inst("iconst_1", "") -> add 1 (JCode.OpConst(`Int (1l)))
-    | Inst("iconst_2", "") -> add 1 (JCode.OpConst(`Int (2l)))
-    | Inst("iconst_3", "") -> add 1 (JCode.OpConst(`Int (3l)))
-    | Inst("iconst_4", "") -> add 1 (JCode.OpConst(`Int (4l)))
-    | Inst("iconst_5", "") -> add 1 (JCode.OpConst(`Int (5l)))
-    | Inst("iconst_m1", "") -> add 1 (JCode.OpConst(`Int (-1l)))
-    | Inst("idiv", "") -> add 1 (JCode.OpDiv `Int2Bool)
-    | InstInt("if_acmpeq", "label", n) -> add 3 (JCode.OpIfCmp (`AEq, n))
-    | InstWord("if_acmpeq", "label", l)-> add 3 (JCode.OpIfCmp (`AEq, label2int l))
-    | InstInt("if_acmpne", "label", n) -> add 3 (JCode.OpIfCmp (`ANe, n))
-    | InstWord("if_acmpne", "label", l)-> add 3 (JCode.OpIfCmp (`ANe, label2int l))
-    | InstInt("if_icmpeq", "label", n) -> add 3 (JCode.OpIfCmp (`IEq, n))
-    | InstWord("if_icmpeq", "label", l)-> add 3 (JCode.OpIfCmp (`IEq, label2int l))
-    | InstInt("if_icmpge", "label", n) -> add 3 (JCode.OpIfCmp (`IGe, n))
-    | InstWord("if_icmpge", "label", l)-> add 3 (JCode.OpIfCmp (`IGe, label2int l))
-    | InstInt("if_icmpgt", "label", n) -> add 3 (JCode.OpIfCmp (`IGt, n))
-    | InstWord("if_icmpgt", "label", l)-> add 3 (JCode.OpIfCmp (`IGt, label2int l))
-    | InstInt("if_icmple", "label", n) -> add 3 (JCode.OpIfCmp (`ILe, n))
-    | InstWord("if_icmple", "label", l)-> add 3 (JCode.OpIfCmp (`ILe, label2int l))
-    | InstInt("if_icmplt", "label", n) -> add 3 (JCode.OpIfCmp (`ILt, n))
-    | InstWord("if_icmplt", "label", l)-> add 3 (JCode.OpIfCmp (`ILt, label2int l))
-    | InstInt("if_icmpne", "label", n) -> add 3 (JCode.OpIfCmp (`INe, n))
-    | InstWord("if_icmpne", "label", l)-> add 3 (JCode.OpIfCmp (`INe, label2int l))
-    | InstInt("ifeq", "label", n) -> add 3 (JCode.OpIf (`Eq, n))
-    | InstWord("ifeq", "label", l) -> add 3 (JCode.OpIf (`Eq, label2int l))
-    | InstInt("ifge", "label", n) -> add 3 (JCode.OpIf (`Ge, n))
-    | InstWord("ifge", "label", l) -> add 3 (JCode.OpIf (`Ge, label2int l))
-    | InstInt("ifgt", "label", n) -> add 3 (JCode.OpIf (`Gt, n))
-    | InstWord("ifgt", "label", l) -> add 3 (JCode.OpIf (`Gt, label2int l))
-    | InstInt("ifle", "label", n) -> add 3 (JCode.OpIf (`Le, n))
-    | InstWord("ifle", "label", l) -> add 3 (JCode.OpIf (`Le, label2int l))
-    | InstInt("iflt", "label", n) -> add 3 (JCode.OpIf (`Lt, n))
-    | InstWord("iflt", "label", l) -> add 3 (JCode.OpIf (`Lt, label2int l))
-    | InstInt("ifne", "label", n) -> add 3 (JCode.OpIf (`Ne, n))
-    | InstWord("ifne", "label", l) -> add 3 (JCode.OpIf (`Ne, label2int l))
-    | InstInt("ifnonnull", "label", n) -> add 3 (JCode.OpIf (`NonNull, n))
-    | InstInt("ifnull", "label", n) -> add 3 (JCode.OpIf (`Null, n))
-    | InstIntInt("iinc", "ii", i1, i2) -> add 6 (JCode.OpIInc (i1, i2))
-    | InstIntInt("iinc", "Ii", i1, i2) -> add 6 (JCode.OpIInc (i1, i2))
-    | InstInt("iload", "i", n) -> add 2 (JCode.OpLoad (`Int2Bool, n))
-    | InstInt("iload", "I", n) -> add 3 (JCode.OpLoad (`Int2Bool, n))
-    | Inst("iload_0", "") -> add 1 (JCode.OpLoad (`Int2Bool, 0))
-    | Inst("iload_1", "") -> add 1 (JCode.OpLoad (`Int2Bool, 1))
-    | Inst("iload_2", "") -> add 1 (JCode.OpLoad (`Int2Bool, 2))
-    | Inst("iload_3", "") -> add 1 (JCode.OpLoad (`Int2Bool, 3))
-    | Inst("imul", "") -> add 1 (JCode.OpMult `Int2Bool)
-    | Inst("ineg", "") -> add 1 (JCode.OpNeg `Int2Bool)
-    | InstWord("instanceof", "class", o) -> add 3 (JCode.OpInstanceOf (JParseSignature.parse_objectType o))
-    | Inst("int2byte", "") -> add 1 (JCode.OpI2B)
-    | Inst("int2char", "") -> add 1 (JCode.OpI2C)
-    | Inst("int2short", "") -> add 1 (JCode.OpI2S)
-    (*
-    | Inst("invokedynamic", "method") -> add 1 ()
-    *)
-    | InstWordInt("invokeinterface", "interface", m, i) ->
-
-      let (obj,f) = split_method m in
-      let (name,o) = split_obj obj in
-      let (args,r) = JParseSignature.parse_method_descriptor f in
-      add 5(JCode.OpInvoke (`Interface (JBasics.make_cn name), (JBasics.make_ms o args r)))
-
-    | InstWord("invokenonvirtual", "method", m) ->
-      let (obj,f) = split_method m in
-      let (name,o) = split_obj obj in
-      let (args,r) = JParseSignature.parse_method_descriptor f in
-      add 3(JCode.OpInvoke (`Special (JBasics.make_cn name), (JBasics.make_ms o args r)))
-    | InstWord("invokestatic", "method", m) ->
-      let (obj,f) = split_method m in
-      let (name,o) = split_obj obj in
-      let (args,r) = JParseSignature.parse_method_descriptor f in
-      add 3(JCode.OpInvoke (`Static (JBasics.make_cn name), (JBasics.make_ms o args r)))
-    | InstWord("invokevirtual", "method", m) ->
-      let (obj,f) = split_method m in
-      let (name,o) = split_obj obj in
-      let (args,r) = JParseSignature.parse_method_descriptor f in
-      add 3(JCode.OpInvoke (`Virtual ((JBasics.TClass (JBasics.make_cn name))), (JBasics.make_ms o args r)))
-    | Inst("ior", "") -> add 1 (JCode.OpIOr)
-    | Inst("irem", "") -> add 1 (JCode.OpRem `Int2Bool)
-    | Inst("ireturn", "") -> add 1 (JCode.OpReturn `Int2Bool)
-    | Inst("ishl", "") -> add 1 (JCode.OpIShl)
-    | Inst("ishr", "") -> add 1 (JCode.OpIShr)
-    | InstInt("istore", "i", i) -> add 2 (JCode.OpStore (`Int2Bool, i))
-    | InstInt("istore", "I", i) -> add 3 (JCode.OpStore (`Int2Bool, i))
-    | Inst("istore_0", "") -> add 1 (JCode.OpStore (`Int2Bool, 0))
-    | Inst("istore_1", "") -> add 1 (JCode.OpStore (`Int2Bool, 1))
-    | Inst("istore_2", "") -> add 1 (JCode.OpStore (`Int2Bool, 2))
-    | Inst("istore_3", "") -> add 1 (JCode.OpStore (`Int2Bool, 3))
-    | Inst("isub", "") -> add 1 (JCode.OpSub `Int2Bool)
-    | Inst("iushr", "") -> add 1 (JCode.OpIUShr)
-    | Inst("ixor", "") -> add 1 (JCode.OpIXor)
-
-    (* J *)
-    | InstWord("jsr","label",label) -> add 3 (JCode.OpJsr((label2int label)))
-    | InstWord("jsr_w","label",label) -> add 3 (JCode.OpJsr((label2int label)))
-
-    (* L *)
-    | Inst("l2f", "") -> add 1 (JCode.OpL2F)
-    | Inst("l2d", "") -> add 1 (JCode.OpL2D)
-    | Inst("l2i", "") -> add 1 (JCode.OpL2I)
-    | Inst("ladd", "") -> add 1 (JCode.OpAdd `Long)
-    | Inst("laload", "") ->add 1 (JCode.OpArrayLoad `Long)
-    | Inst("land", "") -> add 1 (JCode.OpLAnd)
-    | Inst("lastore", "") -> add 1 (JCode.OpArrayStore `Long)
-    | Inst("lcmp", "") -> add 1 (JCode.OpCmp `L)
-    | Inst("lconst_0", "") -> add 1 (JCode.OpConst(`Long (Int64.of_int 0)))
-    | Inst("lconst_1", "") -> add 1 (JCode.OpConst(`Long (Int64.of_int 1)))
-    | InstInt("ldc", "constant", n) -> add 2 (JCode.OpConst(`Int (Int32.of_int n)))
-    | InstStr("ldc", "constant", s) -> add 2 (JCode.OpConst(`String (JBasics.make_jstr s)))
-    | InstNum("ldc", "constant", s) -> add 2 (JCode.OpConst(`Float (float_of_string s)))
-    | InstWord("ldc", "constant", d) -> add 2 (JCode.OpConst(`Float (float_of_string d)))
-    | InstWord("ldc2_w", "bigconstant", d) -> add 3 (JCode.OpConst(`Double (float_of_string d)))
-    | InstNum("ldc2_w", "bigconstant", d) -> add 3 (JCode.OpConst(`Double (float_of_string d)))
-    | InstInt("ldc2_w", "bigconstant", d) -> add 3 (JCode.OpConst(`Long (Int64.of_int d)))
-    | Inst("ldiv", "") -> add 1 (JCode.OpDiv `Long)
-    | InstInt("lload", "i", i) -> add 2 (JCode.OpLoad (`Long, i)) 
-    | InstInt("lload", "I", n) -> add 3 (JCode.OpLoad (`Long, n))
-    | Inst("lload_0", "") -> add 1 (JCode.OpLoad (`Long, 0))
-    | Inst("lload_1", "") -> add 1 (JCode.OpLoad (`Long, 1))
-    | Inst("lload_2", "") -> add 1 (JCode.OpLoad (`Long, 2))
-    | Inst("lload_3", "") -> add 1 (JCode.OpLoad (`Long, 3))
-    | Inst("lmul", "") -> add 1 (JCode.OpMult `Long)
-    | Inst("lneg", "") -> add 1 (JCode.OpNeg `Long)
-    | LookupSwitch(cases,default) ->
-      let a =
-        match default with
-        | DefaultInt i -> i
-        | DefaultWord l -> label2int l
-      in
-      let ls = List.map(function
-        | CaseIntInt(i, j)-> (Int32.of_int i, j)
-        | CaseIntWord(i, j) -> (Int32.of_int i, (label2int j))
-      ) cases in
-      let padding_size = (4 - (!pos + 1) mod 4) mod 4 in
-      let n = 9 + padding_size + 8 * (List.length cases) in
-      add n (JCode.OpLookupSwitch (a, ls))
-    | Inst("lor", "") -> add 1 (JCode.OpLOr)
-    | Inst("lrem", "") -> add 1 (JCode.OpRem `Long)
-    | Inst("lreturn", "") -> add 1 (JCode.OpReturn `Long)
-    | Inst("lshl", "") -> add 1 (JCode.OpLShl)
-    | Inst("lshr", "") -> add 1 (JCode.OpLShr)
-    | InstInt("lstore", "i", l) -> add 2 (JCode.OpStore (`Long, l))
-    | InstInt("lstore", "I", l) -> add 3 (JCode.OpStore (`Long, l))
-    | Inst("lstore_0", "") -> add 1  (JCode.OpStore (`Long, 0))
-    | Inst("lstore_1", "") -> add 1  (JCode.OpStore (`Long, 1))
-    | Inst("lstore_2", "") -> add 1  (JCode.OpStore (`Long, 2))
-    | Inst("lstore_3", "") -> add 1  (JCode.OpStore (`Long, 3))
-    | Inst("lsub", "") -> add 1 (JCode.OpSub `Long)
-    | Inst("lushr", "") -> add 1 (JCode.OpLUShr)
-    | Inst("lxor", "") -> add 1 (JCode.OpLXor)
-
-    (* M *)
-    | Inst("monitorenter", "") -> add 1 (JCode.OpMonitorEnter)
-    | Inst("monitorexit", "") -> add 1 (JCode.OpMonitorExit)
-    | InstWordInt("multianewarray", "marray", t, i) ->
-      add 4 (JCode.OpAMultiNewArray ((JParseSignature.parse_objectType t), i))
-
-    (* N *)
-    | InstWord("new", "class", o) -> add 3 (JCode.OpNew (JBasics.make_cn (replace_dot o)))
-    | InstWord("newarray", "atype", t) ->
-      let a = JParseSignature.parse_field_descriptor (cbasic t) in
-      add 2 (JCode.OpNewArray a)
-    | Inst("nop", "") -> add 1 (JCode.OpNop)
-
-    (* P *)
-    | Inst("pop", "") -> add 1 (JCode.OpPop)
-    | Inst("pop2", "") -> add 1 (JCode.OpPop2)
-    | InstWordWord("putfield", "field", cf, fd) ->
-      let (c,f) = split_obj(cf) in
-      let fd = JParseSignature.parse_field_descriptor(fd) in
-      add 3 (JCode.OpPutField ((JBasics.make_cn c), (JBasics.make_fs f fd)))
-    | InstWordWord("putstatic", "field", cf, fd) ->
-      let (c,f) = split_obj(cf) in
-      let fd = JParseSignature.parse_field_descriptor(fd) in
-      add 3 (JCode.OpPutStatic ((JBasics.make_cn c), (JBasics.make_fs f fd)))
-
-    (* R *)
-    | InstInt("ret", "i", n) -> add 2 (JCode.OpRet n)
-    | InstInt("ret", "I", n) -> add 3 (JCode.OpRet n)
-    | Inst("return", "") -> add 1 (JCode.OpReturn `Void)
-
-    (* S *)
-    | Inst("saload", "") -> add 1 (JCode.OpArrayLoad `Short)
-    | Inst("sastore", "") -> add 1 (JCode.OpArrayStore `Short)
-    | InstInt("sipush", "i", n) -> add 3 (JCode.OpConst(`Short n))
-    | Inst("swap", "") -> add 1 (JCode.OpSwap)
-
-    (* T *)
-    | TableSwitch(low,high,defs,def) ->
-      let default2int = function
-        | DefaultInt i -> i
-        | DefaultWord l -> label2int l
-      in
-      let defs = List.map default2int defs in
-      let defs = Array.of_list defs in
-      let padding_size = (4 - ((!pos + 1) mod 4)) mod 4 in
-      let n = 13 + padding_size + 4 * (Array.length defs) in
-      let high = if high = -1 then Array.length defs - 1 else high in
-      add n (JCode.OpTableSwitch ((default2int def), Int32.of_int low, Int32.of_int high, defs))
-    | Inst(a,b) -> Printf.printf "Inst(%S, %S)\n" a b; add 0 JCode.OpInvalid; assert false
-    | InstIntInt(a,b,i1,i2) -> Printf.printf "InstIntInt(%S, %S, %d, %d)\n" a b i1 i2; add 0 JCode.OpInvalid; assert false
-    | InstInt(a,b,i1) -> Printf.printf "InstInt(%S, %S, %d)\n" a b i1; add 0 JCode.OpInvalid; assert false
-    | InstNum(a,b,s) -> Printf.printf "InstNum(%S, %S, %S)\n" a b s; add 0 JCode.OpInvalid; assert false
-    | InstWord(a,b,s) -> Printf.printf "InstWord(%S, %S, %S)\n" a b s; add 0 JCode.OpInvalid; assert false
-    | InstWordInt(a,b,s,i) -> Printf.printf "InstWordInt(%S, %S, %S, %d)\n" a b s i; add 0 JCode.OpInvalid; assert false
-    | InstWordWord(a,b,s1,s2) -> Printf.printf "InstWordWord(%S, %S, %S, %S)\n" a b s1 s2; add 0 JCode.OpInvalid; assert false
-    | InstStr(a,b,s) -> Printf.printf "InstStr(%S, %S, %S)\n" a b s; add 0 JCode.OpInvalid; assert false
-    | InstRelative(a,b,s) -> Printf.printf "InstRelative(%S, %S, %S)\n" a b s; add 0 JCode.OpInvalid; assert false
-  in
-  let codes = List.map f ss in
-  let code = Array.create !pos JCode.OpInvalid in
-  List.iter (function 
-    | (p, JCode.OpInvalid) -> ()
-    | (p, JCode.OpJsr(l)) ->
-      code.(p) <- JCode.OpJsr(realloc p l)
-    | (p, JCode.OpIf(a,l)) ->
-      code.(p) <- JCode.OpIf(a,realloc p l)
-    | (p, JCode.OpIfCmp(a,l)) ->
-      code.(p) <- JCode.OpIfCmp(a,realloc p l)
-    | (p, JCode.OpGoto(l)) ->
-      code.(p) <- JCode.OpGoto(realloc p l)
-    | (p, JCode.OpLookupSwitch(d,cases)) ->
-      code.(p) <- JCode.OpLookupSwitch(realloc p d ,List.map(fun(a,b)-> (a ,realloc p b)) cases)
-    | (p, JCode.OpTableSwitch (def, low, high, defs)) ->
-      let defs = Array.map (realloc p) defs in
-      code.(p) <- JCode.OpTableSwitch(realloc p def,low, high, defs)
-    | (p, c) -> code.(p) <- c
-  ) codes;
-  let lines = if !lines = [] then None else Some (List.rev !lines) in
-  let excs = List.map (function
-    | DCatchWWW(name,a,b,c) ->
-      {
-        JCode.e_start = label2int a;
-        e_end = label2int b;
-        e_handler = label2int c;
-        e_catch_type = (Some name)
-      }
-    | DCatchIII(name,a,b,c) -> 
-      {
-        JCode.e_start = a;
-        e_end = b;
-        e_handler = c;
-        e_catch_type = (Some name)
-      }
-    | _ -> assert false
-  ) (List.rev !excs) in
-  let throws = List.rev !throws in
-  (code,lines, excs, throws)
-
+    in
+    let code = Array.create !pos JCode.OpInvalid in
+    List.iter (function 
+      | (p, JCode.OpInvalid) -> ()
+      | (p, JCode.OpJsr(l)) -> code.(p) <- JCode.OpJsr(realloc p l)
+      | (p, JCode.OpIf(a,l)) -> code.(p) <- JCode.OpIf(a,realloc p l)
+      | (p, JCode.OpIfCmp(a,l)) -> code.(p) <- JCode.OpIfCmp(a,realloc p l)
+      | (p, JCode.OpGoto(l)) -> code.(p) <- JCode.OpGoto(realloc p l)
+      | (p, JCode.OpLookupSwitch(d,cases)) ->
+        let cases = List.map(fun(a,b)-> (a ,realloc p b)) cases in
+        code.(p) <- JCode.OpLookupSwitch(realloc p d ,cases)
+      | (p, JCode.OpTableSwitch (def, low, high, defs)) ->
+        let defs = Array.map (realloc p) defs in
+        code.(p) <- JCode.OpTableSwitch(realloc p def,low, high, defs)
+      | (p, c) -> code.(p) <- c
+    ) codes;
+    let lines = if !lines = [] then None else Some (List.rev !lines) in
+    let excs = List.map (fun exc ->
+        {
+          exc with
+          JCode.e_start = realloc 0 exc.JCode.e_start;
+          e_end = realloc 0 exc.e_end;
+          e_handler = realloc 0 exc.e_handler
+        }
+    ) (List.rev !excs) in
+    let throws = List.rev !throws in
+    (code,lines, excs, throws)
 %}
 
 /* Directives (words beginning with a '.') */
@@ -583,9 +161,7 @@ let mkcode ss =
 
 jas_file :
   | sep jasmin_header inners fields methods
-    {
-      $2 $3 $4 $5
-    }
+    { $2 $3 $4 $5 }
 
 sep :
   | SEP { () }
@@ -1260,14 +836,21 @@ methods :
           stmnt :
             | instruction { $1 }
             | directive { $1 }
-            | error { Invalid }
+            | error { add 0 JCode.OpInvalid }
             | label { $1 }
-            | /* empty */ { Invalid }
+            | /* empty */ { add 0 JCode.OpInvalid }
 
             /* label: */
             label :
-              | Word COLON { Label($1) }
-              | Int COLON instruction { LabelInst((string_of_int $1), $3) }
+              | Word COLON {
+                addlabel $1 !pos;
+                add 0 JCode.OpInvalid
+               }
+              | Int COLON instruction {
+                let (pos, _) = $3 in
+                addlabel (string_of_int $1) pos;
+                $3
+              }
 
             /* Directives (.catch, .set, .limit, etc.) */
 
@@ -1276,10 +859,10 @@ methods :
                 {
                   failwith "TODO: .var"
                 }
-              | DLIMIT limit_expr { Invalid }
-              | DLINE line_expr { $2 }
-              | DTHROWS throws_expr { $2 }
-              | DCATCH catch_expr { $2 }
+              | DLIMIT limit_expr { add 0 JCode.OpInvalid }
+              | DLINE line_expr { add 0 JCode.OpInvalid }
+              | DTHROWS throws_expr { add 0 JCode.OpInvalid }
+              | DCATCH catch_expr { add 0 JCode.OpInvalid }
               | DSET set_expr
                 {
                   failwith "TODO: .set"
@@ -1331,29 +914,37 @@ methods :
               /* .limit locals <val> */
 
               limit_expr :
-                | LOCALS Int         /* .limit locals */
-                  { limit_locals := $2 }
-                | STACK Int          /* .limit stack */
-                  { limit_stack := $2 }
+                | LOCALS Int { limit_locals := $2 } /* .limit locals */
+                | STACK Int { limit_stack := $2 } /* .limit stack */
                 | Word Int { () }
 
               /* .line <num> */
               line_expr :
-                | Int { DLine $1 }
+                | Int { lines := (!pos, $1) :: !lines }
 
               /* .throws <class> */
               throws_expr :
-                | classname { DThrow $1 }
+                | classname { throws := $1 :: !throws }
 
               /* .catch <class> from <label1> to <label2> using <branchlab> */
               catch_expr :
                 | classname FROM Word TO Word USING Word
                   {
-                    DCatchWWW($1, $3, $5, $7)
+                    excs := {
+                      JCode.e_start = label2int $3;
+                      e_end = label2int $5;
+                      e_handler = label2int $7;
+                      e_catch_type = Some $1
+                    } :: !excs
                   }
                 | classname FROM Int TO Int USING Int
                   {
-                    DCatchIII($1, $3, $5, $7)
+                    excs := {
+                      JCode.e_start = $3;
+                      e_end = $5;
+                      e_handler = $7;
+                      e_catch_type = Some $1
+                    } :: !excs
                   }
 
               /* .set <var> = <val> */
@@ -1426,15 +1017,386 @@ methods :
               /* Various patterns of instruction: */
               /*      instruction [<pattern>] */
               simple_instruction :
-                | Insn { Inst(fst $1, snd $1) }
-                | Insn Int Int { InstIntInt(fst $1,snd $1, $2,$3) }
-                | Insn Int { InstInt(fst $1,snd $1, $2) }
-                | Insn Num { InstNum(fst $1,snd $1, $2) }
-                | Insn Word { InstWord(fst $1,snd $1, $2) }
-                | Insn Word Int { InstWordInt(fst $1,snd $1, $2,$3) }
-                | Insn Word Word { InstWordWord(fst $1,snd $1, $2,$3) }
-                | Insn Str { InstStr(fst $1,snd $1, unescape $2) }
-                | Insn Relative { InstRelative(fst $1, snd $1,$2) }
+                | Insn {
+                  match $1 with
+                  (* A *)
+                  | "aaload", "" -> add 1 (JCode.OpArrayLoad `Object)
+                  | "aastore", "" -> add 1 (JCode.OpArrayStore `Object)
+                  | "aconst_null", "" -> add 1 (JCode.OpConst(`ANull))
+                  | "aload_0", "" -> add 1 (JCode.OpLoad (`Object, 0))
+                  | "aload_1", "" -> add 1 (JCode.OpLoad (`Object, 1))
+                  | "aload_2", "" -> add 1 (JCode.OpLoad (`Object, 2))
+                  | "aload_3", "" -> add 1 (JCode.OpLoad (`Object, 3))
+                  | "areturn", "" -> add 1 (JCode.OpReturn `Object)
+                  | "arraylength", "" -> add 1 (JCode.OpArrayLength)
+                  | "astore_0","" -> add 1 (JCode.OpStore (`Object, 0))
+                  | "astore_1","" -> add 1 (JCode.OpStore (`Object, 1))
+                  | "astore_2","" -> add 1 (JCode.OpStore (`Object, 2))
+                  | "astore_3","" -> add 1 (JCode.OpStore (`Object, 3))
+                  | "athrow", "" -> add 1 (JCode.OpThrow)
+                  (* B *)
+                  | "baload", "" ->add 1 (JCode.OpArrayLoad `ByteBool)
+                  | "bastore", "" -> add 1 (JCode.OpArrayStore `ByteBool)
+                  | "breakpoint", "" -> add 1 (JCode.OpBreakpoint)
+                  (* C *)
+                  | "caload", "" ->add 1 (JCode.OpArrayLoad `Char)
+                  | "castore", "" -> add 1 (JCode.OpArrayStore `Char)
+                  (* D *)
+                  | "d2f", "" -> add 1 (JCode.OpD2F)
+                  | "d2i", "" -> add 1 (JCode.OpD2I)
+                  | "d2l", "" -> add 1 (JCode.OpD2L)
+                  | "dadd", "" -> add 1 (JCode.OpAdd `Double)
+                  | "daload", "" ->add 1 (JCode.OpArrayLoad `Double)
+                  | "dastore", "" -> add 1 (JCode.OpArrayStore `Double)
+                  | "dcmpg", "" -> add 1 (JCode.OpCmp `DG)
+                  | "dcmpl", "" -> add 1 (JCode.OpCmp `DL)
+                  | "dconst_0", "" -> add 1 (JCode.OpConst(`Double (0.)))
+                  | "dconst_1", "" -> add 1 (JCode.OpConst(`Double (1.)))
+                  | "ddiv", "" -> add 1 (JCode.OpDiv `Double)
+                  | "dload_0", "" -> add 1 (JCode.OpLoad (`Double, 0))
+                  | "dload_1", "" -> add 1 (JCode.OpLoad (`Double, 1))
+                  | "dload_2", "" -> add 1 (JCode.OpLoad (`Double, 2))
+                  | "dload_3", "" -> add 1 (JCode.OpLoad (`Double, 3))
+                  | "dmul", "" -> add 1 (JCode.OpMult `Double)
+                  | "dneg", "" -> add 1 (JCode.OpNeg `Double)
+                  | "drem", "" -> add 1 (JCode.OpRem `Double)
+                  | "dreturn", "" -> add 1 (JCode.OpReturn `Double)
+                  | "dstore_0", "" -> add 1 (JCode.OpStore (`Double, 0))
+                  | "dstore_1", "" -> add 1 (JCode.OpStore (`Double, 1))
+                  | "dstore_2", "" -> add 1 (JCode.OpStore (`Double, 2))
+                  | "dstore_3", "" -> add 1 (JCode.OpStore (`Double, 3))
+                  | "dsub", "" -> add 1 (JCode.OpSub `Double)
+                  | "dup", "" -> add 1 (JCode.OpDup)
+                  | "dup2", "" -> add 1 (JCode.OpDup2)
+                  | "dup2_x1", "" -> add 1 (JCode.OpDup2X1)
+                  | "dup2_x2", "" -> add 1 (JCode.OpDup2X2)
+                  | "dup_x1", "" -> add 1 (JCode.OpDupX1)
+                  | "dup_x2", "" -> add 1 (JCode.OpDupX2)
+                  (* F *)
+                  | "f2i", "" -> add 1 (JCode.OpF2I)
+                  | "f2l", "" -> add 1 (JCode.OpF2L)
+                  | "f2d", "" -> add 1 (JCode.OpF2D)
+                  | "fadd", "" -> add 1 (JCode.OpAdd `Float)
+                  | "faload", "" ->add 1 (JCode.OpArrayLoad `Float)
+                  | "fastore", "" -> add 1 (JCode.OpArrayStore `Float)
+                  | "fcmpg", "" -> add 1 (JCode.OpCmp `FG)
+                  | "fcmpl", "" -> add 1 (JCode.OpCmp `FL)
+                  | "fconst_0", "" -> add 1(JCode.OpConst(`Float (0.)))
+                  | "fconst_1", "" -> add 1(JCode.OpConst(`Float (1.)))
+                  | "fconst_2", "" -> add 1(JCode.OpConst(`Float (2.)))
+                  | "fdiv", "" -> add 1 (JCode.OpDiv `Float)
+                  | "fload_0", "" -> add 1 (JCode.OpLoad (`Float, 0))
+                  | "fload_1", "" -> add 1 (JCode.OpLoad (`Float, 1))
+                  | "fload_2", "" -> add 1 (JCode.OpLoad (`Float, 2))
+                  | "fload_3", "" -> add 1 (JCode.OpLoad (`Float, 3))
+                  | "fmul", "" -> add 1 (JCode.OpMult `Float)
+                  | "fneg", "" -> add 1 (JCode.OpNeg `Float)
+                  | "frem", "" -> add 1 (JCode.OpRem `Float)
+                  | "freturn", "" -> add 1 (JCode.OpReturn `Float)
+                  | "fstore_0", "" -> add 1 (JCode.OpStore (`Float, 0))
+                  | "fstore_1", "" -> add 1 (JCode.OpStore (`Float, 1))
+                  | "fstore_2", "" -> add 1 (JCode.OpStore (`Float, 2))
+                  | "fstore_3", "" -> add 1 (JCode.OpStore (`Float, 3))
+                  | "fsub", "" -> add 1 (JCode.OpSub `Float)
+                  (* I *)
+                  | "i2f", "" -> add 1 (JCode.OpI2F)
+                  | "i2d", "" -> add 1 (JCode.OpI2D)
+                  | "i2l", "" -> add 1 (JCode.OpI2L)
+                  | "iadd", "" -> add 1 (JCode.OpAdd `Int2Bool)
+                  | "iaload", "" -> add 1 (JCode.OpArrayLoad `Int)
+                  | "iand", "" -> add 1 (JCode.OpIAnd)
+                  | "iastore", "" -> add 1 (JCode.OpArrayStore `Int)
+                  | "iconst_0", "" -> add 1 (JCode.OpConst(`Int (0l)))
+                  | "iconst_1", "" -> add 1 (JCode.OpConst(`Int (1l)))
+                  | "iconst_2", "" -> add 1 (JCode.OpConst(`Int (2l)))
+                  | "iconst_3", "" -> add 1 (JCode.OpConst(`Int (3l)))
+                  | "iconst_4", "" -> add 1 (JCode.OpConst(`Int (4l)))
+                  | "iconst_5", "" -> add 1 (JCode.OpConst(`Int (5l)))
+                  | "iconst_m1", "" -> add 1 (JCode.OpConst(`Int (-1l)))
+                  | "idiv", "" -> add 1 (JCode.OpDiv `Int2Bool)
+                  | "iload_0", "" -> add 1 (JCode.OpLoad (`Int2Bool, 0))
+                  | "iload_1", "" -> add 1 (JCode.OpLoad (`Int2Bool, 1))
+                  | "iload_2", "" -> add 1 (JCode.OpLoad (`Int2Bool, 2))
+                  | "iload_3", "" -> add 1 (JCode.OpLoad (`Int2Bool, 3))
+                  | "imul", "" -> add 1 (JCode.OpMult `Int2Bool)
+                  | "ineg", "" -> add 1 (JCode.OpNeg `Int2Bool)
+                  | "int2byte", "" -> add 1 (JCode.OpI2B)
+                  | "int2char", "" -> add 1 (JCode.OpI2C)
+                  | "int2short", "" -> add 1 (JCode.OpI2S)
+                  (*
+                  | "invokedynamic", "method" -> add 1 ()
+                  *)
+                  | "ior", "" -> add 1 (JCode.OpIOr)
+                  | "irem", "" -> add 1 (JCode.OpRem `Int2Bool)
+                  | "ireturn", "" -> add 1 (JCode.OpReturn `Int2Bool)
+                  | "ishl", "" -> add 1 (JCode.OpIShl)
+                  | "ishr", "" -> add 1 (JCode.OpIShr)
+                  | "istore_0", "" -> add 1 (JCode.OpStore (`Int2Bool, 0))
+                  | "istore_1", "" -> add 1 (JCode.OpStore (`Int2Bool, 1))
+                  | "istore_2", "" -> add 1 (JCode.OpStore (`Int2Bool, 2))
+                  | "istore_3", "" -> add 1 (JCode.OpStore (`Int2Bool, 3))
+                  | "isub", "" -> add 1 (JCode.OpSub `Int2Bool)
+                  | "iushr", "" -> add 1 (JCode.OpIUShr)
+                  | "ixor", "" -> add 1 (JCode.OpIXor)
+                  (* L *)
+                  | "l2f", "" -> add 1 (JCode.OpL2F)
+                  | "l2d", "" -> add 1 (JCode.OpL2D)
+                  | "l2i", "" -> add 1 (JCode.OpL2I)
+                  | "ladd", "" -> add 1 (JCode.OpAdd `Long)
+                  | "laload", "" ->add 1 (JCode.OpArrayLoad `Long)
+                  | "land", "" -> add 1 (JCode.OpLAnd)
+                  | "lastore", "" -> add 1 (JCode.OpArrayStore `Long)
+                  | "lcmp", "" -> add 1 (JCode.OpCmp `L)
+                  | "lconst_0", "" -> add 1 (JCode.OpConst(`Long (Int64.of_int 0)))
+                  | "lconst_1", "" -> add 1 (JCode.OpConst(`Long (Int64.of_int 1)))
+                  | "ldiv", "" -> add 1 (JCode.OpDiv `Long)
+                  | "lload_0", "" -> add 1 (JCode.OpLoad (`Long, 0))
+                  | "lload_1", "" -> add 1 (JCode.OpLoad (`Long, 1))
+                  | "lload_2", "" -> add 1 (JCode.OpLoad (`Long, 2))
+                  | "lload_3", "" -> add 1 (JCode.OpLoad (`Long, 3))
+                  | "lmul", "" -> add 1 (JCode.OpMult `Long)
+                  | "lneg", "" -> add 1 (JCode.OpNeg `Long)
+                  | "lor", "" -> add 1 (JCode.OpLOr)
+                  | "lrem", "" -> add 1 (JCode.OpRem `Long)
+                  | "lreturn", "" -> add 1 (JCode.OpReturn `Long)
+                  | "lshl", "" -> add 1 (JCode.OpLShl)
+                  | "lshr", "" -> add 1 (JCode.OpLShr)
+                  | "lstore_0", "" -> add 1  (JCode.OpStore (`Long, 0))
+                  | "lstore_1", "" -> add 1  (JCode.OpStore (`Long, 1))
+                  | "lstore_2", "" -> add 1  (JCode.OpStore (`Long, 2))
+                  | "lstore_3", "" -> add 1  (JCode.OpStore (`Long, 3))
+                  | "lsub", "" -> add 1 (JCode.OpSub `Long)
+                  | "lushr", "" -> add 1 (JCode.OpLUShr)
+                  | "lxor", "" -> add 1 (JCode.OpLXor)
+                  (* M *)
+                  | "monitorenter", "" -> add 1 (JCode.OpMonitorEnter)
+                  | "monitorexit", "" -> add 1 (JCode.OpMonitorExit)
+                  (* N *)
+                  | "nop", "" -> add 1 (JCode.OpNop)
+                  (* P *)
+                  | "pop", "" -> add 1 (JCode.OpPop)
+                  | "pop2", "" -> add 1 (JCode.OpPop2)
+                  (* R *)
+                  | "return", "" -> add 1 (JCode.OpReturn `Void)
+                  (* S *)
+                  | "saload", "" -> add 1 (JCode.OpArrayLoad `Short)
+                  | "sastore", "" -> add 1 (JCode.OpArrayStore `Short)
+                  | "swap", "" -> add 1 (JCode.OpSwap)
+                  | a,b -> Printf.printf "Inst(%S, %S)\n" a b; assert false
+                }
+                | Insn Int Int {
+                  match(fst $1,snd $1, $2,$3)with
+                  | "iinc", "ii", i1, i2 -> add 6 (JCode.OpIInc (i1, i2))
+                  | "iinc", "Ii", i1, i2 -> add 6 (JCode.OpIInc (i1, i2))
+                  | a,b,i1,i2 ->
+                    Printf.printf "InstIntInt(%S, %S, %d, %d)\n" a b i1 i2;
+                    assert false
+                }
+                | Insn Int {
+                  match(fst $1,snd $1, $2)with
+                  (* A *)
+                  | "aload", "i", n -> add 2 (JCode.OpConst(`Int (Int32.of_int n)))
+                  | "aload", "I", n -> add 3 (JCode.OpConst(`Int (Int32.of_int n)))
+                  | "astore", "i", n -> add 2 (JCode.OpStore(`Object, n))
+                  | "astore", "I", n -> add 3 (JCode.OpStore(`Object, n))
+                  (* B *)
+                  | "bipush", "i", n -> add 2 (JCode.OpConst(`Byte n))
+                  (* D *)
+                  | "dload", "i", 0 -> add 1 (JCode.OpLoad (`Double, 0))
+                  | "dload", "i", 1 -> add 1 (JCode.OpLoad (`Double, 1))
+                  | "dload", "i", 2 -> add 1 (JCode.OpLoad (`Double, 2))
+                  | "dload", "i", 3 -> add 1 (JCode.OpLoad (`Double, 3))
+                  | "dload", "i", i -> add 2 (JCode.OpLoad (`Double, i))
+                  | "dload", "I", 0 -> add 1 (JCode.OpLoad (`Double, 0))
+                  | "dload", "I", 1 -> add 1 (JCode.OpLoad (`Double, 1))
+                  | "dload", "I", 2 -> add 1 (JCode.OpLoad (`Double, 2))
+                  | "dload", "I", 3 -> add 1 (JCode.OpLoad (`Double, 3))
+                  | "dload", "I", n -> add 3 (JCode.OpLoad (`Double, n))
+                  | "dstore", "i", 0 -> add 1 (JCode.OpStore (`Double, 0))
+                  | "dstore", "i", 1 -> add 1 (JCode.OpStore (`Double, 1))
+                  | "dstore", "i", 2 -> add 1 (JCode.OpStore (`Double, 2))
+                  | "dstore", "i", 3 -> add 1 (JCode.OpStore (`Double, 3))
+                  | "dstore", "i", i -> add 2 (JCode.OpStore (`Double, i))
+                  | "dstore", "I", 0 -> add 1 (JCode.OpStore (`Double, 0))
+                  | "dstore", "I", 1 -> add 1 (JCode.OpStore (`Double, 1))
+                  | "dstore", "I", 2 -> add 1 (JCode.OpStore (`Double, 2))
+                  | "dstore", "I", 3 -> add 1 (JCode.OpStore (`Double, 3))
+                  | "dstore", "I", n -> add 3 (JCode.OpStore (`Double, n))
+                  (* F *)
+                  | "fload", "i", 0 -> add 1 (JCode.OpLoad (`Float, 0))
+                  | "fload", "i", 1 -> add 1 (JCode.OpLoad (`Float, 1))
+                  | "fload", "i", 2 -> add 1 (JCode.OpLoad (`Float, 2))
+                  | "fload", "i", 3 -> add 1 (JCode.OpLoad (`Float, 3))
+                  | "fload", "i", i -> add 2 (JCode.OpLoad (`Float, i))
+                  | "fload", "I", 0 -> add 1 (JCode.OpLoad (`Float, 0))
+                  | "fload", "I", 1 -> add 1 (JCode.OpLoad (`Float, 1))
+                  | "fload", "I", 2 -> add 1 (JCode.OpLoad (`Float, 2))
+                  | "fload", "I", 3 -> add 1 (JCode.OpLoad (`Float, 3))
+                  | "fload", "I", n -> add 3 (JCode.OpLoad (`Float, n))
+                  | "fstore", "i", 0 -> add 1 (JCode.OpStore (`Float, 0))
+                  | "fstore", "i", 1 -> add 1 (JCode.OpStore (`Float, 1))
+                  | "fstore", "i", 2 -> add 1 (JCode.OpStore (`Float, 2))
+                  | "fstore", "i", 3 -> add 1 (JCode.OpStore (`Float, 3))
+                  | "fstore", "i", i -> add 2 (JCode.OpStore (`Float, i))
+                  | "fstore", "I", 0 -> add 1 (JCode.OpStore (`Float, 0))
+                  | "fstore", "I", 1 -> add 1 (JCode.OpStore (`Float, 1))
+                  | "fstore", "I", 2 -> add 1 (JCode.OpStore (`Float, 2))
+                  | "fstore", "I", 3 -> add 1 (JCode.OpStore (`Float, 3))
+                  | "fstore", "I", n -> add 3 (JCode.OpStore (`Float, n))
+                  (* G *)
+                  | "goto", "label", n -> add 3 (JCode.OpGoto n)
+                  | "goto_w", "label", n -> add 3 (JCode.OpGoto n)
+                  (* I *)
+                  | "if_acmpeq", "label", n -> add 3 (JCode.OpIfCmp (`AEq, n))
+                  | "if_acmpne", "label", n -> add 3 (JCode.OpIfCmp (`ANe, n))
+                  | "if_icmpeq", "label", n -> add 3 (JCode.OpIfCmp (`IEq, n))
+                  | "if_icmpge", "label", n -> add 3 (JCode.OpIfCmp (`IGe, n))
+                  | "if_icmpgt", "label", n -> add 3 (JCode.OpIfCmp (`IGt, n))
+                  | "if_icmple", "label", n -> add 3 (JCode.OpIfCmp (`ILe, n))
+                  | "if_icmplt", "label", n -> add 3 (JCode.OpIfCmp (`ILt, n))
+                  | "if_icmpne", "label", n -> add 3 (JCode.OpIfCmp (`INe, n))
+                  | "ifeq", "label", n -> add 3 (JCode.OpIf (`Eq, n))
+                  | "ifge", "label", n -> add 3 (JCode.OpIf (`Ge, n))
+                  | "ifgt", "label", n -> add 3 (JCode.OpIf (`Gt, n))
+                  | "ifle", "label", n -> add 3 (JCode.OpIf (`Le, n))
+                  | "iflt", "label", n -> add 3 (JCode.OpIf (`Lt, n))
+                  | "ifne", "label", n -> add 3 (JCode.OpIf (`Ne, n))
+                  | "ifnonnull", "label", n -> add 3 (JCode.OpIf (`NonNull, n))
+                  | "ifnull", "label", n -> add 3 (JCode.OpIf (`Null, n))
+                  | "iload", "i", n -> add 2 (JCode.OpLoad (`Int2Bool, n))
+                  | "iload", "I", n -> add 3 (JCode.OpLoad (`Int2Bool, n))
+                  | "istore", "i", i -> add 2 (JCode.OpStore (`Int2Bool, i))
+                  | "istore", "I", i -> add 3 (JCode.OpStore (`Int2Bool, i))
+                  (* I *)
+                  | "ldc", "constant", n -> add 2 (JCode.OpConst(`Int (Int32.of_int n)))
+                  | "ldc2_w", "bigconstant", d -> add 3 (JCode.OpConst(`Long (Int64.of_int d)))
+                  | "lload", "i", i -> add 2 (JCode.OpLoad (`Long, i)) 
+                  | "lload", "I", n -> add 3 (JCode.OpLoad (`Long, n))
+                  | "lstore", "i", l -> add 2 (JCode.OpStore (`Long, l))
+                  | "lstore", "I", l -> add 3 (JCode.OpStore (`Long, l))
+                  (* R *)
+                  | "ret", "i", n -> add 2 (JCode.OpRet n)
+                  | "ret", "I", n -> add 3 (JCode.OpRet n)
+                  (* S *)
+                  | "sipush", "i", n -> add 3 (JCode.OpConst(`Short n))
+                  | a,b,i1 ->
+                    Printf.printf "InstInt(%S, %S, %d)\n" a b i1;
+                    assert false
+                }
+                | Insn Num {
+                  match(fst $1,snd $1, $2)with
+                  (* I *)
+                  | "ldc", "constant", s -> add 2 (JCode.OpConst(`Float (float_of_string s)))
+                  | "ldc2_w", "bigconstant", d -> add 3 (JCode.OpConst(`Double (float_of_string d)))
+                  | a,b,s ->
+                    Printf.printf "InstNum(%S, %S, %S)\n" a b s;
+                    assert false
+                }
+                | Insn Word { 
+                  match(fst $1,snd $1, $2)with
+                  (* A *)
+                  | "anewarray", "class", o -> add 3 (JCode.OpNewArray (JBasics.TObject (JParseSignature.parse_objectType o)))
+                  (* C *)
+                  | "checkcast", "class", w ->
+                    add 3 (JCode.OpCheckCast (JParseSignature.parse_objectType w))
+                  (* G *)
+                  | "goto", "label", l -> add 3 (JCode.OpGoto(label2int l))
+                  | "goto_w", "label", l -> add 3 (JCode.OpGoto(label2int l))
+                  (* I *)
+                  | "if_acmpeq", "label", l -> add 3 (JCode.OpIfCmp (`AEq, label2int l))
+                  | "if_acmpne", "label", l -> add 3 (JCode.OpIfCmp (`ANe, label2int l))
+                  | "if_icmpeq", "label", l -> add 3 (JCode.OpIfCmp (`IEq, label2int l))
+                  | "if_icmpge", "label", l -> add 3 (JCode.OpIfCmp (`IGe, label2int l))
+                  | "if_icmpgt", "label", l -> add 3 (JCode.OpIfCmp (`IGt, label2int l))
+                  | "if_icmple", "label", l -> add 3 (JCode.OpIfCmp (`ILe, label2int l))
+                  | "if_icmplt", "label", l -> add 3 (JCode.OpIfCmp (`ILt, label2int l))
+                  | "if_icmpne", "label", l -> add 3 (JCode.OpIfCmp (`INe, label2int l))
+                  | "ifeq", "label", l -> add 3 (JCode.OpIf (`Eq, label2int l))
+                  | "ifge", "label", l -> add 3 (JCode.OpIf (`Ge, label2int l))
+                  | "ifgt", "label", l -> add 3 (JCode.OpIf (`Gt, label2int l))
+                  | "ifle", "label", l -> add 3 (JCode.OpIf (`Le, label2int l))
+                  | "iflt", "label", l -> add 3 (JCode.OpIf (`Lt, label2int l))
+                  | "ifne", "label", l -> add 3 (JCode.OpIf (`Ne, label2int l))
+                  | "instanceof", "class", o -> add 3 (JCode.OpInstanceOf (JParseSignature.parse_objectType o))
+                  | "invokenonvirtual", "method", m ->
+                    let (obj,f) = split_method m in
+                    let (name,o) = split_obj obj in
+                    let (args,r) = JParseSignature.parse_method_descriptor f in
+                    add 3(JCode.OpInvoke (`Special (JBasics.make_cn name), JBasics.make_ms o args r))
+                  | "invokestatic", "method", m ->
+                    let (obj,f) = split_method m in
+                    let (name,o) = split_obj obj in
+                    let (args,r) = JParseSignature.parse_method_descriptor f in
+                    add 3(JCode.OpInvoke (`Static (JBasics.make_cn name), JBasics.make_ms o args r))
+                  | "invokevirtual", "method", m ->
+                    let (obj,f) = split_method m in
+                    let (name,o) = split_obj obj in
+                    let (args,r) = JParseSignature.parse_method_descriptor f in
+                    add 3(JCode.OpInvoke (`Virtual ((JBasics.TClass (JBasics.make_cn name))), JBasics.make_ms o args r))
+                  (* J *)
+                  | "jsr","label",label -> add 3 (JCode.OpJsr((label2int label)))
+                  | "jsr_w","label",label -> add 3 (JCode.OpJsr((label2int label)))
+                  | "ldc", "constant", d -> add 2 (JCode.OpConst(`Float (float_of_string d)))
+                  | "ldc2_w", "bigconstant", d -> add 3 (JCode.OpConst(`Double (float_of_string d)))
+                  (* N *)
+                  | "new", "class", o -> add 3 (JCode.OpNew (JBasics.make_cn (replace_dot o)))
+                  | "newarray", "atype", t ->
+                    let a = JParseSignature.parse_field_descriptor (cbasic t) in
+                    add 2 (JCode.OpNewArray a)
+                  | a,b,s ->
+                    Printf.printf "InstWord(%S, %S, %S)\n" a b s;
+                    assert false
+                }
+                | Insn Word Int {
+                  match(fst $1,snd $1, $2,$3)with
+                  (* I *)
+                  | "invokeinterface", "interface", m, i ->
+                    let (obj,f) = split_method m in
+                    let (name,o) = split_obj obj in
+                    let (args,r) = JParseSignature.parse_method_descriptor f in
+                    add 5(JCode.OpInvoke (`Interface (JBasics.make_cn name), JBasics.make_ms o args r))
+                  (* M *)
+                  | "multianewarray", "marray", t, i ->
+                    add 4 (JCode.OpAMultiNewArray ((JParseSignature.parse_objectType t), i))
+                  | a,b,s,i ->
+                    Printf.printf "InstWordInt(%S, %S, %S, %d)\n" a b s i;
+                    assert false
+                }
+                | Insn Word Word {
+                  match(fst $1,snd $1, $2,$3)with
+                  | "getfield", "field", cf, fd ->
+                    let (c,f) = split_obj(cf) in
+                    let fd = JParseSignature.parse_field_descriptor fd in
+                    add 3 (JCode.OpGetField (JBasics.make_cn c, JBasics.make_fs f fd))
+                  | "getstatic", "field", cf, fd ->
+                    let (c,f) = split_obj(cf) in
+                    let fd = JParseSignature.parse_field_descriptor fd in
+                    add 3 (JCode.OpGetStatic (JBasics.make_cn c, JBasics.make_fs f fd))
+                  | "putfield", "field", cf, fd ->
+                    let (c,f) = split_obj(cf) in
+                    let fd = JParseSignature.parse_field_descriptor fd in
+                    add 3 (JCode.OpPutField (JBasics.make_cn c, JBasics.make_fs f fd))
+                  | "putstatic", "field", cf, fd ->
+                    let (c,f) = split_obj(cf) in
+                    let fd = JParseSignature.parse_field_descriptor fd in
+                    add 3 (JCode.OpPutStatic (JBasics.make_cn c, JBasics.make_fs f fd))
+                  | a,b,s1,s2 ->
+                    Printf.printf "InstWordWord(%S, %S, %S, %S)\n" a b s1 s2;
+                    assert false
+                }
+                | Insn Str { 
+                  match(fst $1,snd $1, unescape $2)with
+                  | "ldc", "constant", s -> add 2 (JCode.OpConst(`String (JBasics.make_jstr s)))
+                  | a,b,s ->
+                    Printf.printf "InstStr(%S, %S, %S)\n" a b s;
+                    assert false
+                }
+                | Insn Relative {
+                  match(fst $1, snd $1,$2)with
+                  | a,b,s ->
+                    Printf.printf "InstRelative(%S, %S, %S)\n" a b s;
+                    assert false
+                }
 
               /* complex (i.e. multiline) instructions */
               /*      lookupswitch <lookup> */
@@ -1452,7 +1414,21 @@ methods :
 
                 lookup :
                   | lookup_args lookup_list lookup_default
-                    { LookupSwitch($2,$3) }
+                    {
+                      let a =
+                        match $3 with
+                        | DefaultInt i -> i
+                        | DefaultWord l -> label2int l
+                      in
+                      let ls = List.map(function
+                        | CaseIntInt(i, j)-> (Int32.of_int i, j)
+                        | CaseIntWord(i, j) -> (Int32.of_int i, (label2int j))
+                      ) $2 in
+                      let padding_size = (4 - (!pos + 1) mod 4) mod 4 in
+                      let n = 9 + padding_size + 8 * (List.length $2) in
+                      add n (JCode.OpLookupSwitch (a, ls))
+
+                    }
 
                   lookup_args :
                     | SEP { () } /* no arguments to lookupswitch */
@@ -1477,7 +1453,20 @@ methods :
 
                 table :
                   | table_args table_list table_default
-                    { TableSwitch(fst $1,snd $1,$2,$3) }
+                    {
+                      (* T *)
+                      let (low,high,defs,def) = (fst $1,snd $1,$2,$3) in
+                      let default2int = function
+                        | DefaultInt i -> i
+                        | DefaultWord l -> label2int l
+                      in
+                      let defs = List.map default2int defs in
+                      let defs = Array.of_list defs in
+                      let padding_size = (4 - ((!pos + 1) mod 4)) mod 4 in
+                      let n = 13 + padding_size + 4 * (Array.length defs) in
+                      let high = if high = -1 then Array.length defs - 1 else high in
+                      add n (JCode.OpTableSwitch ((default2int def), Int32.of_int low, Int32.of_int high, defs))
+                    }
 
                   table_args :
                     | Int SEP { ($1,-1) } /* one argument : the <low> parameter */
@@ -1494,3 +1483,4 @@ methods :
                   table_default :
                     | DEFAULT COLON Word { DefaultWord($3) }
                     | DEFAULT COLON Int { DefaultInt($3) }
+
