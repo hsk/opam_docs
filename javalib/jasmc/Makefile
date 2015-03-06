@@ -8,17 +8,15 @@ jasmc: main.ml parser.mly lexer.mll
 test: example
 	@echo "--------"
 	./jasmc tests/jsr.j
-	javac -source 1.5 -target 1.5 tests/Test_interface2.java
-	jasmd -high tests.Test_interface
-	jasmd tests.Test_interface > tests/Test_interface.j
-	jasmd tests.Test_interface2 > tests/Test_interface2.j
+	javac -source 1.5 -target 1.5 tests/Test_while.java
+	jasmd -high tests.Test_while
+	jasmd tests.Test_while > tests/Test_while.j
 	@echo "--------"
-	cat tests/Test_interface.j
+	cat tests/Test_while.j
 	@echo "--------"
-	javap -v tests/Test_interface.class
-	./jasmc tests/Test_interface.j
-	./jasmc tests/Test_interface2.j
-	java tests.Test_interface2
+	javap -v tests/Test_while.class
+	./jasmc tests/Test_while.j
+	java tests.Test_while
 
 example:
 	./jasmc examples/*.j

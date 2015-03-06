@@ -368,6 +368,7 @@ type switchdefault =
 
 type pcode =
 | DLine of int
+| DThrow of JBasics.class_name
 | DCatchWWW of JBasics.class_name * string * string * string
 | DCatchIII of JBasics.class_name * int * int * int
 | Label of string
@@ -400,6 +401,10 @@ let mkcode ss =
   let excs = ref [] in
   let addexc exc =
     excs := exc :: !excs
+  in
+  let throws = ref [] in
+  let addthrow throw =
+    throws := throw :: !throws
   in
   let labels = ref [] in
   let label2int l =
@@ -435,6 +440,7 @@ let mkcode ss =
     match c with
     | DCatchIII _ -> addexc c; add 0 JCode.OpInvalid
     | DCatchWWW _ -> addexc c; add 0 JCode.OpInvalid
+    | DThrow cn -> addthrow cn; add 0 JCode.OpInvalid
     | DLine line -> addline line; add 0 JCode.OpInvalid
     | Label l -> addlabel l !pos; add 0 JCode.OpInvalid
     | LabelInst(l,i)-> addlabel l !pos; f i
@@ -816,6 +822,8 @@ let mkcode ss =
       code.(p) <- JCode.OpJsr(realloc p l)
     | (p, JCode.OpIf(a,l)) ->
       code.(p) <- JCode.OpIf(a,realloc p l)
+    | (p, JCode.OpIfCmp(a,l)) ->
+      code.(p) <- JCode.OpIfCmp(a,realloc p l)
     | (p, JCode.OpGoto(l)) ->
       code.(p) <- JCode.OpGoto(realloc p l)
     | (p, JCode.OpLookupSwitch(d,cases)) ->
@@ -841,8 +849,10 @@ let mkcode ss =
         e_handler = c;
         e_catch_type = (Some name)
       }
-  ) !excs in
-  (code,lines, excs)
+    | _ -> assert false
+  ) (List.rev !excs) in
+  let throws = List.rev !throws in
+  (code,lines, excs, throws)
 
 %}
 
@@ -1468,7 +1478,7 @@ methods :
       | defmethod statements endmethod
         {
           let(access,ms) = $1 in
-          let code,lines,excs = mkcode (List.rev $2) in
+          let code,lines,excs,throws = mkcode (List.rev $2) in
           let jmethod = {
             JCode.c_max_stack = !limit_stack;
             c_max_locals = !limit_locals;
@@ -1495,7 +1505,7 @@ methods :
             cm_varargs = List.mem `Varargs access;
             cm_synthetic = List.mem `Synthetic access;
             cm_other_flags = []; (* TODO *)
-            cm_exceptions = []; (* TODO *)
+            cm_exceptions = throws; (* TODO *)
             cm_attributes = { synthetic = false; deprecated = false; other = [] };  (* TODO *)
             cm_annotations = { ma_global = []; ma_parameters = [] }; (* TODO *)
             cm_implementation = Java (lazy jmethod)
@@ -1581,15 +1591,9 @@ methods :
                   Invalid (* TODO *)
                 }
               | DLIMIT limit_expr { Invalid }
-              | DLINE line_expr { DLine($2) }
-              | DTHROWS throws_expr
-                {
-                  failwith "TODO: .throws"
-                }
-              | DCATCH catch_expr
-                {
-                  $2
-                }
+              | DLINE line_expr { $2 }
+              | DTHROWS throws_expr { $2 }
+              | DCATCH catch_expr { $2 }
               | DSET set_expr
                 {
                   failwith "TODO: .set"
@@ -1649,11 +1653,11 @@ methods :
 
               /* .line <num> */
               line_expr :
-                | Int { $1 }
+                | Int { DLine $1 }
 
               /* .throws <class> */
               throws_expr :
-                | classname { $1 }
+                | classname { DThrow $1 }
 
               /* .catch <class> from <label1> to <label2> using <branchlab> */
               catch_expr :
