@@ -4,27 +4,8 @@ jasmc: main.ml parser.mly lexer.mll
 	ocamlyacc parser.mly
 	rm parser.mli
 	ocamllex lexer.mll
-	ocamlfind ocamlc -package javalib,ppx_deriving.show -linkpkg -o jasmc parser.ml lexer.ml main.ml
+	ocamlfind ocamlopt -package javalib,ppx_deriving.show -linkpkg -o jasmc parser.ml lexer.ml main.ml
 test: example
-	./jasmc tests/Test_switch.j
-	java tests.Test_switch
-	./jasmc tests/Test_switch2.j
-	java tests.Test_switch2
-	./jasmc tests/Test_switch3.j
-	java tests.Test_switch3
-
-	@echo "--------"
-	./jasmc tests/jsr.j
-	javac -source 1.5 -target 1.5 tests/*.java
-	jasmd -high tests.Test_while
-	jasmd tests.Test_while > tests/Test_while.j
-	@echo "--------"
-	cat tests/Test_while.j
-	@echo "--------"
-	javap -v tests/Test_while.class
-	./jasmc tests/Test_while.j
-	java tests.Test_while
-
 
 #	./jasmc tests/InvokeDynamic.j
 	./jasmc tests/Test001.j
@@ -48,6 +29,13 @@ test: example
 	./jasmc tests/Test_l.j
 	./jasmc tests/Test_m.j
 	./jasmc tests/Test_s.j
+	./jasmc tests/Test_switch.j
+	./jasmc tests/Test_switch2.j
+	./jasmc tests/Test_switch3.j
+	./jasmc tests/Test_throws.j
+	./jasmc tests/Test_while.j
+	./jasmc tests/jsr.j
+	./jasmc tests/jsr2.j
 
 #	java tests.InvokeDynamic
 #	java tests.Test001
@@ -71,13 +59,12 @@ test: example
 	java tests.Test_l
 	java tests.Test_m
 	java tests.Test_s
-	./jasmc tests/Test_throws.j
+	java tests.Test_switch
+	java tests.Test_switch2
+	java tests.Test_switch3
 #	java tests.Test_throws
-	./jasmc tests/Test_while.j
 	java tests.Test_while
-	./jasmc tests/jsr.j
 	java tests.jsr
-	./jasmc tests/jsr2.j
 	java tests.jsr2
 
 example:
