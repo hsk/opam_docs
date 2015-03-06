@@ -1,7 +1,7 @@
-.bytecode 52.0
+.bytecode 49.0
 .source Test010.java
 
-.class  tests/Test010
+.class tests/Test010
 .super java.lang.Object
 
 

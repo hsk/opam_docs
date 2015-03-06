@@ -94,7 +94,7 @@ rule token = parse
   
   (* Whitespace *)
   | (sp | ht | ff)                  { token lexbuf }
-  | (line_terminator+ (";" input_character*)?)+                { dbg("SEP"); SEP }
+  | (line_terminator+ (sp | ht | ff)* (";" input_character*)? (sp | ht | ff)*)+                { dbg("SEP"); SEP }
   | ";" input_character*
                                     { dbg(Lexing.lexeme lexbuf); token lexbuf } (* end_of_line_comment *)
 
@@ -370,7 +370,7 @@ rule token = parse
   | ".stack" { dbg(Lexing.lexeme lexbuf); DSTACK }
   | '-'? decimal_numeral '.' decimal_numeral as i { dbg(Lexing.lexeme lexbuf); Num (i) }
   | '-'? decimal_numeral as i                    { dbg(Lexing.lexeme lexbuf); Int (int_of_string i) }
-  | '"' string_character* '"' as s          { dbg(Lexing.lexeme lexbuf); Str s }
+  | '"' ('\\' _ | [ ^ '"'])* '"' as s          { dbg(Lexing.lexeme lexbuf); Str s }
   | ':' { dbg(Lexing.lexeme lexbuf); COLON }
   | '=' { dbg(Lexing.lexeme lexbuf); EQ }
   | [ ^ ' ' '\r' '\n' '\t' '=' ':' ]+ as id { dbg(Lexing.lexeme lexbuf); try

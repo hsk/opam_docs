@@ -6,6 +6,7 @@
 
 .method static public main([Ljava/lang/String;)V
 	.limit stack 3
+			nop
 		 	iconst_1
 		 	lookupswitch 
 				1 : 		Hello
